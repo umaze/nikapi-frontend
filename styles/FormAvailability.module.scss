@@ -1,0 +1,15 @@
+@import "Form.module";
+
+.list {
+  list-style: none;
+
+  table {
+    width: 100%;
+
+    thead {
+      tr {
+        font-weight: 500;
+      }
+    }
+  }
+}
