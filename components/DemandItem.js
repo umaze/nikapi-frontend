@@ -26,16 +26,15 @@ export default function DemandItem({ groupId, demand, rollen }) {
     };
 
     return (
-        <tr>
-            <td>{new Date(attributes.datum).toLocaleDateString('de-CH')}</td>
-            <td>{formatTime(attributes.zeitVon)}</td>
-            <td>{formatTime(attributes.zeitBis)}</td>
-            <td>{attributes.einsatztyp?.typ}</td>
+        <tr className={styles.demandRow}>
+            <td className={styles.demandDatum}>{new Date(attributes.datum).toLocaleDateString('de-CH')}</td>
+            <td className={styles.demandZeit}>{formatTime(attributes.zeitVon)}</td>
+            <td className={styles.demandZeit}>{formatTime(attributes.zeitBis)}</td>
+            <td className={styles.demandEinsatz}>{attributes.einsatztyp?.typ}</td>
             {rollen?.map(rolle => (
-                <td className={styles.auswahlcell} key={rolle.id}>
-                    {isChecked(demand.id, rolle.name)}
+                <td className={styles.auswahlCell} key={rolle.id}>
                     <input
-                        className={styles.auswahlbox}
+                        className={styles.auswahlBox}
                         id={`${demand.id}-${rolle.name}`}
                         type="checkbox"
                         name={rolle.name}

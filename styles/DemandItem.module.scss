@@ -1,24 +1,26 @@
-.demand {
-    
+.demandRow {
+  display: flex;
 }
 
-.datum {
-  width: 5rem;
+.demandDatum {
+  width: 6rem;
 }
 
-.zeit {
-  width: 3rem;
+.demandZeit {
+  width: 4rem;
 }
 
-.einsatz {
-  width: 10rem;
+.demandEinsatz {
+  min-width: 14rem;
 }
 
-.auswahlcell {
+.auswahlCell {
+  min-width: 6.5rem;
   text-align: center;
 
-  .auswahlbox {
+  .auswahlBox {
     width: 1.6rem;
     height: 1.6rem;
+    cursor: pointer;
   }
 }
