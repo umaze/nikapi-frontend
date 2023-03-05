@@ -1,22 +1,21 @@
 import Link from 'next/link';
-import Image from 'next/image';
+import { formatTime } from '@/helpers/index';
 import styles from '@/styles/AvailabilityItem.module.scss';
 
 export default function AvailabilityItem({ availability }) {
     return (
-        <div className={styles.event}>
-            <div className={styles.img}>
-                <Image src={availability.image?.data ? availability.image.data.attributes.formats.thumbnail.url : '/images/event-default.png'}
-                    width={170}
-                    height={100}
-                    alt={availability.name} />
-            </div>
-
+        <div className={styles.availability}>
             <div className={styles.info}>
                 <span>
-                    {new Date(availability.date).toLocaleDateString('de-CH')} at {availability.time}
+                    <strong>{new Date(availability.demand?.data.attributes.datum).toLocaleDateString('de-CH')}</strong>&nbsp;
+                    {formatTime(availability.demand?.data.attributes.zeitVon)}
+                    {availability.demand?.data.attributes.zeitVon && ' - '}
+                    {formatTime(availability.demand?.data.attributes.zeitBis)}
                 </span>
-                <h3>{availability.name}</h3>
+                <div className={styles.details}>
+                    <h3>{availability.demand?.data.attributes.einsatztyp.typ}</h3>
+                    <div>{availability.rollen?.map(rolle => rolle.name).join(', ')}</div>
+                </div>
             </div>
 
             <div className={styles.link}>

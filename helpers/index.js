@@ -15,6 +15,8 @@ export function applyTimeToDate(source) {
     return null;
 }
 
+export const formatTime = time => applyTimeToDate(time)?.toLocaleTimeString('de-CH', { hour: "2-digit", minute: "2-digit" });
+
 export function groupSelectedRolesByDemandId(list) {
     const grouped = [];
 

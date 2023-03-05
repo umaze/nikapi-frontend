@@ -2,6 +2,7 @@ import Layout from "@/components/Layout";
 import AvailabilityItem from "@/components/AvailabilityItem";
 import { API_URL, PER_PAGE } from "@/config/index";
 import Pagination from '@/components/Pagination';
+import {configRequest, handleErrorMessage, parseCookies} from "@/helpers/index";
 
 export default function AvailabilitiesPage({ availabilities, page, total }) {
     return (
@@ -17,13 +18,15 @@ export default function AvailabilitiesPage({ availabilities, page, total }) {
     )
 }
 
-export async function getServerSideProps({ query: { page = 1 } }) {
+export async function getServerSideProps({ req, query: { page = 1 } }) {
+    const {token} = parseCookies(req);
     // Calculate start page
     const start = +page === 1 ? 0 : (+page - 1) * PER_PAGE;
 
-    // Fetch events
-    const availabilitiesRes = await fetch(`${API_URL}/api/availabilities?populate=*&sort=bemerkung:asc&pagination[limit]=${PER_PAGE}&pagination[start]=${start}`);
+    // Fetch availabilities
+    const availabilitiesRes = await fetch(`${API_URL}/api/availabilities?populate=rollen&populate=demand.einsatztyp&sort=bemerkung:asc&pagination[limit]=${PER_PAGE}&pagination[start]=${start}`, configRequest('GET', token));
     const availabilities = await availabilitiesRes.json();
+    console.log(`${JSON.stringify(availabilities.data)}`);
 
     return {
         props: {
