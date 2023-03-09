@@ -30,7 +30,7 @@ export default function AddActivityPage() {
     /** Group the person input fields in a component */
     const PersonFields = () => (
         <section className={styles.inputGroup}>
-            <h3>Veranstaltung wählen</h3>
+            <h3 className="heading-tertiary">Veranstaltung wählen</h3>
             <Input label="Full name" required type="text" placeholder="Ex: Maria Leopoldina de Habsburgo"/>
             <Input label="Birthday" required type="date" placeholder="dd/mm/aaa"/>
         </section>
@@ -39,7 +39,7 @@ export default function AddActivityPage() {
     /** Group the contact input fields in a component */
     const ContactFields = () => (
         <section className={styles.inputGroup}>
-            <h3>Tour erstellen</h3>
+            <h3 className="heading-tertiary">Tour erstellen</h3>
             <Input label="Email" required type="email" placeholder="exemple@exemple.com"/>
             <Input label="Phone" required type="tel" placeholder="(00) 0.0000-0000"/>
         </section>
@@ -48,7 +48,7 @@ export default function AddActivityPage() {
     /** Group the address input fields in a component */
     const AddressFields = () => (
         <section className={styles.inputGroup}>
-            <h3>Status setzen</h3>
+            <h3 className="heading-tertiary">Status setzen</h3>
             <Input label="Street" required type="text" placeholder="Street name, avenue, etc..."/>
             <Input label="Number" required type="number" placeholder="000"/>
         </section>
@@ -107,7 +107,7 @@ export default function AddActivityPage() {
         <Layout title="Einsatz hinzufügen">
             <main>
                 <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-                    <h2>Einsatz hinzuf&uuml;gen</h2>
+                    <h2 className="heading-secondary">Einsatz hinzuf&uuml;gen</h2>
                     {fieldGroups[step]}
                     <Navigation/>
                     <Reference/>

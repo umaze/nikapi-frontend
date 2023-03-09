@@ -18,32 +18,32 @@ export default function Header() {
 
             <Search />
 
-            <nav>
-                <ul>
+            <nav className={styles.mainNav}>
+                <ul className={styles.mainNavList}>
                     <li>
-                        <Link href='/availabilities' legacyBehavior>
-                            <a>Verf&uuml;gbarkeiten</a>
+                        <Link className={styles.mainNavLink} href='/availabilities'>
+                            Verf&uuml;gbarkeiten
                         </Link>
                     </li>
                     {user ? <>
                         <li>
-                            <Link href='/availabilities/add' legacyBehavior>
-                                <a>Add Availability</a>
+                            <Link className={styles.mainNavLink} href='/availabilities/add'>
+                                Add Availability
                             </Link>
                         </li>
                         <li>
-                            <Link href='/demands' legacyBehavior>
-                                <a>Demands</a>
+                            <Link className={styles.mainNavLink} href='/demands'>
+                                Demands
                             </Link>
                         </li>
                         <li>
-                            <Link href='/activities' legacyBehavior>
-                                <a>Eins&auml;tze</a>
+                            <Link className={styles.mainNavLink} href='/activities'>
+                                Eins&auml;tze
                             </Link>
                         </li>
                         <li>
-                            <Link href='/account/dashboard' legacyBehavior>
-                                <a>Dashboard</a>
+                            <Link className={styles.mainNavLink} href='/account/dashboard'>
+                                Dashboard
                             </Link>
                         </li>
                         <li>
