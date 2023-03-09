@@ -22,6 +22,10 @@
   align-items: center;
   justify-content: center;
   list-style: none;
+
+  li:last-of-type {
+    margin-right: 2.4rem;
+  }
 }
 
 .logo {

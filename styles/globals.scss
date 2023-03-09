@@ -1,16 +1,5 @@
+@import "./base/base";
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html,
-body {
-  font-family: 'Poppins', sans-serif;
-  line-height: 1.8;
-}
 
 a {
   text-decoration: none;
@@ -33,10 +22,10 @@ h1 {
   cursor: pointer;
   border: 0;
   border-radius: 5px;
-}
 
-.btn:hover {
-  opacity: 0.9;
+  &:hover {
+    opacity: 0.9;
+  }
 }
 
 .btn-secondary {
@@ -47,20 +36,27 @@ h1 {
   border: 0;
   border-radius: 5px;
   padding: 5px 15px;
-  margin: 0 20px;
   cursor: pointer;
+
+  &:hover {
+    opacity: 0.8;
+  }
 }
 
-.btn-secondary:hover {
-  opacity: 0.8;
+.btn,
+.btn-secondary {
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
 }
 
 .btn-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-}
 
-.btn-icon svg {
-  margin-right: 5px;
+  svg {
+    margin-right: 5px;
+  }
 }

@@ -53,10 +53,15 @@
   flex-direction: row-reverse;
   width: 100%;
   padding-top: 2rem;
-}
-.btn-secondary:disabled {
-  opacity: 40%;
-  cursor: not-allowed;
+
+  .noMargin {
+    margin: 0 !important;
+
+    &:disabled {
+      opacity: 40%;
+      cursor: not-allowed;
+    }
+  }
 }
 
 /** navigation controls */

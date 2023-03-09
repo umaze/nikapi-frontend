@@ -73,7 +73,7 @@ export default function AddActivityPage() {
             }
             {
                 step > 0 &&
-                <button type="button" onClick={() => setStep(step + 1)} disabled={!isValid}
+                <button type="button" onClick={() => setStep(step - 1)}
                         className="btn-secondary btn-icon">
                     <FaArrowLeft/> Back
                 </button>
