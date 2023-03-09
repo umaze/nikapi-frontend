@@ -20,20 +20,15 @@ export default function Header() {
 
             <nav className={styles.mainNav}>
                 <ul className={styles.mainNavList}>
-                    <li>
-                        <Link className={styles.mainNavLink} href='/availabilities'>
-                            Verf&uuml;gbarkeiten
-                        </Link>
-                    </li>
                     {user ? <>
                         <li>
-                            <Link className={styles.mainNavLink} href='/availabilities/add'>
-                                Add Availability
+                            <Link className={styles.mainNavLink} href='/availabilities'>
+                                Verf&uuml;gbarkeiten
                             </Link>
                         </li>
                         <li>
                             <Link className={styles.mainNavLink} href='/demands'>
-                                Demands
+                                Veranstaltungen
                             </Link>
                         </li>
                         <li>

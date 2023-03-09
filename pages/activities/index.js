@@ -5,10 +5,7 @@ export default function ActivitiesPage() {
     return (
         <Layout title="Einsätze">
             <h1 className="heading-primary">Eins&auml;tze</h1>
-
-            <Link href={`/activities/add`} legacyBehavior>
-                <a className="btn">Einsatz hinzuf&uuml;gen</a>
-            </Link>
+            <Link className="btn" href={`/activities/add`}>Einsatz hinzuf&uuml;gen</Link>
         </Layout>
     )
 }

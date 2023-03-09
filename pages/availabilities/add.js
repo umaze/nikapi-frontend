@@ -115,7 +115,7 @@ export default function AddAvailabilityPage({token, demandGroups, persistedSelec
 
     return (
         <Layout title="Verfügbarkeiten verwalten">
-            <Link className="link--back" href="/availabilities">Go Back</Link>
+            <Link className="link--back" href="/availabilities">Zur&uuml;ck zu Verf&uuml;gbarkeiten</Link>
             <h1 className="heading-primary">Verf&uuml;gbarkeiten verwalten</h1>
             <ToastContainer/>
 

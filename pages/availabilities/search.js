@@ -10,7 +10,7 @@ export default function SearchPage({ availabilities }) {
 
     return (
         <Layout title="Search Results">
-            <Link href="/availabilities">Go Back</Link>
+            <Link href="/availabilities">Zur&uuml;ck zu Verf&uuml;gbarkeiten</Link>
             <h1>Search Results for {router.query.term}</h1>
             {availabilities.length === 0 && <h3>No availabilities to show</h3>}
             {availabilities.map(availability => (

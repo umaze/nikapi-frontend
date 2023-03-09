@@ -3,6 +3,7 @@ import {useForm} from 'react-hook-form'
 import Layout from "@/components/Layout";
 import {useState} from "react";
 import {FaArrowRight, FaArrowLeft, FaSave} from "react-icons/fa";
+import Link from "next/link";
 
 export default function AddActivityPage() {
     const {
@@ -105,6 +106,7 @@ export default function AddActivityPage() {
 
     return (
         <Layout title="Einsatz hinzufügen">
+            <Link className="link--back" href="/activities">Zur&uuml;ck zu Eins&auml;tze</Link>
             <main>
                 <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
                     <h2 className="heading-secondary">Einsatz hinzuf&uuml;gen</h2>

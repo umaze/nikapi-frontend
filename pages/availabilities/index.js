@@ -3,12 +3,15 @@ import AvailabilityItem from "@/components/AvailabilityItem";
 import { API_URL, PER_PAGE } from "@/config/index";
 import Pagination from '@/components/Pagination';
 import {configRequest, parseCookies} from "@/helpers/index";
+import Link from "next/link";
 
 export default function AvailabilitiesPage({ availabilities, page, total }) {
     return (
         <Layout>
             <h1 className="heading-primary">Verf&uuml;gbarkeiten</h1>
-            {availabilities.length === 0 && <h3>No availabilities to show</h3>}
+            <Link className="btn" href={`/availabilities/add`}>Verf&uuml;gbarkeit hinzuf&uuml;gen</Link>
+
+            {availabilities.length === 0 && <h3  className="heading-tertiary">Keine Verf&uuml;gbarkeiten verhanden</h3>}
             {availabilities.map(availability => (
                 <AvailabilityItem key={availability.id} availability={availability.attributes} />
             ))}
