@@ -59,6 +59,14 @@ h1 {
 
   svg {
     margin-right: 0.5rem;
+    margin-left: 0;
+  }
+
+  &--right {
+    svg {
+      margin-right: 0;
+      margin-left: 0.5rem;
+    }
   }
 }
 

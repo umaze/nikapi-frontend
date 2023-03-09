@@ -4,6 +4,7 @@ import Layout from "@/components/Layout";
 import {useState} from "react";
 import {FaArrowRight, FaArrowLeft, FaSave} from "react-icons/fa";
 import Link from "next/link";
+import Step from "@/components/Step";
 
 export default function AddActivityPage() {
     const {
@@ -28,31 +29,44 @@ export default function AddActivityPage() {
         </div>
     )
 
+    /** Select field component */
+    const Select = ({label, required, id}) => (
+        <div>
+            <legend>{label}</legend>
+            <select
+                {...register(label, {required})}
+                className={errors[label] && styles.inputInvalid}
+                id={id}
+                autoComplete="off">
+                <option>Demand 1</option>
+                <option>Demand 2</option>
+                <option>Demand 3</option>
+            </select>
+            {errors[label] && <span>mandatory</span>}
+        </div>
+    )
+
     /** Group the person input fields in a component */
-    const PersonFields = () => (
-        <section className={styles.inputGroup}>
-            <h3 className="heading-tertiary">Veranstaltung wählen</h3>
-            <Input label="Full name" required type="text" placeholder="Ex: Maria Leopoldina de Habsburgo"/>
-            <Input label="Birthday" required type="date" placeholder="dd/mm/aaa"/>
-        </section>
+    const DemandFields = () => (
+        <Step title="Veranstaltung wählen" current={step + 1} size={fieldGroups.length}>
+            <Select label="Bitte wähle eine Veranstaltung:" required id="selectDemand"/>
+        </Step>
     )
 
     /** Group the contact input fields in a component */
     const ContactFields = () => (
-        <section className={styles.inputGroup}>
-            <h3 className="heading-tertiary">Tour erstellen</h3>
+        <Step title="Tour erstellen" current={step + 1} size={fieldGroups.length}>
             <Input label="Email" required type="email" placeholder="exemple@exemple.com"/>
             <Input label="Phone" required type="tel" placeholder="(00) 0.0000-0000"/>
-        </section>
+        </Step>
     )
 
     /** Group the address input fields in a component */
     const AddressFields = () => (
-        <section className={styles.inputGroup}>
-            <h3 className="heading-tertiary">Status setzen</h3>
+        <Step title="Status setzen" current={step + 1} size={fieldGroups.length}>
             <Input label="Street" required type="text" placeholder="Street name, avenue, etc..."/>
             <Input label="Number" required type="number" placeholder="000"/>
-        </section>
+        </Step>
     )
 
     /** Navigation between steps */
@@ -62,21 +76,21 @@ export default function AddActivityPage() {
                 step === fieldGroups.length - 1 &&
                 <button type="submit" disabled={!isValid}
                         className="btn btn-icon">
-                    <FaSave/> Hinzufügen
+                    <FaSave/>Hinzuf&uuml;gen
                 </button>
             }
             {
                 step < fieldGroups.length - 1 &&
                 <button type="button" onClick={() => setStep(step + 1)} disabled={!isValid}
-                        className="btn-secondary btn-icon">
-                    <FaArrowRight/> Next
+                        className="btn-secondary btn-icon btn-icon--right">
+                    Weiter<FaArrowRight/>
                 </button>
             }
             {
                 step > 0 &&
                 <button type="button" onClick={() => setStep(step - 1)}
                         className="btn-secondary btn-icon">
-                    <FaArrowLeft/> Back
+                    <FaArrowLeft/>Zur&uuml;ck
                 </button>
             }
         </section>
@@ -99,7 +113,7 @@ export default function AddActivityPage() {
 
     const [step, setStep] = useState(0);
     const fieldGroups = [
-        <PersonFields/>,
+        <DemandFields/>,
         <ContactFields/>,
         <AddressFields/>
     ];
