@@ -22,7 +22,7 @@ export default function Header() {
                 <ul>
                     <li>
                         <Link href='/availabilities' legacyBehavior>
-                            <a>Availabilities</a>
+                            <a>Verf&uuml;gbarkeiten</a>
                         </Link>
                     </li>
                     {user ? <>
@@ -34,6 +34,11 @@ export default function Header() {
                         <li>
                             <Link href='/demands' legacyBehavior>
                                 <a>Demands</a>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link href='/activities' legacyBehavior>
+                                <a>Eins&auml;tze</a>
                             </Link>
                         </li>
                         <li>

@@ -1,0 +1,33 @@
+// COLORS
+$color-primary: #0077B6;
+$color-blue: #66add3;
+$color-blue-light: #b3d6e9;
+$color-blue-dark: #1a85bd;
+$color-blue-dark-2: #003c5b;
+$color-blue-dark-3: #00476d;
+$color-green: #0e9b78;
+$color-green-light: #14ddac;
+$color-green-dark: #085845;
+$color-green-dark-2: #064234;
+$color-green-dark-3: #021611;
+$color-red: #991527;
+$color-red-light: #e14b5f;
+$color-red-dark: #6d0f1c;
+$color-red-dark-2: #570c16;
+$color-red-dark-3: #160305;
+$color-white: #fff;
+$color-white-background: #e6f1f8;
+$color-black: #000;
+$color-grey: #555;
+$color-grey-light: #eee;
+$color-grey-light-2: #ddd;
+
+// NOTIFICATION COLORS
+$notification-colors: (
+        "success": $color-green $color-green-light $color-green-dark $color-green-dark-2 $color-green-dark-3,
+        "info": $color-blue $color-blue-light $color-blue-dark $color-blue-dark-2 $color-blue-dark-3,
+        "error": $color-red $color-red-light $color-red-dark $color-red-dark-2 $color-red-dark-3
+);
+
+// FONT
+$default-font-size: 1.6rem;

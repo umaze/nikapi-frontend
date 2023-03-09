@@ -1,0 +1,81 @@
+@import "./abstracts/variables";
+
+/** Form */
+.form {
+  background-color: $color-white;
+}
+
+/** Input group */
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.inputGroup div {
+  position: relative;
+}
+.inputGroup div span {
+  position: absolute;
+  right: 0;
+  bottom: 0.5rem;
+  color: $color-red;
+}
+.inputGroup h3 {
+  margin: 2rem 0 1rem;
+  text-transform: uppercase;
+}
+.inputGroup legend {
+  color: $color-grey;
+}
+.inputGroup input {
+  width: 100%;
+  border: 1px solid $color-grey-light-2;
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+
+  &:focus {
+    border-color: $color-blue-dark-3;
+    background-color: $color-white;
+  }
+
+  &::placeholder {
+    color: $color-grey-light;
+  }
+}
+.inputInvalid {
+  border: $color-red 1px solid !important;
+}
+
+/** navigation by steps */
+.navigationControls {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+  width: 100%;
+  padding-top: 2rem;
+}
+.btn-secondary:disabled {
+  opacity: 40%;
+  cursor: not-allowed;
+}
+
+/** navigation controls */
+.reference {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+}
+.markerBlue,
+.markerGray {
+  border-radius: 50%;
+  width: 0.5rem;
+  height: 0.5rem;
+}
+.markerBlue {
+  background-color: $color-blue-dark-3;
+}
+.markerGray {
+  background-color: $color-grey-light;
+}
