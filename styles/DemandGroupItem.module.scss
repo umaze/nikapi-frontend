@@ -1,27 +1,33 @@
-.groupInfo {
-  padding-bottom: 1rem;
-}
+@import "./abstracts/variables";
 
-.demandHeader {
-  display: flex;
-  border-bottom: solid 1px #ddd;
-  margin-bottom: 0.8rem;
-}
+.group {
+  font-size: 1.8rem;
 
-.demandDatum {
-  width: 6rem;
-}
+  .groupInfo {
+    padding-bottom: 1rem;
+  }
 
-.demandZeit {
-  width: 4rem;
-}
+  .demandHeader {
+    display: flex;
+    border-bottom: solid 1px #ddd;
+    margin-bottom: 0.8rem;
+  }
 
-.demandEinsatz {
-  min-width: 14rem;
-}
+  .demandDatum {
+    width: $column-demand-datum;
+  }
 
-.demandAuswahlRollen {
-  text-align: center;
-  min-width: 6.5rem;
+  .demandZeit {
+    width: $column-demand-zeit;
+  }
 
+  .demandEinsatz {
+    min-width: $column-demand-einsatz;
+  }
+
+  .demandAuswahlRollen {
+    text-align: center;
+    min-width: $column-demand-auswahl-rollen;
+
+  }
 }

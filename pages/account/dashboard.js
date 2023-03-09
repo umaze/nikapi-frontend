@@ -32,8 +32,8 @@ export default function DashboardPage({ availabilities, token }) {
     return (
         <Layout title="User Dashboard">
             <div className={styles.dash}>
-                <h1>Dashboard</h1>
-                <h3>My Availabilities</h3>
+                <h1 className="heading-primary">Dashboard</h1>
+                <h3 className="heading-tertiary">Meine Verf&uuml;gbarkeiten</h3>
                 <ToastContainer />
 
                 {availabilities && availabilities.map((availability) => (

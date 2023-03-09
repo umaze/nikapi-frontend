@@ -7,7 +7,7 @@ import {configRequest, parseCookies} from "@/helpers/index";
 export default function AvailabilitiesPage({ availabilities, page, total }) {
     return (
         <Layout>
-            <h1>Verf&uuml;gbarkeiten</h1>
+            <h1 className="heading-primary">Verf&uuml;gbarkeiten</h1>
             {availabilities.length === 0 && <h3>No availabilities to show</h3>}
             {availabilities.map(availability => (
                 <AvailabilityItem key={availability.id} availability={availability.attributes} />

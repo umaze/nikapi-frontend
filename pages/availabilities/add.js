@@ -114,16 +114,16 @@ export default function AddAvailabilityPage({token, demandGroups, persistedSelec
     }, []);
 
     return (
-        <Layout title="Add New Availability">
-            <Link href="/availabilities">Go Back</Link>
-            <h1>Verf&uuml;gbarkeiten verwalten</h1>
+        <Layout title="Verfügbarkeiten verwalten">
+            <Link className="link--back" href="/availabilities">Go Back</Link>
+            <h1 className="heading-primary">Verf&uuml;gbarkeiten verwalten</h1>
             <ToastContainer/>
 
             <form
                 onSubmit={handleSubmit}
                 className={styles.form}
                 ref={(el) => formRef = el}>
-                {demandGroups?.length === 0 && <h3>No groups to show</h3>}
+                {demandGroups?.length === 0 && <h3 className="heading-tertiary">No groups to show</h3>}
                 <ul className={styles.list}>
                     {demandGroups?.map(group => (
                         <li key={group.id}>

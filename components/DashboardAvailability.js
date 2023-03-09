@@ -4,10 +4,10 @@ import styles from '@/styles/DashboardAvailability.module.scss';
 
 export default function DashboardAvailability({ availability, handleDelete }) {
     return (
-        <div className={styles.event}>
+        <div className={styles.availability}>
             <h4>
-                <Link href={`/availabilities/${availability.attributes.slug}`} legacyBehavior>
-                    <a>{availability.attributes.name}</a>
+                <Link href={`/availabilities/${availability.attributes.slug}`}>
+                    {availability.attributes.name}
                 </Link>
             </h4>
             <Link href={`/availabilities/edit/${availability.id}`}>

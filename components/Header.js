@@ -53,10 +53,8 @@ export default function Header() {
                         </li>
                     </> : <>
                         <li>
-                            <Link href='/account/login' legacyBehavior>
-                                <a className="btn-secondary btn-icon">
-                                    <FaSignInAlt /> Login
-                                </a>
+                            <Link className="btn-secondary btn-icon" href='/account/login'>
+                                <FaSignInAlt /> Login
                             </Link>
                         </li>
                     </>}

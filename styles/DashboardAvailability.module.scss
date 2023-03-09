@@ -1,22 +1,23 @@
-.event {
-    margin: 10px 0;
-    padding: 10px;
-    border-radius: 5px;
+.availability {
+    margin: 1rem 0;
+    padding: 1rem;
+    border-radius: 0.5rem;
     border: 1px #ddd solid;
     background-color: #f4f4f4;
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    font-size: 1.6rem;
   }
-  
-  .event h4 {
-    margin-bottom: 10px;
+
+  .availability h4 {
+    margin-bottom: 1rem;
     flex: 2;
   }
   
   .edit,
   .delete {
-    margin: 10px;
+    margin: 1rem;
   }
   
   .delete {

@@ -1,21 +1,23 @@
+@import "./abstracts/variables";
+
 .demandRow {
   display: flex;
 }
 
 .demandDatum {
-  width: 6rem;
+  width: $column-demand-datum;
 }
 
 .demandZeit {
-  width: 4rem;
+  width: $column-demand-zeit;
 }
 
 .demandEinsatz {
-  min-width: 14rem;
+  min-width: $column-demand-einsatz;
 }
 
 .auswahlCell {
-  min-width: 6.5rem;
+  min-width: $column-demand-auswahl-rollen;
   text-align: center;
 
   .auswahlBox {

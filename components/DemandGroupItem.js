@@ -7,7 +7,7 @@ export default function DemandGroupItem({group}) {
     return (
         <div className={styles.group}>
             <div className={styles.groupInfo}>
-                <h3>{attributes.name}</h3>
+                <h3  className="subheading">{attributes.name}</h3>
             </div>
             <table>
                 <thead>
