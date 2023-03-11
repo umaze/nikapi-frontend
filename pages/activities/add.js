@@ -5,15 +5,43 @@ import {useState} from "react";
 import {FaArrowRight, FaArrowLeft, FaSave} from "react-icons/fa";
 import Link from "next/link";
 import Step from "@/components/Step";
+import {configRequest, formatTime, handleErrorMessage, parseCookies} from "@/helpers/index";
+import {API_URL} from "@/config/index";
+import {useDispatch} from "react-redux";
+import {setDemand} from "@/store/activitySlice";
+import ApplyOrders from "@/components/ApplyOrders";
+import Select from "@/components/Select";
 
-export default function AddActivityPage() {
+export default function AddActivityPage({token, demands, persistedAvailabilities}) {
     const {
         register,
         handleSubmit,
         formState: {errors, isValid}
     } = useForm({mode: 'all'});
 
+    const dispatch = useDispatch();
+
     const onSubmit = data => console.log(data);
+    const handleChange = event => {
+        const selectedDemand = demands.find(demand => +demand.id === +event.target.value);
+        dispatch(
+            setDemand({
+                ...selectedDemand
+            })
+        );
+    };
+
+    const getOptionLabel = demand => {
+        const typ = demand.attributes.einsatztyp.typ;
+        const datum = new Date(demand.attributes.datum).toLocaleDateString('de-CH')
+        const zeit = `${formatTime(demand.attributes.zeitVon)} - ${formatTime(demand.attributes.zeitBis)}`;
+        const gruppe = demand.attributes.gruppe.data.attributes.name;
+        if (demand.attributes.zeitVon) {
+            return `${datum} | ${zeit} | ${typ} [${gruppe}]`;
+        } else {
+            return `${datum} | keine Zeit | ${typ} [${gruppe}]`;
+        }
+    };
 
     /** Input field component */
     const Input = ({label, required, type, placeholder}) => (
@@ -29,40 +57,33 @@ export default function AddActivityPage() {
         </div>
     )
 
-    /** Select field component */
-    const Select = ({label, required, id}) => (
-        <div>
-            <legend>{label}</legend>
-            <select
-                {...register(label, {required})}
-                className={errors[label] && styles.inputInvalid}
-                id={id}
-                autoComplete="off">
-                <option>Demand 1</option>
-                <option>Demand 2</option>
-                <option>Demand 3</option>
-            </select>
-            {errors[label] && <span>mandatory</span>}
-        </div>
-    )
+    const demandOptions = options => (
+        <>
+            <option value={0} hidden>Wähle eine Veranstaltung...</option>
+            {options && options.map((option, i) => (
+                <option key={i} value={option.id}>{getOptionLabel(option)}</option>
+            ))}
+        </>
+    );
 
-    /** Group the person input fields in a component */
     const DemandFields = () => (
         <Step title="Veranstaltung wählen" current={step + 1} size={fieldGroups.length}>
-            <Select label="Bitte wähle eine Veranstaltung:" required id="selectDemand"/>
+            <Select
+                label="Veranstaltung"
+                required
+                id="selectDemand"
+                options={demandOptions(demands)}
+                register={(name, required) => register(name, {required: required})}
+                handleChange={e => handleChange(e)}
+                errors={errors}/>
         </Step>
+    );
+
+    const ApplyOrderFields = () => (
+        <ApplyOrders currentStep={step + 1} stepsSize={fieldGroups.length}/>
     )
 
-    /** Group the contact input fields in a component */
-    const ContactFields = () => (
-        <Step title="Tour erstellen" current={step + 1} size={fieldGroups.length}>
-            <Input label="Email" required type="email" placeholder="exemple@exemple.com"/>
-            <Input label="Phone" required type="tel" placeholder="(00) 0.0000-0000"/>
-        </Step>
-    )
-
-    /** Group the address input fields in a component */
-    const AddressFields = () => (
+    const ConfirmationFields = () => (
         <Step title="Status setzen" current={step + 1} size={fieldGroups.length}>
             <Input label="Street" required type="text" placeholder="Street name, avenue, etc..."/>
             <Input label="Number" required type="number" placeholder="000"/>
@@ -114,8 +135,8 @@ export default function AddActivityPage() {
     const [step, setStep] = useState(0);
     const fieldGroups = [
         <DemandFields/>,
-        <ContactFields/>,
-        <AddressFields/>
+        <ApplyOrderFields/>,
+        <ConfirmationFields/>
     ];
 
     return (
@@ -131,4 +152,35 @@ export default function AddActivityPage() {
             </main>
         </Layout>
     )
+}
+
+export async function getServerSideProps({req}) {
+    const {token} = parseCookies(req);
+
+    // Fetch demands
+    const demandsRes = await fetch(`${API_URL}/api/demands?populate=einsatztyp&populate=gruppe.rollen&sort=datum:asc`, configRequest('GET', token));
+    const demands = await demandsRes.json();
+    handleErrorMessage(demandsRes);
+
+    // Fetch availabilities
+    const availabilitiesRes = await fetch(`${API_URL}/api/availabilities?populate=rollen&populate=demand&populate=demand.gruppe`, configRequest('GET', token));
+    const allAvailabilities = await availabilitiesRes.json();
+    handleErrorMessage(availabilitiesRes);
+
+    const persistedAvailabilities = allAvailabilities.data.map((item) => {
+        return {
+            id: item.id,
+            groupId: item.attributes.demand.data.attributes.gruppe.data.id,
+            demandId: item.attributes.demand.data.id,
+            rollen: item.attributes.rollen
+        }
+    });
+
+    return {
+        props: {
+            demands: demands.data,
+            persistedAvailabilities,
+            token
+        }
+    };
 }
