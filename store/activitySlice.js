@@ -1,5 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { HYDRATE } from "next-redux-wrapper";
+import {createSlice} from "@reduxjs/toolkit";
+import {HYDRATE} from "next-redux-wrapper";
 
 const initialState = {
     current: {},
@@ -31,6 +31,7 @@ export const activitySlice = createSlice({
         },
         setRole(state, action) {
             state.roles = {
+                ...state.roles,
                 ...action.payload
             };
         }
@@ -46,13 +47,25 @@ export const activitySlice = createSlice({
     },
 });
 
-export const selectMatchingAvailabilities = (demandId, rolle) => state => {
+export const selectMatchingAvailabilities = (demandId, rollen) => state => {
     const availabilitiesOfDemand = state.activity.availabilities?.filter(a => +a.demandId === +demandId);
-    return availabilitiesOfDemand?.length > 0 ? availabilitiesOfDemand.filter(a => a.rollen.some(r => r.name === rolle)) : [];
+    const matches = {};
+    if (availabilitiesOfDemand?.length > 0) {
+        rollen.forEach(rolle => {
+            matches[rolle.name] = availabilitiesOfDemand
+                .filter(a => a.rollen
+                    .some(r => r.name === rolle.name)
+                );
+        });
+    }
+    return matches;
 }
-export const { setDemand } = activitySlice.actions;
-export const { setAvailabilities } = activitySlice.actions;
-export const { setRole } = activitySlice.actions;
+export const {setDemand} = activitySlice.actions;
+export const {setAvailabilities} = activitySlice.actions;
+export const {setRole} = activitySlice.actions;
 export const selectCurrentDemand = state => state.activity.current;
-export const selectAvailabilities = (state) => { return selectMatchingAvailabilities(state) };
+export const getRoles = state => state.activity.roles;
+export const selectAvailabilities = (state) => {
+    return selectMatchingAvailabilities(state)
+};
 export default activitySlice.reducer;

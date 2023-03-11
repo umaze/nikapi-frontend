@@ -38,6 +38,7 @@
 
 .markerBlue,
 .markerGray {
+  border: 1px solid $color-grey;
   border-radius: 50%;
   width: 0.5rem;
   height: 0.5rem;
@@ -48,5 +49,5 @@
 }
 
 .markerGray {
-  background-color: $color-grey-light;
+  background-color: $color-grey-light-2;
 }
