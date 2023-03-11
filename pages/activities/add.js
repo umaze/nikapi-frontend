@@ -1,15 +1,15 @@
 import styles from '@/styles/Activities.module.scss'
 import {useForm} from 'react-hook-form'
 import Layout from "@/components/Layout";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {FaArrowRight, FaArrowLeft, FaSave} from "react-icons/fa";
 import Link from "next/link";
 import Step from "@/components/Step";
 import {configRequest, formatTime, handleErrorMessage, parseCookies} from "@/helpers/index";
 import {API_URL} from "@/config/index";
 import {useDispatch} from "react-redux";
-import {setDemand} from "@/store/activitySlice";
-import ApplyOrders from "@/components/ApplyOrders";
+import {setDemand, setAvailabilities} from "@/store/activitySlice";
+import ApplyRoles from "@/components/ApplyRoles";
 import Select from "@/components/Select";
 
 export default function AddActivityPage({token, demands, persistedAvailabilities}) {
@@ -20,6 +20,11 @@ export default function AddActivityPage({token, demands, persistedAvailabilities
     } = useForm({mode: 'all'});
 
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(setAvailabilities([...persistedAvailabilities]
+        ))
+    }, []);
 
     const onSubmit = data => console.log(data);
     const handleChange = event => {
@@ -79,8 +84,12 @@ export default function AddActivityPage({token, demands, persistedAvailabilities
         </Step>
     );
 
-    const ApplyOrderFields = () => (
-        <ApplyOrders currentStep={step + 1} stepsSize={fieldGroups.length}/>
+    const ApplyRolesFields = () => (
+        <ApplyRoles
+            currentStep={step + 1}
+            stepsSize={fieldGroups.length}
+            register={(name, required) => register(name, {required: required})}
+            errors={errors}/>
     )
 
     const ConfirmationFields = () => (
@@ -114,6 +123,10 @@ export default function AddActivityPage({token, demands, persistedAvailabilities
                     <FaArrowLeft/>Zur&uuml;ck
                 </button>
             }
+            {
+                step === 0 &&
+                <Link className="btn-secondary" href={`/activities`}>Abbrechen</Link>
+            }
         </section>
     )
 
@@ -135,7 +148,7 @@ export default function AddActivityPage({token, demands, persistedAvailabilities
     const [step, setStep] = useState(0);
     const fieldGroups = [
         <DemandFields/>,
-        <ApplyOrderFields/>,
+        <ApplyRolesFields/>,
         <ConfirmationFields/>
     ];
 
@@ -163,7 +176,7 @@ export async function getServerSideProps({req}) {
     handleErrorMessage(demandsRes);
 
     // Fetch availabilities
-    const availabilitiesRes = await fetch(`${API_URL}/api/availabilities?populate=rollen&populate=demand&populate=demand.gruppe`, configRequest('GET', token));
+    const availabilitiesRes = await fetch(`${API_URL}/api/availabilities?populate=rollen&populate=demand&populate=demand.gruppe&populate=benutzer`, configRequest('GET', token));
     const allAvailabilities = await availabilitiesRes.json();
     handleErrorMessage(availabilitiesRes);
 
@@ -172,7 +185,8 @@ export async function getServerSideProps({req}) {
             id: item.id,
             groupId: item.attributes.demand.data.attributes.gruppe.data.id,
             demandId: item.attributes.demand.data.id,
-            rollen: item.attributes.rollen
+            rollen: item.attributes.rollen,
+            benutzer: item.attributes.benutzer?.data.attributes
         }
     });
 
