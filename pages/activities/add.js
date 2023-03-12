@@ -11,6 +11,7 @@ import {useDispatch} from "react-redux";
 import {setDemand, setAvailabilities} from "@/store/activitySlice";
 import ApplyRoles from "@/components/ApplyRoles";
 import Select from "@/components/Select";
+import ApplyOrders from "@/components/ApplyOrders";
 
 export default function AddActivityPage({token, demands, persistedAvailabilities}) {
     const {
@@ -90,12 +91,20 @@ export default function AddActivityPage({token, demands, persistedAvailabilities
             stepsSize={fieldGroups.length}
             register={register}
             errors={errors}/>
-    )
+    );
+
+    const ApplyOrdersFields = () => (
+        <ApplyOrders
+            currentStep={step + 1}
+            stepsSize={fieldGroups.length}
+            register={register}
+            errors={errors}/>
+    );
 
     const ConfirmationFields = () => (
         <Step title="Status setzen" current={step + 1} size={fieldGroups.length}>
-            <Input label="Street" required type="text" placeholder="Street name, avenue, etc..."/>
-            <Input label="Number" required type="number" placeholder="000"/>
+            <Input label="Bemerkungen" required type="text" placeholder="Spezielles zu beachten, Besonderheiten, ..."/>
+            <Input label="Zeit" required type="time"/>
         </Step>
     )
 
@@ -149,6 +158,7 @@ export default function AddActivityPage({token, demands, persistedAvailabilities
     const fieldGroups = [
         <DemandFields/>,
         <ApplyRolesFields/>,
+        <ApplyOrdersFields/>,
         <ConfirmationFields/>
     ];
 
