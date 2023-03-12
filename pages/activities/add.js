@@ -88,7 +88,7 @@ export default function AddActivityPage({token, demands, persistedAvailabilities
         <ApplyRoles
             currentStep={step + 1}
             stepsSize={fieldGroups.length}
-            register={(name, required) => register(name, {required: required})}
+            register={register}
             errors={errors}/>
     )
 
