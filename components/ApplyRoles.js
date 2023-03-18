@@ -16,6 +16,9 @@ export default function ApplyRoles({currentStep, stepsSize, register, errors}) {
                     {rollen.map((r, i) => (
                         <SelectAvailability key={i} role={r} register={register} errors={errors}/>
                     ))}
+                    {rollen.map((r, i) => (
+                        <button key={i} className="btn">Weiterer {r.name}</button>
+                    ))}
                 </>
             }
         </Step>
