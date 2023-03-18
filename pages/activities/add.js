@@ -8,7 +8,7 @@ import Step from "@/components/Step";
 import {configRequest, formatTime, handleErrorMessage, parseCookies} from "@/helpers/index";
 import {API_URL} from "@/config/index";
 import {useDispatch} from "react-redux";
-import {setDemand, setAvailabilities} from "@/store/activitySlice";
+import {setDemand, setAvailabilities, setMatchingOrders} from "@/store/activitySlice";
 import ApplyRoles from "@/components/ApplyRoles";
 import Select from "@/components/Select";
 import ApplyOrders from "@/components/ApplyOrders";
@@ -28,14 +28,30 @@ export default function AddActivityPage({token, demands, persistedAvailabilities
     }, []);
 
     const onSubmit = data => console.log(data);
-    const handleChange = event => {
+    const handleChange = async event => {
         const selectedDemand = demands.find(demand => +demand.id === +event.target.value);
         dispatch(
             setDemand({
                 ...selectedDemand
             })
         );
+        const matchingOrders = await fetchMatchingOrders(selectedDemand);
+        const orders = matchingOrders.length > 0 ? [...matchingOrders] : [];
+        dispatch(
+            setMatchingOrders(
+                orders
+            )
+        );
+
     };
+
+    const fetchMatchingOrders = async demand => {
+        // Fetch relevant orders (matching einsatztyp and datum)
+        const ordersRes = await fetch(`${API_URL}/api/orders?populate=einsatztyp&filters[einsatztyp][typ][$eq]=${demand.attributes.einsatztyp.typ}&filters[datum][$eq]=${demand.attributes.datum}`, configRequest('GET', token));
+        const matchingOrders = await ordersRes.json();
+        handleErrorMessage(ordersRes);
+        return matchingOrders.data;
+    }
 
     const getOptionLabel = demand => {
         const typ = demand.attributes.einsatztyp.typ;

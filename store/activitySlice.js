@@ -4,6 +4,7 @@ import {HYDRATE} from "next-redux-wrapper";
 const initialState = {
     current: {},
     availabilities: [],
+    orders: [],
     roles: {}
 };
 
@@ -23,6 +24,11 @@ export const activitySlice = createSlice({
             state.current = {
                 ...action.payload
             };
+        },
+        setMatchingOrders(state, action) {
+            state.orders = [
+                ...action.payload
+            ];
         },
         setAvailabilities(state, action) {
             state.availabilities = [
@@ -61,9 +67,11 @@ export const selectMatchingAvailabilities = (demandId, rollen) => state => {
     return matches;
 }
 export const {setDemand} = activitySlice.actions;
+export const {setMatchingOrders} = activitySlice.actions;
 export const {setAvailabilities} = activitySlice.actions;
 export const {setRole} = activitySlice.actions;
 export const selectCurrentDemand = state => state.activity.current;
+export const selectMatchingOrders = state => state.activity.orders;
 export const getRoles = state => state.activity.roles;
 export const selectAvailabilities = (state) => {
     return selectMatchingAvailabilities(state)

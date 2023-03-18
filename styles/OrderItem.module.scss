@@ -1,0 +1,50 @@
+@import "./abstracts/variables";
+
+.order {
+  display: flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size: 1.6rem;
+  margin: 1rem 0.5rem;
+  padding: 1.2rem;
+  border-radius: 0.5rem;
+  background-color: $color-white;
+  box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.1);
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  padding-right: 1rem;
+  max-width: 30rem;
+  line-height: 1.5;
+}
+
+.details,
+.address {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.details {
+  font-weight: 700;
+}
+
+.link {
+  display: flex;
+  column-gap: 0.5rem;
+  margin-left: 1rem;
+  min-height: 100%;
+}
+
+@media (max-width: 600px) {
+  .order {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .info {
+    margin-bottom: 20px;
+  }
+}

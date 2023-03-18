@@ -1,0 +1,46 @@
+.infos {
+  display: inline-block;
+  line-height: 1.4;
+
+  strong {
+    font-weight: 700;
+  }
+}
+
+.dragAndDrop {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 1rem;
+
+  &Basket {
+    border-radius: 0.75rem;
+    border: 1px dashed black;
+    width: 100%;
+  }
+
+  &Margin {
+    margin: 1rem 0;
+  }
+
+  &Title {
+    margin: 0 4rem;
+    font-weight: 700;
+  }
+
+  &Item {
+    display: flex;
+    justify-content: space-between;
+    border-width: 1px;
+    margin: 0.5rem 4rem;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    background-color: rgb(129 140 248);
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+
+    button {
+      margin-left: 1rem;
+    }
+  }
+}
