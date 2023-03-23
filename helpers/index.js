@@ -124,15 +124,18 @@ export function applyPropertiesToActivityObject(parsed, rollen) {
     Object.entries(parsed).forEach(([k, v]) => {
         const [key, value] = Object.entries(v)[0];
         if (rollen.some(r => r.name.toLowerCase() === key)) {
-            // Role names are capitalized: e.g. Helfer
-            const rolleName = key?.charAt(0).toUpperCase() + key.slice(1);
-            applied.rollen.push(
-                {
-                    rolle: {
-                        name: rolleName
-                    },
-                    availability: +value
-                });
+            // Apply only selected roles
+            if (!!+value) {
+                // Role names are capitalized: e.g. Helfer
+                const rolleName = key?.charAt(0).toUpperCase() + key.slice(1);
+                applied.rollen.push(
+                    {
+                        rolle: {
+                            name: rolleName
+                        },
+                        availability: +value
+                    });
+            }
         } else {
             applied[key] = key === 'demand' ? +value : value;
         }
