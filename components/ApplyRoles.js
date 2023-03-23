@@ -3,9 +3,9 @@ import {useSelector} from "react-redux";
 import {FaPlus} from 'react-icons/fa';
 import {getSelectables, selectCurrentDemand, selectMatchingAvailabilities} from "@/store/activitySlice";
 import SelectAvailability from "@/components/SelectAvailability";
-import styles from "@/styles/ApplyRoles.module.scss";
 import {useState} from "react";
 import {getRoleNameOfSelectable, getUnselectedRoles} from "@/helpers/index";
+import styles from "@/styles/ApplyRoles.module.scss";
 
 export default function ApplyRoles({currentStep, stepsSize, register, errors}) {
     const activityDemand = useSelector(selectCurrentDemand);

@@ -49,6 +49,9 @@ export const activitySlice = createSlice({
                 ...state.selectables,
                 ...additionals
             ];
+        },
+        initSelectables(state) {
+            state.selectables = [];
         }
     },
     // Special reducer for hydrating the state. Special case for next-redux-wrapper
@@ -75,11 +78,14 @@ export const selectMatchingAvailabilities = (demandId, rollen) => state => {
     }
     return matches;
 }
-export const {setDemand} = activitySlice.actions;
-export const {setMatchingOrders} = activitySlice.actions;
-export const {setAvailabilities} = activitySlice.actions;
-export const {setRole} = activitySlice.actions;
-export const {addSelectable} = activitySlice.actions;
+export const {
+    setDemand,
+    setMatchingOrders,
+    setAvailabilities,
+    setRole,
+    addSelectable,
+    initSelectables
+} = activitySlice.actions;
 export const selectCurrentDemand = state => state.activity.current;
 export const selectMatchingOrders = state => state.activity.orders;
 export const getRoles = state => state.activity.roles;

@@ -1,5 +1,4 @@
-import styles from '@/styles/Activities.module.scss'
-import {useForm} from 'react-hook-form'
+import {useForm} from 'react-hook-form';
 import Layout from "@/components/Layout";
 import {useEffect, useState} from "react";
 import {FaArrowRight, FaArrowLeft, FaSave} from "react-icons/fa";
@@ -8,15 +7,21 @@ import Step from "@/components/Step";
 import {configRequest, formatTime, handleErrorMessage, parseCookies} from "@/helpers/index";
 import {API_URL} from "@/config/index";
 import {useDispatch} from "react-redux";
-import {setDemand, setAvailabilities, setMatchingOrders} from "@/store/activitySlice";
+import {setDemand, setAvailabilities, setMatchingOrders, initSelectables} from "@/store/activitySlice";
 import ApplyRoles from "@/components/ApplyRoles";
 import Select from "@/components/Select";
 import ApplyOrders from "@/components/ApplyOrders";
+import styles from '@/styles/Activities.module.scss';
 
 export default function AddActivityPage({token, demands, persistedAvailabilities}) {
+    const [step, setStep] = useState(0);
+    const [selectedDatum, setSelectedDatum] = useState('');
+    const [selectedEinsatztyp, setSelectedEinsatztyp] = useState('');
+
     const {
         register,
         handleSubmit,
+        reset,
         formState: {errors, isValid}
     } = useForm({mode: 'all'});
 
@@ -29,12 +34,18 @@ export default function AddActivityPage({token, demands, persistedAvailabilities
 
     const onSubmit = data => console.log(data);
     const handleChange = async event => {
+        reset({
+            selectDemand: event.target.value
+        });
         const selectedDemand = demands.find(demand => +demand.id === +event.target.value);
+        setSelectedDatum(selectedDemand.attributes.datum);
+        setSelectedEinsatztyp(selectedDemand.attributes.einsatztyp.typ);
         dispatch(
             setDemand({
                 ...selectedDemand
             })
         );
+        dispatch(initSelectables());
         const matchingOrders = await fetchMatchingOrders(selectedDemand);
         const orders = matchingOrders.length > 0 ? [...matchingOrders] : [];
         dispatch(
@@ -42,7 +53,6 @@ export default function AddActivityPage({token, demands, persistedAvailabilities
                 orders
             )
         );
-
     };
 
     const fetchMatchingOrders = async demand => {
@@ -90,6 +100,11 @@ export default function AddActivityPage({token, demands, persistedAvailabilities
 
     const DemandFields = () => (
         <Step title="Veranstaltung wählen" current={step + 1} size={fieldGroups.length}>
+            <div className={styles.infos}>
+                <p>Datum: <strong>{selectedDatum ? new Date(selectedDatum).toLocaleDateString('de-CH') : '-'}</strong>
+                </p>
+                <p>Einsatztyp: <strong>{selectedEinsatztyp || '-'}</strong></p>
+            </div>
             <Select
                 label="Veranstaltung"
                 required
@@ -169,8 +184,6 @@ export default function AddActivityPage({token, demands, persistedAvailabilities
         });
         return markers;
     }
-
-    const [step, setStep] = useState(0);
     const fieldGroups = [
         <DemandFields/>,
         <ApplyRolesFields/>,

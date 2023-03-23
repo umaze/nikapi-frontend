@@ -51,3 +51,12 @@
 .markerGray {
   background-color: $color-grey-light-2;
 }
+
+.infos {
+  display: inline-block;
+  line-height: 1.4;
+
+  strong {
+    font-weight: 700;
+  }
+}
