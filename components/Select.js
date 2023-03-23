@@ -1,8 +1,8 @@
-import styles from "@/styles/Activities.module.scss";
+import styles from "@/styles/Select.module.scss";
 
 export default function Select({label, required, disabled, id, options, register, handleChange, errors}) {
     return (
-        <div>
+        <div className={styles.customSelect}>
             <legend>{label}</legend>
             <select
                 {...register(id, {required})}

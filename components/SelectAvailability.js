@@ -2,7 +2,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {addSelectable, selectCurrentDemand, selectMatchingAvailabilities, setRole} from "@/store/activitySlice";
 import Select from "@/components/Select";
 
-export default function SelectAvailability({role, register, errors, index}) {
+export default function SelectAvailability({role, register, errors}) {
     const dispatch = useDispatch();
     const activityDemand = useSelector(selectCurrentDemand);
     const rollen = activityDemand.attributes?.gruppe.data.attributes.rollen;

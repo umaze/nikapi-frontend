@@ -56,7 +56,7 @@ export default function ApplyRoles({currentStep, stepsSize, register, errors}) {
                     </div>
 
                     {selectables.map((r, i) => (
-                        <SelectAvailability key={i} role={r} register={register} errors={errors} index={i}/>
+                        <SelectAvailability key={i} role={r} register={register} errors={errors}/>
                     ))}
                     {rollen.map((r, i) => (
                         displayButton(r.name) &&
