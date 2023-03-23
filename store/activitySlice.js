@@ -1,11 +1,13 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {HYDRATE} from "next-redux-wrapper";
+import {getNewSelectables} from "@/helpers/index";
 
 const initialState = {
     current: {},
     availabilities: [],
     orders: [],
-    roles: {}
+    roles: {},
+    selectables: []
 };
 
 // Actual Slice
@@ -40,6 +42,13 @@ export const activitySlice = createSlice({
                 ...state.roles,
                 ...action.payload
             };
+        },
+        addSelectable(state, action) {
+            const additionals = getNewSelectables([action.payload], state.selectables);
+            state.selectables = [
+                ...state.selectables,
+                ...additionals
+            ];
         }
     },
     // Special reducer for hydrating the state. Special case for next-redux-wrapper
@@ -70,9 +79,11 @@ export const {setDemand} = activitySlice.actions;
 export const {setMatchingOrders} = activitySlice.actions;
 export const {setAvailabilities} = activitySlice.actions;
 export const {setRole} = activitySlice.actions;
+export const {addSelectable} = activitySlice.actions;
 export const selectCurrentDemand = state => state.activity.current;
 export const selectMatchingOrders = state => state.activity.orders;
 export const getRoles = state => state.activity.roles;
+export const getSelectables = state => state.activity.selectables;
 export const selectAvailabilities = (state) => {
     return selectMatchingAvailabilities(state)
 };

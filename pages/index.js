@@ -22,8 +22,8 @@ export default function HomePage({ availabilities }) {
 }
 
 export async function getStaticProps() {
-  const res = await fetch(`${API_URL}/api/availabilities?populate=*&_sort=bemerkung:ASC&_limit=3`);
-  const availabilities = await res.json();
+  const availabilitiesRes = await fetch(`${API_URL}/api/availabilities?populate=*&_sort=bemerkung:ASC&_limit=3`);
+  const availabilities = await availabilitiesRes.json();
 
   return {
     props: { availabilities: availabilities.data },

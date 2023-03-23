@@ -1,5 +1,6 @@
 import { useDrag } from "react-dnd";
 import OrderItem from "@/components/OrderItem";
+import { FaFolderOpen } from 'react-icons/fa';
 
 export const DragCard = ({ order }) => {
     const [{ isDragging }, dragRef] = useDrag({
@@ -14,7 +15,7 @@ export const DragCard = ({ order }) => {
         <div>
             <div ref={dragRef}>
                 <OrderItem key={order.id} order={order} />
-                {isDragging && "📂"}
+                {isDragging && <FaFolderOpen/>}
             </div>
         </div>
     );
