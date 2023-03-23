@@ -27,7 +27,7 @@ export async function getServerSideProps({ req, query: { page = 1 } }) {
     const start = +page === 1 ? 0 : (+page - 1) * PER_PAGE;
 
     // Fetch availabilities
-    const availabilitiesRes = await fetch(`${API_URL}/api/availabilities?populate=rollen&populate=demand.einsatztyp&sort=bemerkung:asc&pagination[limit]=${PER_PAGE}&pagination[start]=${start}`, configRequest('GET', token));
+    const availabilitiesRes = await fetch(`${API_URL}/api/availabilities?populate=rollen&populate=demand.einsatztyp&populate=benutzer&sort=bemerkung:asc&pagination[limit]=${PER_PAGE}&pagination[start]=${start}`, configRequest('GET', token));
     const availabilities = await availabilitiesRes.json();
 
     return {

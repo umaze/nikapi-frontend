@@ -20,7 +20,11 @@
 .info {
     flex: 2;
 
-    span {
+    &Top {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        align-items: baseline;
+
         strong {
             padding-right: 1rem;
         }
