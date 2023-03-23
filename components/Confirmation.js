@@ -30,7 +30,7 @@ export default function Confirmation({currentStep, stepsSize, register, errors})
     );
 
     return (
-        <Step title="Status setzen" current={currentStep} size={stepsSize}>
+        <Step title="Bestätigung" current={currentStep} size={stepsSize}>
             <div className={styles.confirmation}>
                 <div className={styles.infos}>
                     <p>Datum: <strong>{new Date(activityDemand.attributes.datum).toLocaleDateString('de-CH')}</strong>

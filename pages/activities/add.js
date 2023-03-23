@@ -1,23 +1,39 @@
 import {useForm} from 'react-hook-form';
 import Layout from "@/components/Layout";
 import {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import {FaArrowRight, FaArrowLeft, FaSave} from "react-icons/fa";
 import Link from "next/link";
 import Step from "@/components/Step";
-import {configRequest, formatTime, handleErrorMessage, parseCookies} from "@/helpers/index";
+import {
+    applyPropertiesToActivityObject,
+    configRequest,
+    formatTime,
+    handleErrorMessage,
+    parseCookies,
+    parseFormDataToValidProperties
+} from "@/helpers/index";
 import {API_URL} from "@/config/index";
-import {useDispatch} from "react-redux";
-import {setDemand, setAvailabilities, setMatchingOrders, initSelectables} from "@/store/activitySlice";
+import {
+    setDemand,
+    setAvailabilities,
+    setMatchingOrders,
+    initSelectables,
+    selectCurrentDemand
+} from "@/store/activitySlice";
 import ApplyRoles from "@/components/ApplyRoles";
 import Select from "@/components/Select";
 import ApplyOrders from "@/components/ApplyOrders";
-import styles from '@/styles/Activities.module.scss';
 import Confirmation from "@/components/Confirmation";
+import styles from '@/styles/Activities.module.scss';
 
 export default function AddActivityPage({token, demands, persistedAvailabilities}) {
     const [step, setStep] = useState(0);
     const [selectedDatum, setSelectedDatum] = useState('');
     const [selectedEinsatztyp, setSelectedEinsatztyp] = useState('');
+
+    const activityDemand = useSelector(selectCurrentDemand);
+    const rollen = activityDemand.attributes?.gruppe.data.attributes.rollen;
 
     const {
         register,
@@ -33,7 +49,13 @@ export default function AddActivityPage({token, demands, persistedAvailabilities
         ))
     }, []);
 
-    const onSubmit = data => console.log(data);
+    const onSubmit = data => {
+        // Form validity
+        const parsed = parseFormDataToValidProperties(data);
+        const applied = applyPropertiesToActivityObject(parsed, rollen);
+        console.log(JSON.stringify(applied));
+    };
+
     const handleChange = async event => {
         reset({
             selectDemand: event.target.value

@@ -96,3 +96,46 @@ export function handleErrorMessage(res) {
         toast.error('Something Went Wrong');
     }
 }
+
+export function parseFormDataToValidProperties(data) {
+    return Object.keys(data)?.map(item => {
+        let formatted = {};
+        const value = data[item];
+        if (item.startsWith('select')) {
+            const withoutPrefix = item.slice(6).toLowerCase();
+            if (~item.indexOf('_')) {
+                // Key like selecthelfer_0
+                formatted[withoutPrefix.split('_')[0]] = value;
+            } else {
+                // Key like selectStatus
+                formatted[withoutPrefix] = value;
+            }
+        } else {
+            // Key like Bezeichnung
+            formatted[item.toLowerCase()] = value;
+        }
+        return formatted;
+    });
+}
+
+export function applyPropertiesToActivityObject(parsed, rollen) {
+    const applied = {};
+    applied.rollen = [];
+    Object.entries(parsed).forEach(([k, v]) => {
+        const [key, value] = Object.entries(v)[0];
+        if (rollen.some(r => r.name.toLowerCase() === key)) {
+            // Role names are capitalized: e.g. Helfer
+            const rolleName = key?.charAt(0).toUpperCase() + key.slice(1);
+            applied.rollen.push(
+                {
+                    rolle: {
+                        name: rolleName
+                    },
+                    availability: +value
+                });
+        } else {
+            applied[key] = key === 'demand' ? +value : value;
+        }
+    });
+    return applied;
+}
