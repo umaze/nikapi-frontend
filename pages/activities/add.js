@@ -12,6 +12,7 @@ import ApplyRoles from "@/components/ApplyRoles";
 import Select from "@/components/Select";
 import ApplyOrders from "@/components/ApplyOrders";
 import styles from '@/styles/Activities.module.scss';
+import Confirmation from "@/components/Confirmation";
 
 export default function AddActivityPage({token, demands, persistedAvailabilities}) {
     const [step, setStep] = useState(0);
@@ -75,20 +76,6 @@ export default function AddActivityPage({token, demands, persistedAvailabilities
         }
     };
 
-    /** Input field component */
-    const Input = ({label, required, type, placeholder}) => (
-        <div>
-            <legend>{label}</legend>
-            <input
-                {...register(label, {required})}
-                className={errors[label] && styles.inputInvalid}
-                type={type}
-                placeholder={placeholder}
-            />
-            {errors[label] && <span>mandatory</span>}
-        </div>
-    )
-
     const demandOptions = options => (
         <>
             <option value={0} hidden>Wähle eine Veranstaltung...</option>
@@ -133,10 +120,11 @@ export default function AddActivityPage({token, demands, persistedAvailabilities
     );
 
     const ConfirmationFields = () => (
-        <Step title="Status setzen" current={step + 1} size={fieldGroups.length}>
-            <Input label="Bemerkungen" required type="text" placeholder="Spezielles zu beachten, Besonderheiten, ..."/>
-            <Input label="Zeit" required type="time"/>
-        </Step>
+        <Confirmation
+            currentStep={step + 1}
+            stepsSize={fieldGroups.length}
+            register={register}
+            errors={errors}/>
     )
 
     /** Navigation between steps */
@@ -184,6 +172,7 @@ export default function AddActivityPage({token, demands, persistedAvailabilities
         });
         return markers;
     }
+
     const fieldGroups = [
         <DemandFields/>,
         <ApplyRolesFields/>,
