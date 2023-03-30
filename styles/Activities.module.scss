@@ -27,34 +27,14 @@
   }
 }
 
-/** navigation controls */
-.reference {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  width: 100%;
-}
-
-.markerBlue,
-.markerGray {
-  border: 1px solid $color-grey;
-  border-radius: 50%;
-  width: 0.5rem;
-  height: 0.5rem;
-}
-
-.markerBlue {
-  background-color: $color-blue-dark-3;
-}
-
-.markerGray {
-  background-color: $color-grey-light-2;
-}
-
 .infos {
-  display: inline-block;
-  line-height: 1.4;
+  display: flex;
+  column-gap: 2rem;
+  padding: 3rem 0 1rem;
+
+  p {
+    min-width: 17rem;
+  }
 
   strong {
     font-weight: 700;

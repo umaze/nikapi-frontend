@@ -22,7 +22,7 @@ import {
     selectCurrentDemand
 } from "@/store/activitySlice";
 import ApplyRoles from "@/components/ApplyRoles";
-import Select from "@/components/Select";
+import SelectWrapper from "@/components/SelectWrapper";
 import ApplyOrders from "@/components/ApplyOrders";
 import Confirmation from "@/components/Confirmation";
 import styles from '@/styles/Activities.module.scss';
@@ -108,13 +108,13 @@ export default function AddActivityPage({token, demands, persistedAvailabilities
     );
 
     const DemandFields = () => (
-        <Step title="Veranstaltung wählen" current={step + 1} size={fieldGroups.length}>
+        <Step title="Veranstaltung" info="Eine Veranstaltung auswählen" current={step + 1} size={fieldGroups.length}>
             <div className={styles.infos}>
                 <p>Datum: <strong>{selectedDatum ? new Date(selectedDatum).toLocaleDateString('de-CH') : '-'}</strong>
                 </p>
                 <p>Einsatztyp: <strong>{selectedEinsatztyp || '-'}</strong></p>
             </div>
-            <Select
+            <SelectWrapper
                 label="Veranstaltung"
                 required
                 id="selectDemand"

@@ -55,7 +55,7 @@ export function getDifferentSelections(listCurrent, listPersisted) {
 export const getRoleNameOfSelectable = selectable => Object.keys(selectable)[0]?.split('_')[0];
 
 export function getUnselectedRoles(listRoles, listSelected) {
-    return listRoles.filter(
+    return listRoles?.filter(
         role => !listSelected.some(
             selected => role.name?.toLowerCase() === getRoleNameOfSelectable(selected)
         )

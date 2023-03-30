@@ -1,5 +1,5 @@
 import Step from "@/components/Step";
-import Select from "@/components/Select";
+import SelectWrapper from "@/components/SelectWrapper";
 import {STATUS_ACTIVITY} from "@/config/index";
 import styles from "@/styles/Confirmation.module.scss";
 import {useSelector} from "react-redux";
@@ -30,7 +30,7 @@ export default function Confirmation({currentStep, stepsSize, register, errors})
     );
 
     return (
-        <Step title="Bestätigung" current={currentStep} size={stepsSize}>
+        <Step title="Bestätigung" info="Abschliessende Angaben" current={currentStep} size={stepsSize}>
             <div className={styles.confirmation}>
                 <div className={styles.infos}>
                     <p>Datum: <strong>{new Date(activityDemand.attributes.datum).toLocaleDateString('de-CH')}</strong>
@@ -39,7 +39,7 @@ export default function Confirmation({currentStep, stepsSize, register, errors})
                 </div>
                 <Input label="Bezeichnung" type="text" required placeholder="Kennzeichnung des Einsatzes"/>
                 <Input label="Bemerkungen" type="text" placeholder="Spezielles zu beachten, Besonderheiten, ..."/>
-                <Select
+                <SelectWrapper
                     label="Status"
                     required
                     id={`selectStatus`}

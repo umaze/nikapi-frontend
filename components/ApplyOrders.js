@@ -36,7 +36,7 @@ export default function ApplyOrders({currentStep, stepsSize, register, errors}) 
     }
 
     return (
-        <Step title="Aufträge zuweisen" current={currentStep} size={stepsSize}>
+        <Step title="Bestellungen" info="Zuweisen mit Drag&Drop" current={currentStep} size={stepsSize}>
             {activityDemand.attributes &&
                 <>
                     <div className={styles.infos}>

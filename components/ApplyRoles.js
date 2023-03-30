@@ -45,7 +45,7 @@ export default function ApplyRoles({currentStep, stepsSize, register, errors}) {
     };
 
     return (
-        <Step title="Rollen zuweisen" current={currentStep} size={stepsSize}>
+        <Step title="Rollen" info="Mitglieder zuweisen" current={currentStep} size={stepsSize}>
             {activityDemand.attributes &&
                 <>
                     <div className={styles.infos}>

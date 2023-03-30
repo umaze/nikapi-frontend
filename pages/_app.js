@@ -1,5 +1,6 @@
 import {Provider} from 'react-redux';
 import {AuthProvider} from '@/context/AuthContext';
+import {MantineProvider} from '@mantine/core';
 import {wrapper} from "@/store/store";
 import '@/styles/globals.scss';
 import {DndProvider} from 'react-dnd'
@@ -11,9 +12,17 @@ export default function App({Component, ...rest}) {
     return (
         <Provider store={store}>
             <AuthProvider>
-                <DndProvider backend={HTML5Backend}>
-                    <Component {...pageProps} />
-                </DndProvider>
+                <MantineProvider
+                    withGlobalStyles
+                    withNormalizeCSS
+                    theme={{
+                        /** Put your mantine theme override here */
+                        colorScheme: 'light',
+                    }}>
+                    <DndProvider backend={HTML5Backend}>
+                        <Component {...pageProps} />
+                    </DndProvider>
+                </MantineProvider>
             </AuthProvider>
         </Provider>
     )

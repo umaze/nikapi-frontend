@@ -13,7 +13,7 @@ export default function AvailabilityItem({availability}) {
                         {availability.demand?.data.attributes.zeitVon && ' - '}
                         {formatTime(availability.demand?.data.attributes.zeitBis)}
                     </div>
-                    <div>{availability.benutzer.data.attributes.username}</div>
+                    <div>{availability.benutzer?.data.attributes.username}</div>
                 </div>
                 <div className={styles.details}>
                     <h3>{availability.demand?.data.attributes.einsatztyp.typ}</h3>

@@ -7,6 +7,10 @@
   flex-direction: column;
   gap: 1rem;
   min-height: 40rem;
+  padding: 1.8rem;
+  border: 1px solid $color-blue;
+  border-radius: 1rem;
+  overflow: hidden;
 }
 
 .inputGroup div {
@@ -48,9 +52,52 @@
   display: flex;
   justify-content: space-between;
   align-items: baseline;
+  padding: 1.8rem;
+  margin: -1.8rem -1.8rem 0;
+  border-bottom: 1px solid $color-blue;
+  background-color: $color-blue-light;
 
-  .stepInfo strong {
+  .stepCircle {
+    align-self: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid $color-blue-dark;
+    border-radius: 50%;
+    width: 5rem;
+    height: 5rem;
+    //transform: translateY(-7%);
+  }
+
+  .stepNumber {
+    display: flex;
     font-size: 2.4rem;
+    font-weight: 700;
+  }
+
+  .stepCombo {
+    display: flex;
+    column-gap: 2rem;
+  }
+
+  .stepDescription {
+    line-height: 1.4;
+
+    &Title {
+      font-size: 2.4rem;
+      font-weight: 600;
+    }
+
+    &Info {
+      font-size: 1.4rem;
+      color: $color-grey;
+    }
+  }
+
+  .stepInfo {
+    strong {
+      font-size: 2.4rem;
+    }
   }
 }
 
