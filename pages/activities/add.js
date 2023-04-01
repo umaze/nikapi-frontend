@@ -1,6 +1,8 @@
 import {useForm} from 'react-hook-form';
+import {toast} from "react-toastify";
 import Layout from "@/components/Layout";
 import {useEffect, useState} from "react";
+import {useRouter} from "next/router";
 import {useDispatch, useSelector} from "react-redux";
 import {FaArrowRight, FaArrowLeft, FaSave} from "react-icons/fa";
 import Link from "next/link";
@@ -33,6 +35,7 @@ export default function AddActivityPage({token, demands, persistedAvailabilities
     const [selectedEinsatztyp, setSelectedEinsatztyp] = useState('');
 
     const activityDemand = useSelector(selectCurrentDemand);
+    const router = useRouter();
     const rollen = activityDemand.attributes?.gruppe.data.attributes.rollen;
 
     const {
@@ -49,11 +52,25 @@ export default function AddActivityPage({token, demands, persistedAvailabilities
         ))
     }, []);
 
-    const onSubmit = data => {
+    const onSubmit = async data => {
         // Form validity
         const parsed = parseFormDataToValidProperties(data);
         const applied = applyPropertiesToActivityObject(parsed, rollen);
-        console.log(JSON.stringify(applied));
+        const res = await fetch(`${API_URL}/api/activities`,
+            configRequest(
+                'POST',
+                token,
+                JSON.stringify({data: applied})
+            )
+        );
+        if (!res.ok) {
+            handleErrorMessage(res, toast);
+        } else {
+            toast.success('Success');
+            await router.push('/activities');
+        }
+
+        // console.log(JSON.stringify(applied));
     };
 
     const handleChange = async event => {
@@ -100,7 +117,7 @@ export default function AddActivityPage({token, demands, persistedAvailabilities
 
     const demandOptions = options => (
         <>
-            <option value={0} hidden>Wähle eine Veranstaltung...</option>
+            <option value="" hidden>Wähle eine Veranstaltung...</option>
             {options && options.map((option, i) => (
                 <option key={i} value={option.id}>{getOptionLabel(option)}</option>
             ))}
@@ -119,7 +136,7 @@ export default function AddActivityPage({token, demands, persistedAvailabilities
                 required
                 id="selectDemand"
                 options={demandOptions(demands)}
-                register={(name, required) => register(name, {required: required})}
+                register={(name, required) => register(name, required)}
                 handleChange={e => handleChange(e)}
                 errors={errors}/>
         </Step>

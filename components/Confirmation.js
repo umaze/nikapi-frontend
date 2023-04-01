@@ -42,7 +42,7 @@ export default function Confirmation({currentStep, stepsSize, register, errors})
                 <SelectWrapper
                     label="Status"
                     required
-                    id={`selectStatus`}
+                    id="selectStatus"
                     options={statusOptions(STATUS_ACTIVITY)}
                     register={(name, required) => register(name, {required: required})}
                     errors={errors}/>

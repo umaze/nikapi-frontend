@@ -1,5 +1,4 @@
 import cookie from 'cookie';
-import {toast} from "react-toastify";
 
 export function parseCookies(req) {
     return cookie.parse(req ? req.headers.cookie || '' : '');
@@ -87,7 +86,9 @@ export const configRequest = (method, token, body = null, contentType = null) =>
     };
 };
 
-export function handleErrorMessage(res) {
+export function handleErrorMessage(res, toast) {
+    if (!toast) return;
+
     if (!res.ok) {
         if (res.status === 403 || res.status === 401) {
             toast.error('Unauthorized');
