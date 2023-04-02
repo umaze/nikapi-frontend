@@ -3,10 +3,25 @@ import { useRouter } from 'next/router';
 import Header from './Header';
 import Showcase from './Showcase';
 import Footer from './Footer';
+import Sidebar from "@/components/Sidebar";
+import {IconCheckbox, IconClipboardList} from '@tabler/icons-react';
 import styles from '@/styles/Layout.module.scss';
 
 export default function Layout({ title, keywords, description, children }) {
     const router = useRouter();
+
+    const testSubMenu = [
+        {
+            href: '/availabilities',
+            label: 'Verfügbarkeiten',
+            icon: <IconCheckbox/>
+        },
+        {
+            href: '/activities',
+            label: 'Einsätze',
+            icon: <IconClipboardList/>
+        }
+    ];
 
     return (
         <div>
@@ -21,7 +36,12 @@ export default function Layout({ title, keywords, description, children }) {
             {router.pathname === '/' && <Showcase />}
 
             <div className={styles.container}>
-                {children}
+                <aside>
+                    <Sidebar listSubMenu={testSubMenu} />
+                </aside>
+                <div className={styles.mainContent}>
+                    {children}
+                </div>
             </div>
             <Footer />
         </div>

@@ -23,22 +23,12 @@ export default function Header() {
                     {user ? <>
                         <li>
                             <Link className={styles.mainNavLink} href='/availabilities'>
-                                Verf&uuml;gbarkeiten
-                            </Link>
-                        </li>
-                        <li>
-                            <Link className={styles.mainNavLink} href='/demands'>
-                                Veranstaltungen
+                                Mein Bereich
                             </Link>
                         </li>
                         <li>
                             <Link className={styles.mainNavLink} href='/activities'>
-                                Eins&auml;tze
-                            </Link>
-                        </li>
-                        <li>
-                            <Link className={styles.mainNavLink} href='/account/dashboard'>
-                                Dashboard
+                                Planung
                             </Link>
                         </li>
                         <li>
