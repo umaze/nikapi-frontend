@@ -4,9 +4,12 @@ import Link from 'next/link';
 import Search from './Search';
 import AuthContext from '@/context/AuthContext';
 import styles from '@/styles/Header.module.scss';
+import {useRouter} from "next/router";
 
 export default function Header() {
     const { user, logout } = useContext(AuthContext);
+    const router = useRouter();
+    const currentRoute = router.pathname;
 
     return (
         <header className={styles.header}>
@@ -22,12 +25,12 @@ export default function Header() {
                 <ul className={styles.mainNavList}>
                     {user ? <>
                         <li>
-                            <Link className={styles.mainNavLink} href='/availabilities'>
+                            <Link href='/availabilities' className={`${styles.mainNavLink} ${currentRoute.endsWith('/availabilities') ? styles.active : styles.nonActive}`}>
                                 Mein Bereich
                             </Link>
                         </li>
                         <li>
-                            <Link className={styles.mainNavLink} href='/activities'>
+                            <Link href='/activities' className={`${styles.mainNavLink} ${currentRoute.endsWith('/activities') ? styles.active : styles.nonActive}`}>
                                 Planung
                             </Link>
                         </li>

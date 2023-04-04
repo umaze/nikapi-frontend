@@ -9,6 +9,15 @@
   height: 7rem;
   padding: 0 3rem;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
+
+  nav {
+    display: flex;
+    height: 100%;
+  }
 }
 
 /**********************************/
@@ -34,7 +43,6 @@
     color: #03045E;
     font-weight: 500;
     font-size: 1.8rem;
-    transition: all 0.3s;
   }
 
   &:hover,
@@ -56,6 +64,16 @@
       background-color: #006ba4;
     }
   }
+}
+
+.active {
+    border-bottom: 5px solid orangered;
+    margin-bottom: -9px;
+    padding-bottom: 4px;
+}
+
+.nonActive {
+  border: none;
 }
 
 .logo {
