@@ -6,7 +6,7 @@ import styles from '@/styles/Footer.module.scss';
 import ScrollLink from "@/components/ScrollLink";
 
 export default function Footer() {
-    const { user, logout } = useContext(AuthContext);
+    const {user, logout} = useContext(AuthContext);
     return (
         <footer className={styles.footer}>
             <div className="container grid grid--3-cols">
@@ -15,40 +15,30 @@ export default function Footer() {
                         <IconSleigh/>Samichlaus
                     </Link>
 
-                    <p className={styles.copyright}>Copyright &copy; 2023 by St.Nikolaus-Gesellschaft Dietlikon &amp; Wangen-Br&uuml;ttisellen.<br/>All rights reserved.</p>
+                    <p className={styles.copyright}>Copyright &copy; 2023 by St.Nikolaus-Gesellschaft
+                        Dietlikon &amp; Wangen-Br&uuml;ttisellen.<br/>All rights reserved.</p>
                     <ul className={styles.footerNav}>
                         <li>
                             <Link className={styles.footerLink} data-item-title="Impressum" href="#">Impressum</Link>
                         </li>
                         <li>
-                            <Link className={styles.footerLink} data-item-title="Datenschutzbestimmungen" href="#">Datenschutz</Link>
+                            <Link className={styles.footerLink} data-item-title="Datenschutzbestimmungen"
+                                  href="#">Datenschutz</Link>
                         </li>
                     </ul>
                 </div>
-                <div className={styles.openingHoursCol}>
+                <div className={styles.contactCol}>
                     <p className={styles.footerHeading}>Kontakt</p>
-                    <div className={styles.openingHours}>
-                        <div>
-                            Di - Fr:
+                    <div className={styles.contact}>
+                        <div>St.Nikolaus-Gesellschaft<br/>
+                            Dietlikon &amp; Wangen-Br&uuml;ttisellen<br/>
+                            Postfach 301<br/>
+                            8305 <strong>Dietlikon</strong>
                         </div>
                         <div>
-                            <time dateTime="09:00">09:00</time>
-                            -
-                            <time dateTime="18:30">18:30</time>
-                        </div>
-                        <div>
-                            Sa:
-                        </div>
-                        <div>
-                            <time dateTime="09:00">09:00</time>
-                            -
-                            <time dateTime="15:00">15:00</time>
-                        </div>
-                        <div>
-                            Mo:
-                        </div>
-                        <div>
-                            geschlossen
+                            <Link href="https://samichlaus-dietlikon.ch" target="_blank">
+                                Link Webseite
+                            </Link>
                         </div>
                     </div>
                 </div>
@@ -61,7 +51,8 @@ export default function Footer() {
                             <li><Link className={styles.footerLink} href='#' onClick={() => logout()}>Logout</Link></li>
                         </> : <>
                             <li>
-                                <ScrollLink className={styles.footerLink} href="#einsatzplanung">Einsatzplanung</ScrollLink>
+                                <ScrollLink className={styles.footerLink}
+                                            href="#einsatzplanung">Einsatzplanung</ScrollLink>
                             </li>
                             <li><Link className={styles.footerLink} href='/account/login'>Login</Link></li>
                         </>}
