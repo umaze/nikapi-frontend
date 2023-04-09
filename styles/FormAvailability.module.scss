@@ -1,11 +1,16 @@
+@import "./abstracts/variables";
 @import "Form.module";
 
 .list {
   list-style: none;
   margin-bottom: 3.6rem;
 
-  li:not(:first-of-type) {
-    padding-top: 2rem;
+  li {
+    border: 1px solid $color-brown;
+    border-radius: 8px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    background-color: $color-brown-light-3;
   }
 
   table {

@@ -1,9 +1,86 @@
+@import "./abstracts/variables";
+
+/**********************************/
+/* FOOTER */
+/**********************************/
+
 .footer {
-  margin: 10rem 0 4rem;
-  text-align: center;
-  font-size: 1.8rem;
+  position: relative;
+  z-index: 20;
+  padding: 12.8rem 0;
+  border-top: 1px solid $color-brown;
+  background-color: $color-brown-light;
 }
 
-.footer p {
-  margin: 0.5rem 0;
+.logoCol {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2.2rem;
+
+  .footerNav {
+    flex-direction: row;
+  }
+}
+
+.footerLogo {
+  display: flex;
+  align-items: center;
+  color: $color-red;
+  font-weight: 600;
+  font-size: 3rem;
+  text-transform: uppercase;
+
+  &:hover, &:active {
+    color: $color-red-light;
+  }
+
+  svg {
+    height: 3.6rem;
+    width: 3.6rem;
+    margin-right: 1rem;
+  }
+}
+
+.copyright,
+.openingHours {
+  font-size: 1.4rem;
+  line-height: 1.6;
+  color: $color-black;
+}
+
+.openingHours {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  column-gap: 1rem;
+  row-gap: 1.2rem;
+}
+
+.footerHeading {
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: $color-black;
+  margin-bottom: 4rem;
+  cursor: default;
+}
+
+.footerNav {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+}
+
+.footerLink:link,
+.footerLink:visited {
+  text-decoration: none;
+  font-size: $default-font-size;
+  font-weight: 500;
+  color: $color-black;
+  transition: all 0.3s;
+}
+
+.footerLink:hover,
+.footerLink:active {
+  font-weight: 600;
+  color: $color-brown-dark;
 }

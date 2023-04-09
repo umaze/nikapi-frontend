@@ -16,7 +16,7 @@ export default function Sidebar({listSubMenu}) {
     return (
         <>
             {user && listSubMenu?.length > 0 &&
-                <div className={`${styles.sidebar} ${expanded ? styles.sidebarExpanded : ''}`}>
+                <div className={`${styles.sidebar} ${expanded ? 'expanded' : ''}`}>
                     <button
                         onClick={handleToggleCollapse}
                         className={!expanded ? styles.centered : ''}>

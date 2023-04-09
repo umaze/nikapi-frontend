@@ -4,13 +4,14 @@ import Link from 'next/link';
 import Layout from "@/components/Layout";
 import AvailabilityItem from "@/components/AvailabilityItem";
 import { API_URL } from "@/config/index";
+import {FaArrowLeft} from "react-icons/fa";
 
 export default function SearchPage({ availabilities }) {
     const router = useRouter();
 
     return (
         <Layout title="Search Results">
-            <Link href="/availabilities">Zur&uuml;ck zu Verf&uuml;gbarkeiten</Link>
+            <Link href="/availabilities"><FaArrowLeft/>Zur&uuml;ck zu Verf&uuml;gbarkeiten</Link>
             <h1>Search Results for {router.query.term}</h1>
             {availabilities.length === 0 && <h3>No availabilities to show</h3>}
             {availabilities.map(availability => (

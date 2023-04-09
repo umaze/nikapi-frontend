@@ -1,13 +1,16 @@
 import Head from 'next/head';
-import { useRouter } from 'next/router';
+import {useRouter} from 'next/router';
 import Header from './Header';
-import Showcase from './Showcase';
+import Hero from './Hero';
 import Footer from './Footer';
 import Sidebar from "@/components/Sidebar";
 import {IconCheckbox, IconClipboardList} from '@tabler/icons-react';
 import styles from '@/styles/Layout.module.scss';
+import {useContext} from "react";
+import AuthContext from "@/context/AuthContext";
 
-export default function Layout({ title, keywords, description, children }) {
+export default function Layout({title, keywords, description, children}) {
+    const {user} = useContext(AuthContext);
     const router = useRouter();
 
     const testSubMenu = [
@@ -27,23 +30,21 @@ export default function Layout({ title, keywords, description, children }) {
         <div>
             <Head>
                 <title>{title}</title>
-                <meta name="description" content={description} />
-                <meta name="keywords" content={keywords} />
+                <meta name="description" content={description}/>
+                <meta name="keywords" content={keywords}/>
             </Head>
 
-            <Header />
+            <Header/>
 
-            {router.pathname === '/' && <Showcase />}
+            {router.pathname === '/' && <Hero/>}
 
             <div className={styles.container}>
-                <aside>
-                    <Sidebar listSubMenu={testSubMenu} />
-                </aside>
+                {user && <Sidebar listSubMenu={testSubMenu}/> }
                 <div className={styles.mainContent}>
                     {children}
                 </div>
             </div>
-            <Footer />
+            <Footer/>
         </div>
     )
 }

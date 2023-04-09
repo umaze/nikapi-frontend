@@ -34,7 +34,7 @@
     border-radius: 0;
     background-color: transparent;
     /* Styling the select text color */
-    color: darken(#1FBDED,35%);
+    color: $color-brown-dark;
 
     /* removes the fucking native down arrow */
     -webkit-appearance: none;
@@ -67,7 +67,7 @@
     /* Styling the down arrow */
     border-left: .25em solid transparent;
     border-right: .25em solid transparent;
-    border-bottom: .375em solid darken(#1FBDED,25%);
+    border-bottom: .375em solid $color-brown-dark;
   }
 
   &:after
@@ -75,7 +75,7 @@
     /* Styling the down arrow */
     border-left: .25em solid transparent;
     border-right: .25em solid transparent;
-    border-top: .375em solid darken(#1FBDED,25%);
+    border-top: .375em solid $color-brown-dark;
   }
 
 }

@@ -4,7 +4,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #fff;
+  background: $color-brown-light;
   color: #333;
   height: 7rem;
   padding: 0 3rem;
@@ -13,6 +13,7 @@
   position: -webkit-sticky; /* Safari */
   position: sticky;
   top: 0;
+  z-index: 10;
 
   nav {
     display: flex;
@@ -28,10 +29,29 @@
   list-style: none;
   display: flex;
   align-items: center;
-  gap: 3.2rem;
+  gap: 1.2rem;
+
+  li:not(:last-of-type) {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+
+    &:hover {
+      background-color: $color-brown-light-2;
+
+      .mainNavLink {
+        color: $color-red;
+      }
+
+      .active {
+        border-color: $color-red-dark;
+      }
+    }
+  }
 
   li:last-of-type {
-    margin-right: 2.4rem;
+    margin: 0 2.4rem;
   }
 }
 
@@ -40,14 +60,15 @@
   &:visited {
     display: inline-block;
     text-decoration: none;
-    color: #03045E;
+    color: $color-black;
     font-weight: 500;
     font-size: 1.8rem;
   }
 
   &:hover,
   &:active {
-    color: $color-primary;
+    color: $color-red;
+    background-color: $color-brown-light-2;
   }
 
   &.navCta {
@@ -67,9 +88,11 @@
 }
 
 .active {
-    border-bottom: 5px solid orangered;
-    margin-bottom: -9px;
-    padding-bottom: 4px;
+  border-bottom: 5px solid $color-red;
+
+  .mainNavLink {
+    margin-bottom: -5px;
+  }
 }
 
 .nonActive {
@@ -77,13 +100,14 @@
 }
 
 .logo {
-  color: red;
-  font-size: 2rem;
+  color: $color-red;
+  font-weight: 600;
+  font-size: 3rem;
   text-transform: uppercase;
 }
 
 .logo a {
-  color: red;
+  color: $color-red;
 }
 
 @media (max-width: 768px) {

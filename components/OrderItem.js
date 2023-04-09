@@ -12,11 +12,11 @@ export default function OrderItem({order, onDeleteItem}) {
             </div>
 
             <div className={styles.link}>
-                <Link className="btn btn-icon" href={`/orders/${order.id}`}>
+                <Link className="btn btn-secondary btn-secondary--small btn-icon" href={`/orders/${order.id}`}>
                     <FaSearchPlus/>
                 </Link>
                 {onDeleteItem &&
-                    <button className="btn btn-icon" onClick={(event) => onDeleteItem(order, event)}>
+                    <button className="btn btn-secondary btn-secondary--small btn-icon" onClick={(event) => onDeleteItem(order, event)}>
                         <FaTrashAlt/>
                     </button>}
             </div>

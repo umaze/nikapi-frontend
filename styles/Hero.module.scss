@@ -1,0 +1,69 @@
+@import "./abstracts/variables";
+
+/**********************************/
+/* HERO SECTION */
+/**********************************/
+
+.sectionHero {
+  background-color: rgba($color-brown-dark, 0.7);
+  padding: 4.8rem 0 9.6rem 0;
+}
+
+.hero {
+  max-width: 130rem;
+  height: 50vh;
+  margin: 0 auto;
+  padding: 0 3.2rem;
+  color: $color-white;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9.6rem;
+  align-items: center;
+
+  &-img {
+    width: 100%;
+  }
+
+  &Description {
+    font-size: 2rem;
+    line-height: 1.6;
+    margin-bottom: 4.8rem;
+
+    &:first-of-type {
+      margin-bottom: 0;
+    }
+  }
+}
+
+
+//.hero {
+//  height: 100vh;
+//  width: 100%;
+//  background-color: $color-brown-light-2;
+//  color: $color-white;
+//  position: relative;
+//  display: flex;
+//  flex-direction: column;
+//  align-items: center;
+//  justify-content: center;
+//  text-align: center;
+//}
+//
+//.hero::after {
+//  content: '';
+//  position: absolute;
+//  top: 0;
+//  left: 0;
+//  width: 100%;
+//  height: 100%;
+//  background-color: rgba($color-brown-dark, 0.7);
+//}
+//
+//.hero * {
+//  z-index: 9;
+//}
+//
+//.hero h1 {
+//  font-size: 4rem;
+//  margin-bottom: 0;
+//}

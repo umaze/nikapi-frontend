@@ -17,6 +17,7 @@ import Link from 'next/link';
 import Layout from '@/components/Layout';
 import {API_URL} from '@/config/index';
 import styles from '@/styles/FormAvailability.module.scss';
+import {FaArrowLeft} from "react-icons/fa";
 
 export default function AddAvailabilityPage({token, demandGroups, persistedSelection}) {
     const [availabilities, setAvailabilities] = useState([]);
@@ -115,7 +116,7 @@ export default function AddAvailabilityPage({token, demandGroups, persistedSelec
 
     return (
         <Layout title="Verfügbarkeiten verwalten">
-            <Link className="link--back" href="/availabilities">Zur&uuml;ck zu Verf&uuml;gbarkeiten</Link>
+            <Link className="link--back" href="/availabilities"><FaArrowLeft/>Zur&uuml;ck zu Verf&uuml;gbarkeiten</Link>
             <h1 className="heading-primary">Verf&uuml;gbarkeiten verwalten</h1>
             <ToastContainer/>
 
@@ -132,7 +133,7 @@ export default function AddAvailabilityPage({token, demandGroups, persistedSelec
                     ))}
                 </ul>
 
-                <input type="submit" value="Add Availability" className="btn"/>
+                <input type="submit" value="Änderung speichern" className="btn"/>
             </form>
         </Layout>
     )

@@ -16,14 +16,14 @@ export default function AvailabilityItem({availability}) {
                     <div>{availability.benutzer?.data.attributes.username}</div>
                 </div>
                 <div className={styles.details}>
-                    <h3>{availability.demand?.data.attributes.einsatztyp.typ}</h3>
+                    <div className={styles.einsatztyp}>{availability.demand?.data.attributes.einsatztyp.typ}</div>
                     <div>{availability.rollen?.map(rolle => rolle.name).join(', ')}</div>
                 </div>
             </div>
 
             <div className={styles.link}>
                 <Link href={`/availabilities/${availability.slug}`} legacyBehavior>
-                    <a className="btn">Details</a>
+                    <a className="btn-secondary">Details</a>
                 </Link>
             </div>
         </div>

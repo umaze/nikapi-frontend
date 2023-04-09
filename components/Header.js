@@ -19,29 +19,27 @@ export default function Header() {
                 </Link>
             </div>
 
-            <Search />
-
             <nav className={styles.mainNav}>
                 <ul className={styles.mainNavList}>
                     {user ? <>
-                        <li>
-                            <Link href='/availabilities' className={`${styles.mainNavLink} ${currentRoute.endsWith('/availabilities') ? styles.active : styles.nonActive}`}>
+                        <li className={`${currentRoute.includes('/availabilities') ? styles.active : styles.nonActive}`}>
+                            <Link href='/availabilities' className={styles.mainNavLink}>
                                 Mein Bereich
                             </Link>
                         </li>
-                        <li>
-                            <Link href='/activities' className={`${styles.mainNavLink} ${currentRoute.endsWith('/activities') ? styles.active : styles.nonActive}`}>
+                        <li className={`${currentRoute.includes('/activities') ? styles.active : styles.nonActive}`}>
+                            <Link href='/activities' className={styles.mainNavLink}>
                                 Planung
                             </Link>
                         </li>
                         <li>
-                            <button onClick={() => logout()} className="btn-secondary btn-icon">
+                            <button onClick={() => logout()} className="btn btn-cta btn-icon">
                                 <FaSignOutAlt />  Logout
                             </button>
                         </li>
                     </> : <>
                         <li>
-                            <Link className="btn-secondary btn-icon" href='/account/login'>
+                            <Link className="btn btn-cta btn-icon" href='/account/login'>
                                 <FaSignInAlt /> Login
                             </Link>
                         </li>

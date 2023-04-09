@@ -5,16 +5,21 @@
     justify-content:space-between;
     align-items:center;
     font-size: 1.8rem;
-    margin: 20px 0;
-    padding:13px;
+    margin: 1.2rem 0;
+    padding: 1.2rem 1.2rem 1.2rem 2rem;
     border-radius: 0.5rem;
-    background-color: $color-white;
+    background-color: $color-brown-light-3;
     box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.1);
+
+    &:first-of-type {
+        margin-top: 3rem;
+    }
 }
 
-.img {
-    flex: 1;
-    margin: 10px;
+.einsatztyp {
+    font-weight: 500;
+    font-size: 2.2rem;
+    min-width: 28rem;
 }
 
 .info {
@@ -28,12 +33,20 @@
         strong {
             padding-right: 1rem;
         }
+
+        div:last-of-type {
+            padding-left: 1rem;
+        }
     }
 
     .details {
         display: grid;
         grid-template-columns: 1fr 2fr;
         align-items: baseline;
+
+        div:last-of-type {
+            padding-left: 1rem;
+        }
     }
 }
 
@@ -44,6 +57,6 @@
     }
 
     .info {
-        margin-bottom: 20px;
+        margin-bottom: 2rem;
     }
 }

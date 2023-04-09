@@ -197,21 +197,6 @@ export default function AddActivityPage({token, demands, persistedAvailabilities
         </section>
     )
 
-    /** Mark the input group already filled as blue or gray if not */
-    const Reference = () => (
-        <footer className={styles.reference}>
-            {renderMarkers()}
-        </footer>
-    )
-
-    function renderMarkers() {
-        let markers = [];
-        fieldGroups.forEach((_, i) => {
-            markers.push(<span key={i} className={step >= i ? styles.markerBlue : styles.markerGray}/>);
-        });
-        return markers;
-    }
-
     const fieldGroups = [
         <DemandFields/>,
         <ApplyRolesFields/>,
@@ -221,13 +206,12 @@ export default function AddActivityPage({token, demands, persistedAvailabilities
 
     return (
         <Layout title="Einsatz hinzufügen">
-            <Link className="link--back" href="/activities">Zur&uuml;ck zu Eins&auml;tze</Link>
+            <Link className="link--back" href="/activities"><FaArrowLeft/> Zur&uuml;ck zu Eins&auml;tze</Link>
             <main>
                 <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
                     <h2 className="heading-secondary">Einsatz hinzuf&uuml;gen</h2>
                     {fieldGroups[step]}
                     <Navigation/>
-                    <Reference/>
                 </form>
             </main>
         </Layout>
