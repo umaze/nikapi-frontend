@@ -8,7 +8,7 @@ export default function ActivitiesPage() {
     const {user} = useContext(AuthContext);
     return (
         <Layout title="Einsätze">
-            <h1 className="heading-primary">Meine Eins&auml;tze</h1>
+            <h1 className="heading-primary">Eins&auml;tze</h1>
             {isEinsatzplaner(user) && <Link className="btn" href={`/activities/add`}>Einsatz hinzuf&uuml;gen</Link>}
         </Layout>
     )

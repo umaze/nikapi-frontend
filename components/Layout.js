@@ -7,7 +7,6 @@ import Einsatzplanung from "@/components/Einsatzplanung";
 import Sidebar from "@/components/Sidebar";
 import {useContext} from "react";
 import AuthContext from "@/context/AuthContext";
-import {SUB_MENU} from "@/config/index";
 import styles from '@/styles/Layout.module.scss';
 
 export default function Layout({title, keywords, description, children}) {
@@ -30,7 +29,7 @@ export default function Layout({title, keywords, description, children}) {
                     <Einsatzplanung/>
                 </> :
                 <div className={styles.container}>
-                    {user && <Sidebar listSubMenu={SUB_MENU}/> }
+                    <Sidebar/>
                     <div className={styles.mainContent}>
                         {children}
                     </div>

@@ -11,7 +11,7 @@ export default function AvailabilitiesPage({ availabilities, page, total }) {
             <h1 className="heading-primary">Verf&uuml;gbarkeiten</h1>
             <Link className="btn" href={`/availabilities/manage`}>Verf&uuml;gbarkeiten verwalten</Link>
 
-            {availabilities.length === 0 && <h3  className="heading-tertiary">Keine Verf&uuml;gbarkeiten vorhanden</h3>}
+            {availabilities.length === 0 && <p className="info-no-data">Es sind keine Verf&uuml;gbarkeiten vorhanden.</p>}
             {availabilities.map(availability => (
                 <AvailabilityItem key={availability.id} availability={availability.attributes} />
             ))}

@@ -1,4 +1,4 @@
-import {IconCheckbox, IconClipboardList} from "@tabler/icons-react";
+import {IconCheckbox, IconClipboardList, IconBuildingCircus, IconShoppingCart} from "@tabler/icons-react";
 
 export const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:1337';
 export const NEXT_URL = process.env.NEXT_PUBLIC_FRONTEND_URL || 'http://localhost:3000';
@@ -35,7 +35,13 @@ export const SUB_MENU = {
         {
             href: '/demands',
             label: 'Veranstaltungen',
-            icon: <IconClipboardList/>,
+            icon: <IconBuildingCircus/>,
+            restricted: true
+        },
+        {
+            href: '/orders',
+            label: 'Bestellungen',
+            icon: <IconShoppingCart/>,
             restricted: true
         }
     ]

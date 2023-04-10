@@ -11,7 +11,7 @@ export default function DemandsPage({ demands }) {
         <Layout>
             <h1 className="heading-primary">Veranstaltungen</h1>
             <ToastContainer />
-            {demands?.length === 0 && <h3>Keine Veranstaltungen vorhanden</h3>}
+            {demands?.length === 0 && <p className="info-no-data">Es sind keine Veranstaltungen vorhanden.</p>}
             <ul className={styles.list}>
                 {demands?.map(demand => (
                     <li key={demand.id}>

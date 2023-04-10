@@ -1,0 +1,25 @@
+@import "./abstracts/variables";
+@import "./AvailabilityItem.module";
+
+.order {
+  display: flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size: 1.8rem;
+  margin: 1.2rem 0;
+  padding: 1.2rem 1.2rem 1.2rem 2rem;
+  border-radius: 0.5rem;
+  background-color: $color-brown-light-3;
+  box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.1);
+
+  &:first-of-type {
+    margin-top: 3rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .order {
+    flex-direction: column;
+    text-align: center;
+  }
+}

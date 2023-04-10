@@ -1,26 +1,34 @@
 import {FaSignInAlt, FaSignOutAlt} from 'react-icons/fa';
-import {useContext} from 'react';
+import {useContext, useEffect} from 'react';
 import Link from 'next/link';
 import AuthContext from '@/context/AuthContext';
 import styles from '@/styles/Header.module.scss';
 import {useRouter} from "next/router";
-import {useDispatch} from "react-redux";
-import {setActivatedNavMenu} from "@/store/applicationSlice";
+import {useDispatch, useSelector} from "react-redux";
+import {selectActivatedNavMenu, setActivatedNavMenu} from "@/store/applicationSlice";
 import {MAIN_MENU} from "@/config/index";
+import {checkRouteMeinBereich, checkRoutePlanung} from "@/helpers/index";
 
 export default function Header() {
     const { user, logout } = useContext(AuthContext);
     const dispatch = useDispatch();
+    const selectedNavMenu = useSelector(selectActivatedNavMenu);
     const router = useRouter();
     const currentRoute = router.pathname;
-
-    const checkActivatedRoute = routes => {
-        return routes.some(route => currentRoute.endsWith(route));
-    };
 
     const handleSelectMenu = menu => {
         dispatch(setActivatedNavMenu(menu));
     }
+
+    useEffect(() => {
+        if (!selectedNavMenu) {
+            if (checkRouteMeinBereich(currentRoute)) {
+                dispatch(setActivatedNavMenu(MAIN_MENU[0].id));
+            } else if (checkRoutePlanung(currentRoute)) {
+                dispatch(setActivatedNavMenu(MAIN_MENU[1].id));
+            }
+        }
+    }, []);
 
     return (
         <header className={styles.header}>
@@ -33,7 +41,7 @@ export default function Header() {
             <nav className={styles.mainNav}>
                 <ul className={styles.mainNavList}>
                     {user ? <>
-                        <li className={`${checkActivatedRoute(['/me']) ? styles.active : styles.nonActive}`}>
+                        <li className={`${checkRouteMeinBereich(currentRoute) ? styles.active : styles.nonActive}`}>
                             <Link
                                 href='/availabilities/me'
                                 className={styles.mainNavLink}
@@ -41,7 +49,7 @@ export default function Header() {
                                 Mein Bereich
                             </Link>
                         </li>
-                        <li className={`${checkActivatedRoute(['/activities', '/availabilities', 'demands']) ? styles.active : styles.nonActive}`}>
+                        <li className={`${checkRoutePlanung(currentRoute) ? styles.active : styles.nonActive}`}>
                             <Link
                                 href='/activities'
                                 className={styles.mainNavLink}

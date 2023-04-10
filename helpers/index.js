@@ -147,3 +147,15 @@ export function applyPropertiesToActivityObject(parsed, rollen) {
     });
     return applied;
 }
+
+export function checkActivatedRoute(currentRoute, routes) {
+    return routes.some(route => currentRoute.endsWith(route));
+}
+
+export function checkRouteMeinBereich(currentRoute) {
+    return checkActivatedRoute(currentRoute, ['/me']);
+}
+
+export function checkRoutePlanung(currentRoute) {
+    return checkActivatedRoute(currentRoute, ['/activities', '/availabilities', '/demands', '/orders']);
+}
