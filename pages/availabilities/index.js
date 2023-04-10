@@ -9,7 +9,7 @@ export default function AvailabilitiesPage({ availabilities, page, total }) {
     return (
         <Layout>
             <h1 className="heading-primary">Verf&uuml;gbarkeiten</h1>
-            <Link className="btn" href={`/availabilities/manage`}>Verf&uuml;gbarkeiten verwalten</Link>
+            <Link className="btn" href={`/availabilities/me/manage`}>Verf&uuml;gbarkeiten verwalten</Link>
 
             {availabilities.length === 0 && <p className="info-no-data">Es sind keine Verf&uuml;gbarkeiten vorhanden.</p>}
             {availabilities.map(availability => (

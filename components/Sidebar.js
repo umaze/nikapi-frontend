@@ -16,6 +16,13 @@ export default function Sidebar() {
     const router = useRouter();
     const currentRoute = router.pathname;
 
+    const routes = item => {
+        if (item.additionals && item.additionals.length > 0) {
+            return [item.href, ...item.additionals.map(a => item.href + a)];
+        }
+        return [item.href]
+    };
+
     const handleToggleCollapse = () => setExpanded(prevState => !prevState);
 
     return (
@@ -32,7 +39,7 @@ export default function Sidebar() {
                             (item.restricted && isEinsatzplaner(user) || !item.restricted) &&
                             <li key={i}>
                                 <Link
-                                    className={`${styles.subNavLink} ${checkActivatedRoute(currentRoute,[item.href]) ? styles.active : styles.nonActive}`}
+                                    className={`${styles.subNavLink} ${checkActivatedRoute(currentRoute, routes(item)) ? styles.active : styles.nonActive}`}
                                     href={item.href}>
                                     <div className={styles.linkIcon}>{item.icon}</div>
                                     {expanded && <div className={styles.linkIcon}>{item.label}</div>}

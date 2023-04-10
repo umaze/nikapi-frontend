@@ -9,7 +9,7 @@ export default function MyAvailabilitiesPage({ availabilities, page, total }) {
     return (
         <Layout>
             <h1 className="heading-primary">Meine Verf&uuml;gbarkeiten</h1>
-            <Link className="btn" href={`/availabilities/manage`}>
+            <Link className="btn" href={`/availabilities/me/manage`}>
                 Verf&uuml;gbarkeiten&nbsp;{availabilities.length === 0 ? 'hinzufügen' : 'verwalten'}
             </Link>
 

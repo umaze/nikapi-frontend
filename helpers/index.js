@@ -153,9 +153,9 @@ export function checkActivatedRoute(currentRoute, routes) {
 }
 
 export function checkRouteMeinBereich(currentRoute) {
-    return checkActivatedRoute(currentRoute, ['/me']);
+    return checkActivatedRoute(currentRoute, ['/me', '/me/manage']);
 }
 
 export function checkRoutePlanung(currentRoute) {
-    return checkActivatedRoute(currentRoute, ['/activities', '/availabilities', '/demands', '/orders']);
+    return checkActivatedRoute(currentRoute, ['/activities', '/availabilities', '/demands', '/orders', '/activities/add']);
 }

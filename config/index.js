@@ -9,7 +9,7 @@ export const STATUS_ORDER = ['offen', 'zugewiesen', 'erledigt', 'inaktiv'];
 export const MAIN_MENU = [{id: 'meinBereich', label: 'Mein Bereich'}, {id: 'planung', label: 'Planung'}];
 
 export const SUB_MENU = {
-    meinBereich : [
+    meinBereich: [
         {
             href: '/activities/me',
             label: 'Einsätze',
@@ -18,13 +18,16 @@ export const SUB_MENU = {
         {
             href: '/availabilities/me',
             label: 'Verfügbarkeiten',
-            icon: <IconCheckbox/>
+            icon: <IconCheckbox/>,
+            additionals: ['/manage']
         }
     ],
-    planung : [{
+    planung: [
+        {
             href: '/activities',
             label: 'Einsätze',
-            icon: <IconClipboardList/>
+            icon: <IconClipboardList/>,
+            additionals: ['/add']
         },
         {
             href: '/availabilities',
