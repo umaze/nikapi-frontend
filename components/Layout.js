@@ -3,28 +3,16 @@ import {useRouter} from 'next/router';
 import Header from './Header';
 import Hero from './Hero';
 import Footer from './Footer';
+import Einsatzplanung from "@/components/Einsatzplanung";
 import Sidebar from "@/components/Sidebar";
-import {IconCheckbox, IconClipboardList} from '@tabler/icons-react';
-import styles from '@/styles/Layout.module.scss';
 import {useContext} from "react";
 import AuthContext from "@/context/AuthContext";
+import {SUB_MENU} from "@/config/index";
+import styles from '@/styles/Layout.module.scss';
 
 export default function Layout({title, keywords, description, children}) {
     const {user} = useContext(AuthContext);
     const router = useRouter();
-
-    const testSubMenu = [
-        {
-            href: '/availabilities',
-            label: 'Verfügbarkeiten',
-            icon: <IconCheckbox/>
-        },
-        {
-            href: '/activities',
-            label: 'Einsätze',
-            icon: <IconClipboardList/>
-        }
-    ];
 
     return (
         <div>
@@ -36,14 +24,19 @@ export default function Layout({title, keywords, description, children}) {
 
             <Header/>
 
-            {router.pathname === '/' && <Hero/>}
-
-            <div className={styles.container}>
-                {user && <Sidebar listSubMenu={testSubMenu}/> }
-                <div className={styles.mainContent}>
-                    {children}
+            {(router.pathname === '/' && !user) ?
+                <>
+                    <Hero/>
+                    <Einsatzplanung/>
+                </> :
+                <div className={styles.container}>
+                    {user && <Sidebar listSubMenu={SUB_MENU}/> }
+                    <div className={styles.mainContent}>
+                        {children}
+                    </div>
                 </div>
-            </div>
+            }
+
             <Footer/>
         </div>
     )

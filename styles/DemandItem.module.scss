@@ -1,28 +1,25 @@
 @import "./abstracts/variables";
+@import "./AvailabilityItem.module";
 
-.demandRow {
+.demand {
   display: flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size: 1.8rem;
+  margin: 1.2rem 0;
+  padding: 1.2rem 1.2rem 1.2rem 2rem;
+  border-radius: 0.5rem;
+  background-color: $color-brown-light-3;
+  box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.1);
+
+  &:first-of-type {
+    margin-top: 3rem;
+  }
 }
 
-.demandDatum {
-  width: $column-demand-datum;
-}
-
-.demandZeit {
-  width: $column-demand-zeit;
-}
-
-.demandEinsatz {
-  min-width: $column-demand-einsatz;
-}
-
-.auswahlCell {
-  min-width: $column-demand-auswahl-rollen;
-  text-align: center;
-
-  .auswahlBox {
-    width: 1.6rem;
-    height: 1.6rem;
-    cursor: pointer;
+@media (max-width: 600px) {
+  .demand {
+    flex-direction: column;
+    text-align: center;
   }
 }

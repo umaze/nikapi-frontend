@@ -1,6 +1,8 @@
-import { createContext, useState, useEffect } from "react";
-import { useRouter } from "next/router";
-import { NEXT_URL } from "@/config/index";
+import {createContext, useEffect, useState} from "react";
+import {useRouter} from "next/router";
+import {MAIN_MENU, NEXT_URL} from "@/config/index";
+import {useDispatch} from "react-redux";
+import {setActivatedNavMenu} from "@/store/applicationSlice";
 
 const AuthContext = createContext();
 
@@ -9,6 +11,7 @@ export const AuthProvider = ({ children }) => {
     const [error, setError] = useState(null);
 
     const router = useRouter();
+    const dispatch = useDispatch();
 
     useEffect(() => {
         const check = async () => checkUserLoggedIn();
@@ -31,7 +34,8 @@ export const AuthProvider = ({ children }) => {
 
         if (res.ok) {
             setUser(data.user);
-            router.push('/availabilities');
+            dispatch(setActivatedNavMenu(MAIN_MENU[0].id));
+            await router.push('/availabilities/me');
         } else {
             setError(data.message);
             // setError('');
@@ -57,7 +61,9 @@ export const AuthProvider = ({ children }) => {
 
         if (res.ok) {
             setUser(data.user);
-            router.push('/availabilities');
+            await checkUserLoggedIn();
+            dispatch(setActivatedNavMenu(MAIN_MENU[0].id));
+            await router.push('/activities/me');
         } else {
             setError(data.message);
             // setError('');
@@ -72,7 +78,7 @@ export const AuthProvider = ({ children }) => {
 
         if (res.ok) {
             setUser(null);
-            router.push('/');
+            await router.push('/');
         }
     };
 

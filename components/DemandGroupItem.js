@@ -1,4 +1,4 @@
-import DemandItem from './DemandItem';
+import DemandTableRow from './DemandTableRow';
 import styles from '@/styles/DemandGroupItem.module.scss';
 
 export default function DemandGroupItem({group}) {
@@ -26,7 +26,7 @@ export default function DemandGroupItem({group}) {
                     <td colspan="5">No demands to show</td>
                 </tr>}
                 {attributes.demands.data?.map(demand => (
-                    <DemandItem
+                    <DemandTableRow
                         key={demand.id}
                         groupId={group.id}
                         demand={demand}

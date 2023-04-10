@@ -1,0 +1,44 @@
+@import "./abstracts/variables";
+
+.sectionEinsatzplanung {
+  padding: 9.6rem 0;
+}
+
+.einsatzplanung {
+  display: flex;
+  flex-direction: column;
+  background-color: $color-brown-light-3;
+  box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.075);
+  border-radius: 11px;
+  border: 1px solid $color-brown-light;
+  max-width: 38rem;
+  justify-self: center;
+  overflow: hidden;
+  transition: all .3s;
+
+  &:hover {
+    box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.15);
+  }
+
+  &Content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    padding: 3.2rem 2.4rem;
+  }
+
+  &Title {
+    font-size: 2.4rem;
+    color: $color-red;
+    font-weight: 500;
+    align-self: center;
+    margin-bottom: 2.4rem;
+  }
+
+  &Description {
+    font-size: 2rem;
+    line-height: 1.6;
+    margin-bottom: 4.8rem;
+  }
+}

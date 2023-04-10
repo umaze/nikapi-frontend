@@ -19,7 +19,7 @@ import {API_URL} from '@/config/index';
 import styles from '@/styles/FormAvailability.module.scss';
 import {FaArrowLeft} from "react-icons/fa";
 
-export default function AddAvailabilityPage({token, demandGroups, persistedSelection}) {
+export default function ManageAvailabilityPage({token, demandGroups, persistedSelection}) {
     const [availabilities, setAvailabilities] = useState([]);
 
     const selected = useSelector(selectAvailabilities);

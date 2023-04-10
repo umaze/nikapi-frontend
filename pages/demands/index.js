@@ -1,21 +1,21 @@
 import Layout from "@/components/Layout";
-import DemandGroupItem from "@/components/DemandGroupItem";
-import { ToastContainer, toast } from 'react-toastify';
+import {toast, ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { parseCookies } from '@/helpers/index';
-import { API_URL } from "@/config/index";
+import {parseCookies} from '@/helpers/index';
+import {API_URL} from "@/config/index";
 import styles from '@/styles/Demands.module.scss';
+import DemandItem from "@/components/DemandItem";
 
-export default function DemandsPage({ demandGroups }) {
+export default function DemandsPage({ demands }) {
     return (
         <Layout>
-            <h1>Demands</h1>
+            <h1 className="heading-primary">Veranstaltungen</h1>
             <ToastContainer />
-            {demandGroups?.length === 0 && <h3>No groups to show</h3>}
+            {demands?.length === 0 && <h3>Keine Veranstaltungen vorhanden</h3>}
             <ul className={styles.list}>
-                {demandGroups?.map(group => (
-                    <li key={group.id}>
-                        <DemandGroupItem key={group.id} group={group.attributes} />
+                {demands?.map(demand => (
+                    <li key={demand.id}>
+                        <DemandItem key={demand.id} demand={demand} />
                     </li>
                 ))}
             </ul>
@@ -26,17 +26,17 @@ export default function DemandsPage({ demandGroups }) {
 export async function getServerSideProps({ req }) {
     const { token } = parseCookies(req);
     // Fetch demands
-    const demandGroupsRes = await fetch(`${API_URL}/api/demand-groups?populate=demands.einsatztyp&populate=rollen`, {
+    const demandsRes = await fetch(`${API_URL}/api/demands?populate=einsatztyp&populate=gruppe.rollen&sort=datum:asc`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
         }
     });
-    const demandGroups = await demandGroupsRes.json();
+    const demands = await demandsRes.json();
 
-    if (!demandGroupsRes.ok) {
-        if (res.status === 403 || res.status === 401) {
+    if (!demandsRes.ok) {
+        if (demandsRes.status === 403 || demandsRes.status === 401) {
             toast.error('Unauthorized');
             return;
         }
@@ -45,7 +45,7 @@ export async function getServerSideProps({ req }) {
 
     return {
         props: {
-            demandGroups: demandGroups.data,
+            demands: demands.data,
             token
         }
     };

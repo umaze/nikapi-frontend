@@ -4,6 +4,10 @@ export function parseCookies(req) {
     return cookie.parse(req ? req.headers.cookie || '' : '');
 }
 
+export function isEinsatzplaner(user) {
+    return user && user.role?.name === 'Einsatzplaner';
+}
+
 export function applyTimeToDate(source) {
     const currentDate = new Date();
     const arrTime = source?.split(':');

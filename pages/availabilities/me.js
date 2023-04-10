@@ -5,10 +5,10 @@ import Pagination from '@/components/Pagination';
 import {configRequest, parseCookies} from "@/helpers/index";
 import Link from "next/link";
 
-export default function AvailabilitiesPage({ availabilities, page, total }) {
+export default function MyAvailabilitiesPage({ availabilities, page, total }) {
     return (
         <Layout>
-            <h1 className="heading-primary">Verf&uuml;gbarkeiten</h1>
+            <h1 className="heading-primary">Meine Verf&uuml;gbarkeiten</h1>
             <Link className="btn" href={`/availabilities/manage`}>Verf&uuml;gbarkeiten verwalten</Link>
 
             {availabilities.length === 0 && <h3  className="heading-tertiary">Keine Verf&uuml;gbarkeiten vorhanden</h3>}
@@ -27,7 +27,7 @@ export async function getServerSideProps({ req, query: { page = 1 } }) {
     const start = +page === 1 ? 0 : (+page - 1) * PER_PAGE;
 
     // Fetch availabilities
-    const availabilitiesRes = await fetch(`${API_URL}/api/availabilities?populate=rollen&populate=demand.einsatztyp&populate=benutzer&sort=bemerkung:asc&pagination[limit]=${PER_PAGE}&pagination[start]=${start}`, configRequest('GET', token));
+    const availabilitiesRes = await fetch(`${API_URL}/api/availabilities/me?populate=rollen&populate=demand.einsatztyp&populate=benutzer&sort=bemerkung:asc&pagination[limit]=${PER_PAGE}&pagination[start]=${start}`, configRequest('GET', token));
     const availabilities = await availabilitiesRes.json();
 
     return {
