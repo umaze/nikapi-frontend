@@ -33,7 +33,7 @@ export default function ActivityItem({activity}) {
 
             <div className={styles.link}>
                 <Link href={`/activities/${activity.id}`} legacyBehavior>
-                    <a className="btn-secondary">Bearbeiten</a>
+                    <a className="btn-secondary">Details</a>
                 </Link>
             </div>
         </div>

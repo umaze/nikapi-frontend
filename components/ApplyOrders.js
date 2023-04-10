@@ -1,7 +1,7 @@
 import Step from "@/components/Step";
 import {useSelector} from "react-redux";
 import {selectCurrentDemand, selectMatchingOrders} from "@/store/activitySlice";
-import { FaTrashAlt } from 'react-icons/fa';
+import {FaTrashAlt} from 'react-icons/fa';
 import {useState} from "react";
 import {useDrop} from "react-dnd";
 import DragFile from "@/components/DragFile";
@@ -40,25 +40,29 @@ export default function ApplyOrders({currentStep, stepsSize, register, errors}) 
             {activityDemand.attributes &&
                 <>
                     <div className={styles.infos}>
-                        <p>Datum: <strong>{new Date(activityDemand.attributes.datum).toLocaleDateString('de-CH')}</strong></p>
+                        <p>Datum: <strong>{new Date(activityDemand.attributes.datum).toLocaleDateString('de-CH')}</strong>
+                        </p>
                         <p>Einsatztyp: <strong>{einsatztyp}</strong></p>
-                        {!auftragRequired &&
-                            <p>Auftr&auml;ge für Typ '{einsatztyp}' <strong>nicht erforderlich</strong></p>}
                     </div>
+                    {!auftragRequired &&
+                        <p>Bestellungen sind für Typ '{einsatztyp}' <strong>nicht erforderlich</strong>.</p>}
 
-                    <div className={styles.dragAndDrop}>
-                        <DragFile orders={filteredData}/>
-                        <div className={styles.dragAndDropBasket} ref={dropRef}>
-                            <div className={styles.dragAndDropMargin}>
-                                <div>
-                                    <p className={styles.dragAndDropTitle}>Zugewiesene Auftr&auml;ge</p>
+                    {auftragRequired &&
+                        <div className={styles.dragAndDrop}>
+                            <DragFile orders={filteredData}/>
+                            <div className={styles.dragAndDropBasket} ref={dropRef}>
+                                <div className={styles.dragAndDropMargin}>
+                                    <div>
+                                        <p className={styles.dragAndDropTitle}>Zugewiesene Auftr&auml;ge</p>
+                                    </div>
+                                    {basket.map((order, i) => (
+                                        <OrderItem key={i} order={order}
+                                                   onDeleteItem={(item, event) => handleDeleteItem(item, event)}/>
+                                    ))}
                                 </div>
-                                {basket.map((order, i) => (
-                                    <OrderItem key={i} order={order} onDeleteItem={(item, event) => handleDeleteItem(item, event)} />
-                                ))}
                             </div>
                         </div>
-                    </div>
+                    }
                 </>
             }
         </Step>
