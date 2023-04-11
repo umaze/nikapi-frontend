@@ -112,3 +112,30 @@ h1 {
   margin-top: 4.8rem;
   font-size: 2.4rem;
 }
+
+.status {
+  border-radius: 5px;
+  width: fit-content;
+  padding-right: 1rem;
+  margin-left: 1rem;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.toast-error,
+.toast-success {
+  font-size: 2rem;
+  padding: 3rem 2rem;
+}
+
+.toast-success {
+  background: $color-green-light !important;
+}
+
+.toast-error {
+  background: $color-red-light-2 !important;
+}
+
+.Toastify__toast-container {
+  width: 35vw !important;
+}

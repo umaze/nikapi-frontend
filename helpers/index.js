@@ -95,10 +95,16 @@ export function handleErrorMessage(res, toast) {
 
     if (!res.ok) {
         if (res.status === 403 || res.status === 401) {
-            toast.error('Unauthorized');
+            toast.error('Nicht authorisiert', {
+                position: toast.POSITION.TOP_CENTER,
+                className: 'toast-error'
+            });
             return;
         }
-        toast.error('Something Went Wrong');
+        toast.error('Ein Fehler ist aufgetreten', {
+            position: toast.POSITION.TOP_CENTER,
+            className: 'toast-error'
+        });
     }
 }
 

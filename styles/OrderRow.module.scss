@@ -1,4 +1,5 @@
 @import "./abstracts/variables";
+@import "./abstracts/mixins";
 @import "./AvailabilityItem.module";
 
 .order {
@@ -15,6 +16,18 @@
   &:first-of-type {
     margin-top: 3rem;
   }
+}
+
+.offen {
+  @include status("offen");
+}
+
+.zugewiesen {
+  @include status("bereit");
+}
+
+.erledigt {
+  @include status("erledigt");
 }
 
 @media (max-width: 600px) {

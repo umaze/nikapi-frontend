@@ -22,18 +22,21 @@ $color-black: #05021C;
 $color-grey: #555;
 $color-grey-light: #eee;
 $color-grey-light-2: #ddd;
-$color-yellow: #ddd;
+$color-yellow: #FFD260;
+$color-yellow-dark: #cca84d;
+$color-yellow-dark-2: #997e3a;
+$color-yellow-light: #ffe4a0;
 $color-brown: #A57F60;
 $color-brown-light: #c9b2a0;
 $color-brown-light-2: #e4d9cf;
 $color-brown-light-3: #f6f2ef;
 $color-brown-dark: #735943;
 
-// NOTIFICATION COLORS
-$notification-colors: (
-        "success": $color-green $color-green-light $color-green-dark $color-green-dark-2 $color-green-dark-3,
-        "info": $color-blue $color-blue-light $color-blue-dark $color-blue-dark-2 $color-blue-dark-3,
-        "error": $color-red $color-red-light $color-red-dark $color-red-dark-2 $color-red-dark-3
+// STATUS COLORS
+$status-colors: (
+        "bereit": $color-green $color-green-light $color-white,
+        "erledigt": $color-blue $color-blue-light $color-black,
+        "offen": $color-yellow-dark $color-yellow-light $color-black
 );
 
 // FONT

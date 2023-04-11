@@ -1,3 +1,5 @@
+@use "sass:map";
+@use "sass:list";
 @import "../abstracts/variables";
 
 @mixin form-label {
@@ -16,4 +18,12 @@
   background-color: $color-white-background;
   border-radius: 9px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+@mixin status($value) {
+  $list: map.get($status_colors, $value);
+
+  color: list.nth($list, 3);
+  background-color: list.nth($list, 2);
+  border: 2px solid list.nth($list, 1);
 }

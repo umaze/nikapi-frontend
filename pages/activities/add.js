@@ -56,6 +56,7 @@ export default function AddActivityPage({token, demands, persistedAvailabilities
         // Form validity
         const parsed = parseFormDataToValidProperties(data);
         const applied = applyPropertiesToActivityObject(parsed, rollen);
+
         const res = await fetch(`${API_URL}/api/activities`,
             configRequest(
                 'POST',
@@ -66,7 +67,10 @@ export default function AddActivityPage({token, demands, persistedAvailabilities
         if (!res.ok) {
             handleErrorMessage(res, toast);
         } else {
-            toast.success('Success');
+            toast.success('Einsatz erfolgreich gespeichert', {
+                position: toast.POSITION.TOP_CENTER,
+                className: 'toast-success'
+            });
             await router.push('/activities');
         }
 

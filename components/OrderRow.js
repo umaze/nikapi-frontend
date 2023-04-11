@@ -15,7 +15,7 @@ export default function OrderRow({ order }) {
                         {attributes.zeitVon && ' - '}
                         {formatTime(attributes.zeitBis)}
                     </div>
-                    <div>&nbsp;</div>
+                    <div className={`status ${styles[attributes.status]}`}>{attributes.status}</div>
                 </div>
                 <div className={styles.details}>
                     <div className={styles.einsatztyp}>{attributes.einsatztyp?.typ}</div>
