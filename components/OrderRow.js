@@ -24,7 +24,7 @@ export default function OrderRow({ order }) {
             </div>
 
             <div className={styles.link}>
-                <Link href={`/orders/${order.id}`} legacyBehavior>
+                <Link href={`/orders/edit/${order.id}`} legacyBehavior>
                     <a className="btn-secondary">Bearbeiten</a>
                 </Link>
             </div>
