@@ -1,10 +1,6 @@
 @import "./abstracts/variables";
 
 /** Form */
-.form {
-  font-size: 1.8rem;
-}
-
 .inputInvalid {
   border: $color-red 1px solid !important;
 }

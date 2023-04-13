@@ -7,11 +7,11 @@ export default function ActivityItemOverall({activity}) {
     const roles = attributes.rollen.map(r => `${r.rolle?.name} [${r.availability.data.attributes.benutzer.data.attributes.username}]`);
 
     return (
-        <div className={styles.activity}>
+        <div className={`${styles.activity} ${styles[attributes.status]}`}>
             <div className={styles.info}>
                 <div className={styles.infoTop}>
                     <div>{attributes.bezeichnung}</div>
-                    <div className={`status ${styles[attributes.status]}`}>{attributes.status}</div>
+                    <div>{attributes.status}</div>
                 </div>
                 <div className={styles.details}>
                     <div className={styles.rollen}>

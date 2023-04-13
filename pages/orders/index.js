@@ -2,14 +2,18 @@ import {toast, ToastContainer} from "react-toastify";
 import Layout from "@/components/Layout";
 import styles from "@/styles/Demands.module.scss";
 import OrderRow from "@/components/OrderRow";
-import {parseCookies} from "@/helpers/index";
+import {isEinsatzplaner, parseCookies} from "@/helpers/index";
 import {API_URL} from "@/config/index";
+import Link from "next/link";
+import {useContext} from "react";
+import AuthContext from "@/context/AuthContext";
 
 export default function OrdersPage({orders}) {
+    const {user} = useContext(AuthContext);
     return (
         <Layout>
             <h1 className="heading-primary">Bestellungen</h1>
-            <ToastContainer />
+            {isEinsatzplaner(user) && <Link className="btn" href={`/orders/add`}>Bestellung hinzuf&uuml;gen</Link>}
             {orders?.length === 0 && <p className="info-no-data">Es sind keine Bestellungen vorhanden.</p>}
             <ul className={styles.list}>
                 {orders?.map(order => (
@@ -36,10 +40,16 @@ export async function getServerSideProps({ req }) {
 
     if (!ordersRes.ok) {
         if (ordersRes.status === 403 || ordersRes.status === 401) {
-            toast.error('Unauthorized');
+            toast.error('Nicht authorisiert', {
+                position: toast.POSITION.TOP_CENTER,
+                className: 'toast-error'
+            });
             return;
         }
-        toast.error('Something Went Wrong');
+        toast.error('Ein Fehler ist aufgetreten', {
+            position: toast.POSITION.TOP_CENTER,
+            className: 'toast-error'
+        });
     }
 
     return {

@@ -45,7 +45,8 @@ export const SUB_MENU = {
             href: '/orders',
             label: 'Bestellungen',
             icon: <IconShoppingCart/>,
-            restricted: true
+            restricted: true,
+            additionals: ['/add']
         }
     ]
 };

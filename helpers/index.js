@@ -163,5 +163,5 @@ export function checkRouteMeinBereich(currentRoute) {
 }
 
 export function checkRoutePlanung(currentRoute) {
-    return checkActivatedRoute(currentRoute, ['/activities', '/availabilities', '/demands', '/orders', '/activities/add']);
+    return checkActivatedRoute(currentRoute, ['/activities', '/availabilities', '/demands', '/orders', '/activities/add', '/orders/add']);
 }

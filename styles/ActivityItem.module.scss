@@ -3,37 +3,23 @@
 @import "./AvailabilityItem.module";
 
 .activity {
-  display: flex;
-  justify-content:space-between;
-  align-items:center;
-  font-size: 1.8rem;
-  margin: 1.2rem 0;
-  padding: 1.2rem 1.2rem 1.2rem 2rem;
-  border-radius: 0.5rem;
-  background-color: $color-brown-light-3;
-  box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.1);
+  @include card-overview;
+}
 
-  &:first-of-type {
-    margin-top: 3rem;
-  }
+.offen {
+  @include border-status-color("offen");
+}
+.bereit {
+  @include border-status-color("bereit");
+}
+.erledigt {
+  @include border-status-color("erledigt");
 }
 
 .rollen {
   ul {
     list-style: none;
   }
-}
-
-.offen {
-  @include status("offen");
-}
-
-.bereit {
-  @include status("bereit");
-}
-
-.erledigt {
-  @include status("erledigt");
 }
 
 @media (max-width: 600px) {

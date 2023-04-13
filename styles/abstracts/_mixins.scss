@@ -20,10 +20,33 @@
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
-@mixin status($value) {
-  $list: map.get($status_colors, $value);
+@mixin border-status-color($status) {
+  $list: map.get($status_colors, $status);
+  border-left: 0.8rem solid list.nth($list, 2);
+}
 
-  color: list.nth($list, 3);
-  background-color: list.nth($list, 2);
-  border: 2px solid list.nth($list, 1);
+@mixin card-overview {
+  display: flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size: 1.8rem;
+  margin: 1.2rem 0;
+  padding: 1.2rem 1.2rem 1.2rem 2rem;
+  border-radius: 0.5rem;
+  background-color: $color-brown-light-3;
+  box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.1);
+
+  &:first-of-type {
+    margin-top: 3rem;
+  }
+}
+
+@mixin input-field {
+  background-color: $color-white;
+  border: thin solid $color-blue-dark-3;
+  border-radius: 4px;
+  display: inline-block;
+  font: inherit;
+  line-height: 1.5em;
+  padding: 0.5em 0.5em 0.5em 1em;
 }

@@ -6,7 +6,7 @@ export default function OrderRow({ order }) {
     const attributes = order.attributes;
 
     return (
-        <div className={styles.order}>
+        <div className={`${styles.order} ${styles[attributes.status]}`}>
             <div className={styles.info}>
                 <div className={styles.infoTop}>
                     <div>
@@ -15,7 +15,7 @@ export default function OrderRow({ order }) {
                         {attributes.zeitVon && ' - '}
                         {formatTime(attributes.zeitBis)}
                     </div>
-                    <div className={`status ${styles[attributes.status]}`}>{attributes.status}</div>
+                    <div>{attributes.status}</div>
                 </div>
                 <div className={styles.details}>
                     <div className={styles.einsatztyp}>{attributes.einsatztyp?.typ}</div>

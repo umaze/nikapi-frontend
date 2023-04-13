@@ -212,7 +212,7 @@ export default function AddActivityPage({token, demands, persistedAvailabilities
         <Layout title="Einsatz hinzufügen">
             <Link className="link--back" href="/activities"><FaArrowLeft/> Zur&uuml;ck zu Eins&auml;tze</Link>
             <main>
-                <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+                <form className="form" onSubmit={handleSubmit(onSubmit)}>
                     <h2 className="heading-secondary">Einsatz hinzuf&uuml;gen</h2>
                     {fieldGroups[step]}
                     <Navigation/>
