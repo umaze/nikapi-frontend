@@ -154,6 +154,15 @@ export function applyPropertiesToActivityObject(parsed, rollen) {
     return applied;
 }
 
+export function applyPropertiesToOrderObject(parsed) {
+    const applied = {};
+    Object.entries(parsed).forEach(([k, v]) => {
+        const [key, value] = Object.entries(v)[0];
+        applied[key] = key === 'einsatztyp' ? { typ: value } : value;
+    });
+    return applied;
+}
+
 export function checkActivatedRoute(currentRoute, routes) {
     return routes.some(route => currentRoute.endsWith(route));
 }
@@ -164,4 +173,14 @@ export function checkRouteMeinBereich(currentRoute) {
 
 export function checkRoutePlanung(currentRoute) {
     return checkActivatedRoute(currentRoute, ['/activities', '/availabilities', '/demands', '/orders', '/activities/add', '/orders/add']);
+}
+
+export function getOptions(options) {
+    return (
+        <>
+            {options && options.map((option, i) => (
+                <option key={i} defaultValue={options[0]} value={option}>{option}</option>
+            ))}
+        </>
+    )
 }

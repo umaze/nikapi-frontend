@@ -6,6 +6,7 @@ export const NEXT_URL = process.env.NEXT_PUBLIC_FRONTEND_URL || 'http://localhos
 export const PER_PAGE = 5;
 export const STATUS_ACTIVITY = ['offen', 'bereit', 'erledigt', 'inaktiv'];
 export const STATUS_ORDER = ['offen', 'zugewiesen', 'erledigt', 'inaktiv'];
+export const EINSATZTYP_ORDER = ['Abend', 'Schulen Vormittag', 'Schulen Nachmittag'];
 export const MAIN_MENU = [{id: 'meinBereich', label: 'Mein Bereich'}, {id: 'planung', label: 'Planung'}];
 
 export const SUB_MENU = {

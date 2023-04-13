@@ -4,18 +4,11 @@ import SelectWrapper from "@/components/SelectWrapper";
 import {STATUS_ACTIVITY} from "@/config/index";
 import {selectCurrentDemand} from "@/store/activitySlice";
 import InputWrapper from "@/components/InputWrapper";
+import {getOptions} from "@/helpers/index";
 import styles from "@/styles/Confirmation.module.scss";
 
 export default function Confirmation({currentStep, stepsSize, register, errors}) {
     const activityDemand = useSelector(selectCurrentDemand);
-
-    const statusOptions = (options) => (
-        <>
-            {options && options.map((option, i) => (
-                <option key={i} defaultValue={options[0]} value={option}>{option}</option>
-            ))}
-        </>
-    );
 
     return (
         <Step title="Bestätigung" info="Abschliessende Angaben" current={currentStep} size={stepsSize}>
@@ -27,6 +20,7 @@ export default function Confirmation({currentStep, stepsSize, register, errors})
                 </div>
                 <InputWrapper
                     label="Bezeichnung"
+                    id="bezeichnung"
                     type="text"
                     required
                     placeholder="Kennzeichnung des Einsatzes"
@@ -34,6 +28,7 @@ export default function Confirmation({currentStep, stepsSize, register, errors})
                     errors={errors} />
                 <InputWrapper
                     label="Bemerkungen"
+                    id="bemerkung"
                     type="text"
                     placeholder="Spezielles zu beachten, Besonderheiten, ..."
                     register={register}
@@ -42,7 +37,7 @@ export default function Confirmation({currentStep, stepsSize, register, errors})
                     label="Status"
                     required
                     id="selectStatus"
-                    options={statusOptions(STATUS_ACTIVITY)}
+                    options={getOptions(STATUS_ACTIVITY)}
                     register={register}
                     errors={errors}/>
             </div>
