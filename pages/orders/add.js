@@ -20,7 +20,6 @@ export default function AddOrderPage({token}) {
     const {
         register,
         handleSubmit,
-        reset,
         formState: {errors, isValid}
     } = useForm({mode: 'all'});
 
@@ -28,6 +27,8 @@ export default function AddOrderPage({token}) {
         // Form validity
         const parsed = parseFormDataToValidProperties(data.order);
         const applied = applyPropertiesToOrderObject(parsed);
+
+        // console.log(`Applied: ${JSON.stringify(applied)}`);
 
         const res = await fetch(`${API_URL}/api/orders`,
             configRequest(

@@ -13,7 +13,7 @@ export default function OrderForm({register, errors, order, setValue}) {
                 adresse: order.adresse,
                 auftraggeber: order.auftraggeber,
                 kontakt: order.kontakt,
-                anzahl: order.anzahl,
+                anzahlKinder: order.anzahlKinder,
                 datum: order.datum,
                 selectStatus: order.status,
                 selectEinsatztyp: order.einsatztyp?.typ,
@@ -32,7 +32,6 @@ export default function OrderForm({register, errors, order, setValue}) {
                     required
                     placeholder="Kennzeichnung des Einsatzes"
                     register={register}
-                    value={order.bezeichnung}
                     errors={errors} />
                 <div className={styles.gridSpan2}>
                     <InputWrapper
@@ -62,7 +61,7 @@ export default function OrderForm({register, errors, order, setValue}) {
                     errors={errors} />
                 <InputWrapper
                     label="Anzahl Kinder"
-                    id="order.anzahl"
+                    id="order.anzahlKinder"
                     type="number"
                     required
                     placeholder="-"

@@ -122,8 +122,13 @@ export function parseFormDataToValidProperties(data) {
                 formatted[withoutPrefix] = value;
             }
         } else {
-            // Key like Bezeichnung
-            formatted[item.toLowerCase()] = value;
+            if (item.startsWith('anzahl')) {
+                // Key like anzahlKinder
+                formatted[item] = value;
+            } else {
+                // Key like Bezeichnung
+                formatted[item.toLowerCase()] = value;
+            }
         }
         return formatted;
     });
@@ -158,7 +163,13 @@ export function applyPropertiesToOrderObject(parsed) {
     const applied = {};
     Object.entries(parsed).forEach(([k, v]) => {
         const [key, value] = Object.entries(v)[0];
-        applied[key] = key === 'einsatztyp' ? { typ: value } : value;
+        if (key === 'einsatztyp') {
+            applied[key] = { typ: value };
+        } else if (key.startsWith('anzahl')) {
+            applied[key] = Number.isNaN(value) ? 0 : +value;
+        } else {
+            applied[key] = value;
+        }
     });
     return applied;
 }
