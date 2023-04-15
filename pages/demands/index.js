@@ -1,5 +1,5 @@
 import Layout from "@/components/Layout";
-import {toast, ToastContainer} from 'react-toastify';
+import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {configRequest, handleErrorMessage, isEinsatzplaner, parseCookies} from '@/helpers/index';
 import {API_URL} from "@/config/index";
@@ -36,7 +36,7 @@ export default function DemandsPage({ demands, token }) {
             <ul className={styles.list}>
                 {demands?.map(demand => (
                     <li key={demand.id}>
-                        <DemandItem key={demand.id} demand={demand} onDelete={() => handleDelete(demand)} />
+                        <DemandItem key={demand.id} demand={demand} onDelete={() => handleDelete(demand)} token={token} />
                     </li>
                 ))}
             </ul>
@@ -63,7 +63,7 @@ export default function DemandsPage({ demands, token }) {
 export async function getServerSideProps({ req }) {
     const { token } = parseCookies(req);
     // Fetch demands
-    const demandsRes = await fetch(`${API_URL}/api/demands?populate=einsatztyp&populate=gruppe.rollen&sort=datum:asc`, configRequest('GET', token));
+    const demandsRes = await fetch(`${API_URL}/api/demands?populate=einsatztyp&populate=gruppe.rollen&populate=activities&sort=datum:asc`, configRequest('GET', token));
     const demands = await demandsRes.json();
     handleErrorMessage(demandsRes, toast);
 
