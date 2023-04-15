@@ -103,7 +103,7 @@ export default function AddActivityPage({token, demands, persistedAvailabilities
         // Fetch relevant orders (matching einsatztyp and datum)
         const ordersRes = await fetch(`${API_URL}/api/orders?populate=einsatztyp&filters[einsatztyp][typ][$eq]=${demand.attributes.einsatztyp.typ}&filters[datum][$eq]=${demand.attributes.datum}`, configRequest('GET', token));
         const matchingOrders = await ordersRes.json();
-        handleErrorMessage(ordersRes);
+        handleErrorMessage(ordersRes, toast);
         return matchingOrders.data;
     }
 
@@ -228,12 +228,12 @@ export async function getServerSideProps({req}) {
     // Fetch demands
     const demandsRes = await fetch(`${API_URL}/api/demands?populate=einsatztyp&populate=gruppe.rollen&sort=datum:asc`, configRequest('GET', token));
     const demands = await demandsRes.json();
-    handleErrorMessage(demandsRes);
+    handleErrorMessage(demandsRes, toast);
 
     // Fetch availabilities
     const availabilitiesRes = await fetch(`${API_URL}/api/availabilities?populate=rollen&populate=demand&populate=demand.gruppe&populate=benutzer`, configRequest('GET', token));
     const allAvailabilities = await availabilitiesRes.json();
-    handleErrorMessage(availabilitiesRes);
+    handleErrorMessage(availabilitiesRes, toast);
 
     const persistedAvailabilities = allAvailabilities.data.map((item) => {
         return {

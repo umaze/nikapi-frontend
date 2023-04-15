@@ -7,7 +7,7 @@ import {
     configRequest
 } from '@/helpers/index';
 import DemandGroupItem from "@/components/DemandGroupItem";
-import {ToastContainer} from 'react-toastify';
+import {toast, ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {useRouter} from 'next/router';
 import {useState, useRef, useEffect} from 'react';
@@ -75,16 +75,16 @@ export default function ManageAvailabilityPage({token, demandGroups, persistedSe
         inserts.forEach(item => {
             const data = initAvailabilityData('Neue Verfügbarkeit', item);
             fetch(`${API_URL}/api/availabilities`, configRequest('POST', token, JSON.stringify(data)))
-                .then(res => handleErrorMessage(res));
+                .then(res => handleErrorMessage(res, toast));
         });
         updates.forEach(item => {
             const data = initAvailabilityData('Verfügbarkeit bearbeitet', item);
             fetch(`${API_URL}/api/availabilities/${item.id}`, configRequest('PUT', token, JSON.stringify(data)))
-                .then(res => handleErrorMessage(res));
+                .then(res => handleErrorMessage(res, toast));
         });
         deletions.forEach(item => {
             fetch(`${API_URL}/api/availabilities/${item.id}`, configRequest('DELETE', token))
-                .then(res => handleErrorMessage(res));
+                .then(res => handleErrorMessage(res, toast));
         });
 
         // else {
@@ -145,12 +145,12 @@ export async function getServerSideProps({req}) {
     // Fetch demands
     const demandGroupsRes = await fetch(`${API_URL}/api/demand-groups?populate=demands.einsatztyp&populate=rollen`, configRequest('GET', token));
     const demandGroups = await demandGroupsRes.json();
-    handleErrorMessage(demandGroupsRes);
+    handleErrorMessage(demandGroupsRes, toast);
 
     // Fetch availabilities
     const availabilitiesRes = await fetch(`${API_URL}/api/availabilities/me?populate=rollen&populate=demand&populate=demand.gruppe`, configRequest('GET', token));
     const myAvailabilities = await availabilitiesRes.json();
-    handleErrorMessage(availabilitiesRes);
+    handleErrorMessage(availabilitiesRes, toast);
 
     const persistedSelection = myAvailabilities.data.map((item) => {
         return {

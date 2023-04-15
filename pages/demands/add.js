@@ -55,7 +55,7 @@ export default function AddDemandPage({demandGroups, token}) {
                 <form className="form" onSubmit={handleSubmit(onSubmit)}>
                     <h2 className="heading-secondary">Veranstaltung hinzuf&uuml;gen</h2>
 
-                    <DemandForm register={register} errors={errors} demandGroups={demandGroups} />
+                    <DemandForm register={register} errors={errors} demandGroups={demandGroups}/>
 
                     <button type="submit" disabled={!isValid}
                             className={`btn btn-icon ${styles.btn}`}>
@@ -73,7 +73,7 @@ export async function getServerSideProps({req}) {
     // Fetch demand groups
     const demandGroupsRes = await fetch(`${API_URL}/api/demand-groups?populate=rollen`, configRequest('GET', token));
     const demandGroups = await demandGroupsRes.json();
-    handleErrorMessage(demandGroupsRes);
+    handleErrorMessage(demandGroupsRes, toast);
 
     return {
         props: {

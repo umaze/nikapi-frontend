@@ -72,7 +72,7 @@ export async function getServerSideProps({ params: { id }, req }) {
     // Fetch demand groups
     const demandGroupsRes = await fetch(`${API_URL}/api/demand-groups?populate=rollen`, configRequest('GET', token));
     const demandGroups = await demandGroupsRes.json();
-    handleErrorMessage(demandGroupsRes);
+    handleErrorMessage(demandGroupsRes, toast);
 
     return {
         props: {

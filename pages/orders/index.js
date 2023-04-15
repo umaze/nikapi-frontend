@@ -2,7 +2,7 @@ import {toast} from "react-toastify";
 import Layout from "@/components/Layout";
 import styles from "@/styles/Demands.module.scss";
 import OrderRow from "@/components/OrderRow";
-import {isEinsatzplaner, parseCookies} from "@/helpers/index";
+import {configRequest, handleErrorMessage, isEinsatzplaner, parseCookies} from "@/helpers/index";
 import {API_URL} from "@/config/index";
 import Link from "next/link";
 import {useContext, useState} from "react";
@@ -19,7 +19,6 @@ export default function OrdersPage({orders, token}) {
 
     const handleDelete = order => {
         setSelectedOrder(order);
-        console.log(`Selected: ${JSON.stringify(order)}`);
         setShowModal(true);
     }
 
@@ -62,28 +61,9 @@ export default function OrdersPage({orders, token}) {
 export async function getServerSideProps({ req }) {
     const { token } = parseCookies(req);
     // Fetch orders
-    const ordersRes = await fetch(`${API_URL}/api/orders?populate=einsatztyp&populate=activity&sort=datum:asc`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-        }
-    });
+    const ordersRes = await fetch(`${API_URL}/api/orders?populate=einsatztyp&populate=activity&sort=datum:asc`, configRequest('GET', token));
     const orders = await ordersRes.json();
-
-    if (!ordersRes.ok) {
-        if (ordersRes.status === 403 || ordersRes.status === 401) {
-            toast.error('Nicht authorisiert', {
-                position: toast.POSITION.TOP_CENTER,
-                className: 'toast-error'
-            });
-            return;
-        }
-        toast.error('Ein Fehler ist aufgetreten', {
-            position: toast.POSITION.TOP_CENTER,
-            className: 'toast-error'
-        });
-    }
+    handleErrorMessage(ordersRes, toast);
 
     return {
         props: {

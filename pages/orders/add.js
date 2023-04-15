@@ -28,8 +28,6 @@ export default function AddOrderPage({token}) {
         const parsed = parseFormDataToValidProperties(data.order);
         const applied = applyPropertiesToOrderObject(parsed);
 
-        // console.log(`Applied: ${JSON.stringify(applied)}`);
-
         const res = await fetch(`${API_URL}/api/orders`,
             configRequest(
                 'POST',
