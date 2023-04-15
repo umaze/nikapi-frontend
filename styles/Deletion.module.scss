@@ -1,0 +1,24 @@
+.deletion {
+  padding-left: 1rem;
+  padding-bottom: 1.2rem;
+
+  .content {
+    margin-bottom: 3rem;
+  }
+
+  ul {
+    list-style: none;
+    margin: 1.2rem 0 1.2rem 1.8rem;
+  }
+
+  .btnGroup {
+    button {
+      font: inherit;
+      padding: 0.8rem 1.2rem;
+    }
+
+    button:not(:last-of-type) {
+      margin-right: 1rem;
+    }
+  }
+}

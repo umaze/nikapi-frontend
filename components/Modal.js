@@ -17,12 +17,12 @@ export default function Modal({ show, onClose, children, title }) {
         <div className={styles.overlay}>
             <div className={styles.modal}>
                 <div className={styles.header}>
+                    {title && <h3 className="heading-tertiary">{title}</h3>}
                     <a href="#" onClick={handleClose}>
                         <FaTimes />
                     </a>
                 </div>
-                {title && <div>{title}</div>}
-                <div className={styles.body}>{children}</div>
+                {children}
             </div>
         </div>
     ) : null;

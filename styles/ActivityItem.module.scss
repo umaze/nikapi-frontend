@@ -7,13 +7,13 @@
 }
 
 .offen {
-  @include border-status-color("offen");
+  @include border-left-status-color("offen");
 }
 .bereit {
-  @include border-status-color("bereit");
+  @include border-left-status-color("bereit");
 }
 .erledigt {
-  @include border-status-color("erledigt");
+  @include border-left-status-color("erledigt");
 }
 
 .rollen {

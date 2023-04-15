@@ -1,15 +1,33 @@
-import {toast, ToastContainer} from "react-toastify";
+import {toast} from "react-toastify";
 import Layout from "@/components/Layout";
 import styles from "@/styles/Demands.module.scss";
 import OrderRow from "@/components/OrderRow";
 import {isEinsatzplaner, parseCookies} from "@/helpers/index";
 import {API_URL} from "@/config/index";
 import Link from "next/link";
-import {useContext} from "react";
+import {useContext, useState} from "react";
 import AuthContext from "@/context/AuthContext";
+import Modal from "@/components/Modal";
+import Deletion from "@/components/Deletion";
+import {useRouter} from "next/router";
 
-export default function OrdersPage({orders}) {
+export default function OrdersPage({orders, token}) {
     const {user} = useContext(AuthContext);
+    const [showModal, setShowModal] = useState(false);
+    const [selectedOrder, setSelectedOrder] = useState({});
+    const router = useRouter();
+
+    const handleDelete = order => {
+        setSelectedOrder(order);
+        console.log(`Selected: ${JSON.stringify(order)}`);
+        setShowModal(true);
+    }
+
+    const postDeletion = async () => {
+        await router.replace(router.asPath);
+        setShowModal(false);
+    };
+
     return (
         <Layout>
             <h1 className="heading-primary">Bestellungen</h1>
@@ -18,10 +36,25 @@ export default function OrdersPage({orders}) {
             <ul className={styles.list}>
                 {orders?.map(order => (
                     <li key={order.id}>
-                        <OrderRow key={order.id} order={order} />
+                        <OrderRow key={order.id} order={order} onDelete={() => handleDelete(order)} />
                     </li>
                 ))}
             </ul>
+
+            <Modal show={showModal} onClose={() => setShowModal(false)} title="Bestellung entfernen">
+                <Deletion
+                    id={selectedOrder.id}
+                    token={token}
+                    endpoint="orders"
+                    onCancel={() => setShowModal(false)}
+                    onDone={postDeletion}>
+                    <p>Bestellung wirklich entfernen?</p>
+                    <ul>
+                        <li><em>{selectedOrder.attributes?.bezeichnung}</em></li>
+                        <li><em>{selectedOrder.attributes?.adresse}</em></li>
+                    </ul>
+                </Deletion>
+            </Modal >
         </Layout>
     );
 }

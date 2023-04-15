@@ -1,8 +1,9 @@
 import {formatTime} from '@/helpers/index';
 import styles from '@/styles/OrderRow.module.scss';
 import Link from "next/link";
+import {IconEdit, IconTrash} from '@tabler/icons-react';
 
-export default function OrderRow({ order }) {
+export default function OrderRow({ order, onDelete }) {
     const attributes = order.attributes;
 
     return (
@@ -15,18 +16,21 @@ export default function OrderRow({ order }) {
                         {attributes.zeitVon && ' - '}
                         {formatTime(attributes.zeitBis)}
                     </div>
-                    <div>{attributes.status}</div>
+                    <div>{attributes.bezeichnung} | <span className={`${styles[`${attributes.status}-bottom`]}`}>{attributes.status}</span></div>
                 </div>
                 <div className={styles.details}>
                     <div className={styles.einsatztyp}>{attributes.einsatztyp?.typ}</div>
-                    <div></div>
+                    <div>{attributes.adresse}</div>
                 </div>
             </div>
 
             <div className={styles.link}>
-                <Link href={`/orders/edit/${order.id}`} legacyBehavior>
-                    <a className="btn-secondary">Bearbeiten</a>
+                <Link href={`/orders/edit/${order.id}`} className="btn btn-secondary btn-secondary--small btn-icon">
+                    <IconEdit />
                 </Link>
+                {!order.activity?.data && <button className="btn btn-secondary btn-secondary--small btn-icon" onClick={onDelete}>
+                    <IconTrash/>
+                </button>}
             </div>
         </div>
     )

@@ -1,21 +1,19 @@
 import {
     applyPropertiesToOrderObject,
-    configRequest,
+    configRequest, handleErrorMessage,
     parseCookies,
     parseFormDataToValidProperties
 } from "@/helpers/index";
 import {API_URL} from "@/config/index";
 import Link from "next/link";
 import {FaArrowLeft, FaSave} from "react-icons/fa";
-import {useRouter} from "next/router";
 import {useForm} from "react-hook-form";
 import Layout from "@/components/Layout";
 import OrderForm from "@/components/OrderForm";
+import {toast} from "react-toastify";
 import styles from "@/styles/OrderAdd.module.scss";
 
 export default function EditOrderPage({order, token}) {
-    const router = useRouter();
-
     const {
         register,
         handleSubmit,
@@ -26,7 +24,25 @@ export default function EditOrderPage({order, token}) {
     const onSubmit = async data => {
         const parsed = parseFormDataToValidProperties(data.order);
         const applied = applyPropertiesToOrderObject(parsed);
-        console.log(`${JSON.stringify(applied)}`);
+
+        const res = await fetch(`${API_URL}/api/orders/${order.id}`,
+            configRequest(
+                'PUT',
+                token,
+                JSON.stringify({data: applied})
+            )
+        );
+
+        if (!res.ok) {
+            handleErrorMessage(res, toast);
+        } else {
+            toast.success('Bestellung erfolgreich geändert', {
+                position: toast.POSITION.TOP_CENTER,
+                className: 'toast-success'
+            });
+            // No routing because of more changes.
+            // await router.push('/orders');
+        }
     };
 
     return (

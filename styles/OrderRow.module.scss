@@ -6,14 +6,27 @@
   @include card-overview;
 }
 
+.link {
+  display: flex;
+  column-gap: 0.5rem;
+
+  svg {
+    margin: 0;
+  }
+}
+
+.offen-bottom {
+  @include border-bottom-status-color("offen");
+}
+
 .offen {
-  @include border-status-color("offen");
+  @include border-left-status-color("offen");
 }
 .bereit {
-  @include border-status-color("bereit");
+  @include border-left-status-color("bereit");
 }
 .erledigt {
-  @include border-status-color("erledigt");
+  @include border-left-status-color("erledigt");
 }
 
 @media (max-width: 600px) {
