@@ -188,7 +188,11 @@ export function applyPropertiesToDemandObject(parsed) {
 }
 
 export function checkActivatedRoute(currentRoute, routes) {
-    return routes.some(route => currentRoute.endsWith(route));
+    return routes.some(route =>
+        route.endsWith('/') ?
+            currentRoute.includes(route) :
+            currentRoute.endsWith(route)
+    );
 }
 
 export function checkRouteMeinBereich(currentRoute) {
@@ -196,7 +200,7 @@ export function checkRouteMeinBereich(currentRoute) {
 }
 
 export function checkRoutePlanung(currentRoute) {
-    return checkActivatedRoute(currentRoute, ['/activities', '/availabilities', '/demands', '/orders', '/activities/add', '/orders/add', '/demands/add']);
+    return checkActivatedRoute(currentRoute, ['/activities', '/availabilities', '/demands', '/orders', '/activities/add', '/orders/add', '/demands/add', '/demands/edit/', '/orders/edit/']);
 }
 
 export function getOptions(options) {

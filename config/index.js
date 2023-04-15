@@ -42,14 +42,14 @@ export const SUB_MENU = {
             label: 'Veranstaltungen',
             icon: <IconBuildingCircus/>,
             restricted: true,
-            additionals: ['/add']
+            additionals: ['/add', '/edit/']
         },
         {
             href: '/orders',
             label: 'Bestellungen',
             icon: <IconShoppingCart/>,
             restricted: true,
-            additionals: ['/add']
+            additionals: ['/add', '/edit/']
         }
     ]
 };
