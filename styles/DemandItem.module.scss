@@ -6,6 +6,15 @@
   @include card-overview;
 }
 
+.link {
+  display: flex;
+  column-gap: 0.5rem;
+
+  svg {
+    margin: 0;
+  }
+}
+
 @media (max-width: 600px) {
   .demand {
     flex-direction: column;

@@ -1,10 +1,3 @@
-import Link from "next/link";
-import {useRouter} from "next/router";
-import {useForm} from "react-hook-form";
-import {FaArrowLeft, FaSave} from "react-icons/fa";
-import {toast} from "react-toastify";
-import {API_URL} from "@/config/index";
-import Layout from "@/components/Layout";
 import {
     applyPropertiesToDemandObject,
     configRequest,
@@ -12,26 +5,30 @@ import {
     parseCookies,
     parseFormDataToValidProperties
 } from "@/helpers/index";
+import {API_URL} from "@/config/index";
+import Link from "next/link";
+import {FaArrowLeft, FaSave} from "react-icons/fa";
+import {useForm} from "react-hook-form";
+import Layout from "@/components/Layout";
+import {toast} from "react-toastify";
 import styles from "@/styles/OrderAdd.module.scss";
 import DemandForm from "@/components/DemandForm";
 
-export default function AddDemandPage({demandGroups, token}) {
-    const router = useRouter();
-
+export default function EditDemandPage({demand, demandGroups, token}) {
     const {
         register,
         handleSubmit,
+        setValue,
         formState: {errors, isValid}
     } = useForm({mode: 'all'});
 
     const onSubmit = async data => {
-        // Form validity
         const parsed = parseFormDataToValidProperties(data.demand);
         const applied = applyPropertiesToDemandObject(parsed);
 
-        const res = await fetch(`${API_URL}/api/demands`,
+        const res = await fetch(`${API_URL}/api/demands/${demand.id}`,
             configRequest(
-                'POST',
+                'PUT',
                 token,
                 JSON.stringify({data: applied})
             )
@@ -40,35 +37,37 @@ export default function AddDemandPage({demandGroups, token}) {
         if (!res.ok) {
             handleErrorMessage(res, toast);
         } else {
-            toast.success('Veranstaltung erfolgreich gespeichert', {
+            toast.success('Veranstaltung erfolgreich geändert', {
                 position: toast.POSITION.TOP_CENTER,
                 className: 'toast-success'
             });
-            await router.push('/demands');
+            // No routing because of more changes.
+            // await router.push('/demands');
         }
     };
 
     return (
-        <Layout title="Veranstaltung hinzufügen">
+        <Layout title="Veranstaltung ändern">
             <Link className="link--back" href="/demands"><FaArrowLeft/> Zur&uuml;ck zu Veranstaltungen</Link>
-            <main>
                 <form className="form" onSubmit={handleSubmit(onSubmit)}>
-                    <h2 className="heading-secondary">Veranstaltung hinzuf&uuml;gen</h2>
+                    <h2 className="heading-secondary">Veranstaltung &auml;ndern</h2>
 
-                    <DemandForm register={register} errors={errors} demandGroups={demandGroups} />
+                    <DemandForm register={register} errors={errors} demand={demand} demandGroups={demandGroups} setValue={setValue} />
 
                     <button type="submit" disabled={!isValid}
                             className={`btn btn-icon ${styles.btn}`}>
-                        <FaSave/>Hinzuf&uuml;gen
+                        <FaSave/>&Auml;nderung speichern
                     </button>
                 </form>
-            </main>
-        </Layout>
-    );
+        </Layout>);
 }
 
-export async function getServerSideProps({req}) {
-    const {token} = parseCookies(req);
+export async function getServerSideProps({ params: { id }, req }) {
+    const { token } = parseCookies(req);
+
+    // Fetch demand
+    const res = await fetch(`${API_URL}/api/demands/${id}?populate=*`, configRequest('GET', token));
+    const demand = await res.json();
 
     // Fetch demand groups
     const demandGroupsRes = await fetch(`${API_URL}/api/demand-groups?populate=rollen`, configRequest('GET', token));
@@ -77,6 +76,10 @@ export async function getServerSideProps({req}) {
 
     return {
         props: {
+            demand: {
+                id: demand.data.id,
+                ...demand.data.attributes
+            },
             demandGroups: demandGroups.data,
             token
         }

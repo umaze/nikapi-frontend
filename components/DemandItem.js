@@ -1,8 +1,9 @@
 import {formatTime} from '@/helpers/index';
 import styles from '@/styles/DemandItem.module.scss';
 import Link from "next/link";
+import {IconEdit, IconTrash} from "@tabler/icons-react";
 
-export default function DemandItem({ demand }) {
+export default function DemandItem({ demand, onDelete }) {
     const attributes = demand.attributes;
     const group = attributes.gruppe.data.attributes;
 
@@ -25,9 +26,12 @@ export default function DemandItem({ demand }) {
             </div>
 
             <div className={styles.link}>
-                <Link href={`/demands/${demand.id}`} legacyBehavior>
-                    <a className="btn-secondary">Bearbeiten</a>
+                <Link href={`/demands/edit/${demand.id}`} className="btn btn-secondary btn-secondary--small btn-icon">
+                    <IconEdit />
                 </Link>
+                {!demand.gruppe?.data && <button className="btn btn-secondary btn-secondary--small btn-icon" onClick={onDelete}>
+                    <IconTrash/>
+                </button>}
             </div>
         </div>
     )

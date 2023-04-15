@@ -6,11 +6,12 @@ import {useEffect} from "react";
 import styles from "@/styles/DemandForm.module.scss";
 
 export default function DemandForm({register, errors, demand, demandGroups, setValue}) {
+    const getOptionLabel = option => `${option.attributes.name} [${option.attributes.rollen?.map(rolle => rolle.name).join(', ')}]`;
     const demandGroupOptions = options => (
         <>
             <option value="" hidden>Wähle eine Gruppe...</option>
             {options && options.map((option, i) => (
-                <option key={i} value={option.id}>{option.attributes.name}</option>
+                <option key={i} value={option.id}>{getOptionLabel(option)}</option>
             ))}
         </>
     );
@@ -20,7 +21,7 @@ export default function DemandForm({register, errors, demand, demandGroups, setV
             setValue('demand', {
                 beschreibung: demand.beschreibung,
                 datum: demand.datum,
-                selectGruppe: demand.gruppe,
+                selectGruppe: demand.gruppe.data.id,
                 zeitVon: demand.zeitVon,
                 zeitBis: demand.zeitBis,
                 selectEinsatztyp: demand.einsatztyp?.typ
