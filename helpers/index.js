@@ -122,8 +122,8 @@ export function parseFormDataToValidProperties(data) {
                 formatted[withoutPrefix] = value;
             }
         } else {
-            if (item.startsWith('anzahl')) {
-                // Key like anzahlKinder
+            if (item.startsWith('anzahl') || item.startsWith('zeit')) {
+                // Key like anzahlKinder or zeitVon
                 formatted[item] = value;
             } else {
                 // Key like Bezeichnung
@@ -174,6 +174,19 @@ export function applyPropertiesToOrderObject(parsed) {
     return applied;
 }
 
+export function applyPropertiesToDemandObject(parsed) {
+    const applied = {};
+    Object.entries(parsed).forEach(([k, v]) => {
+        const [key, value] = Object.entries(v)[0];
+        if (key === 'einsatztyp') {
+            applied[key] = { typ: value };
+        } else {
+            applied[key] = key === 'gruppe' ? +value : value;
+        }
+    });
+    return applied;
+}
+
 export function checkActivatedRoute(currentRoute, routes) {
     return routes.some(route => currentRoute.endsWith(route));
 }
@@ -183,7 +196,7 @@ export function checkRouteMeinBereich(currentRoute) {
 }
 
 export function checkRoutePlanung(currentRoute) {
-    return checkActivatedRoute(currentRoute, ['/activities', '/availabilities', '/demands', '/orders', '/activities/add', '/orders/add']);
+    return checkActivatedRoute(currentRoute, ['/activities', '/availabilities', '/demands', '/orders', '/activities/add', '/orders/add', '/demands/add']);
 }
 
 export function getOptions(options) {
