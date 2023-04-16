@@ -1,6 +1,7 @@
 import styles from "@/styles/ActivityItem.module.scss";
 import Link from "next/link";
 import {formatTime} from "@/helpers/index";
+import {IconEdit} from "@tabler/icons-react";
 
 export default function ActivityItemOverall({activity}) {
     const attributes = activity.attributes;
@@ -39,8 +40,8 @@ export default function ActivityItemOverall({activity}) {
             </div>
 
             <div className={styles.link}>
-                <Link href={`/activities/${activity.id}`} legacyBehavior>
-                    <a className="btn-secondary">Bearbeiten</a>
+                <Link href={`/activities/edit/${activity.id}`} className="btn btn-secondary btn-secondary--small btn-icon">
+                    <IconEdit />
                 </Link>
             </div>
         </div>

@@ -18,7 +18,10 @@ export function applyTimeToDate(source) {
     return null;
 }
 
-export const formatTime = time => applyTimeToDate(time)?.toLocaleTimeString('de-CH', { hour: "2-digit", minute: "2-digit" });
+export const formatTime = time => applyTimeToDate(time)?.toLocaleTimeString('de-CH', {
+    hour: "2-digit",
+    minute: "2-digit"
+});
 
 export function groupSelectedRolesByDemandId(list) {
     const grouped = [];
@@ -64,6 +67,7 @@ export function getUnselectedRoles(listRoles, listSelected) {
         )
     );
 }
+
 export function getNewSelectables(listAdditional, listCurrent) {
     return listAdditional.filter(
         additional => !listCurrent.some(
@@ -164,7 +168,7 @@ export function applyPropertiesToOrderObject(parsed) {
     Object.entries(parsed).forEach(([k, v]) => {
         const [key, value] = Object.entries(v)[0];
         if (key === 'einsatztyp') {
-            applied[key] = { typ: value };
+            applied[key] = {typ: value};
         } else if (key.startsWith('anzahl')) {
             applied[key] = Number.isNaN(value) ? 0 : +value;
         } else {
@@ -179,7 +183,7 @@ export function applyPropertiesToDemandObject(parsed) {
     Object.entries(parsed).forEach(([k, v]) => {
         const [key, value] = Object.entries(v)[0];
         if (key === 'einsatztyp') {
-            applied[key] = { typ: value };
+            applied[key] = {typ: value};
         } else {
             applied[key] = key === 'gruppe' ? +value : value;
         }
@@ -200,7 +204,19 @@ export function checkRouteMeinBereich(currentRoute) {
 }
 
 export function checkRoutePlanung(currentRoute) {
-    return checkActivatedRoute(currentRoute, ['/activities', '/availabilities', '/demands', '/orders', '/activities/add', '/orders/add', '/demands/add', '/demands/edit/', '/orders/edit/']);
+    return checkActivatedRoute(currentRoute,
+        [
+            '/activities',
+            '/availabilities',
+            '/demands',
+            '/orders',
+            '/activities/add',
+            '/orders/add',
+            '/demands/add',
+            '/demands/edit/',
+            '/orders/edit/',
+            '/activities/edit/'
+        ]);
 }
 
 export function getOptions(options) {

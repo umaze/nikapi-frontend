@@ -29,7 +29,7 @@ export const SUB_MENU = {
             href: '/activities',
             label: 'Einsätze',
             icon: <IconClipboardList/>,
-            additionals: ['/add']
+            additionals: ['/add', '/edit/']
         },
         {
             href: '/availabilities',

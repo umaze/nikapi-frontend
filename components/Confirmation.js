@@ -20,7 +20,7 @@ export default function Confirmation({currentStep, stepsSize, register, errors})
                 </div>
                 <InputWrapper
                     label="Bezeichnung"
-                    id="bezeichnung"
+                    id="activity.bezeichnung"
                     type="text"
                     required
                     placeholder="Kennzeichnung des Einsatzes"
@@ -28,7 +28,7 @@ export default function Confirmation({currentStep, stepsSize, register, errors})
                     errors={errors} />
                 <InputWrapper
                     label="Bemerkungen"
-                    id="bemerkung"
+                    id="activity.bemerkung"
                     type="text"
                     placeholder="Spezielles zu beachten, Besonderheiten, ..."
                     register={register}
@@ -36,7 +36,7 @@ export default function Confirmation({currentStep, stepsSize, register, errors})
                 <SelectWrapper
                     label="Status"
                     required
-                    id="selectStatus"
+                    id="activity.selectStatus"
                     options={getOptions(STATUS_ACTIVITY)}
                     register={register}
                     errors={errors}/>

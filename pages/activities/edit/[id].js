@@ -1,10 +1,3 @@
-import {useForm} from 'react-hook-form';
-import {toast} from "react-toastify";
-import Layout from "@/components/Layout";
-import {useRouter} from "next/router";
-import {useSelector} from "react-redux";
-import {FaArrowLeft} from "react-icons/fa";
-import Link from "next/link";
 import {
     applyPropertiesToActivityObject,
     configRequest,
@@ -13,10 +6,17 @@ import {
     parseFormDataToValidProperties
 } from "@/helpers/index";
 import {API_URL} from "@/config/index";
-import {selectCurrentDemand} from "@/store/activitySlice";
+import Link from "next/link";
+import {FaArrowLeft} from "react-icons/fa";
+import {useForm} from "react-hook-form";
+import Layout from "@/components/Layout";
+import {toast} from "react-toastify";
 import ActivityForm from "@/components/ActitvityForm";
+import {useSelector} from "react-redux";
+import {selectCurrentDemand} from "@/store/activitySlice";
+import {useRouter} from "next/router";
 
-export default function AddActivityPage({token, demands, persistedAvailabilities}) {
+export default function EditActivityPage({activity, demands, persistedAvailabilities, token}) {
     const activityDemand = useSelector(selectCurrentDemand);
     const router = useRouter();
     const rollen = activityDemand.attributes?.gruppe.data.attributes.rollen;
@@ -24,18 +24,18 @@ export default function AddActivityPage({token, demands, persistedAvailabilities
     const {
         register,
         handleSubmit,
+        setValue,
         reset,
         formState: {errors, isValid}
     } = useForm({mode: 'all'});
 
     const onSubmit = async data => {
-        // Form validity
-        const parsed = parseFormDataToValidProperties(data);
+        const parsed = parseFormDataToValidProperties(data.activity);
         const applied = applyPropertiesToActivityObject(parsed, rollen);
 
-        const res = await fetch(`${API_URL}/api/activities`,
+        const res = await fetch(`${API_URL}/api/activities/${activity.id}`,
             configRequest(
-                'POST',
+                'PUT',
                 token,
                 JSON.stringify({data: applied})
             )
@@ -43,7 +43,7 @@ export default function AddActivityPage({token, demands, persistedAvailabilities
         if (!res.ok) {
             handleErrorMessage(res, toast);
         } else {
-            toast.success('Einsatz erfolgreich gespeichert', {
+            toast.success('Änderung Einsatz erfolgreich gespeichert', {
                 position: toast.POSITION.TOP_CENTER,
                 className: 'toast-success'
             });
@@ -51,36 +51,49 @@ export default function AddActivityPage({token, demands, persistedAvailabilities
         }
     };
 
-
-
     return (
         <Layout title="Einsatz hinzufügen">
             <Link className="link--back" href="/activities"><FaArrowLeft/> Zur&uuml;ck zu Eins&auml;tze</Link>
             <main>
                 <form className="form" onSubmit={handleSubmit(onSubmit)}>
-                    <h2 className="heading-secondary">Einsatz hinzuf&uuml;gen</h2>
+                    <h2 className="heading-secondary">Einsatz bearbeiten</h2>
 
                     <ActivityForm
                         register={register}
                         errors={errors}
                         reset={reset}
                         isValid={isValid}
+                        setValue={setValue}
+                        activity={activity}
                         demands={demands}
                         persistedAvailabilities={persistedAvailabilities}
-                        token={token} />
+                        token={token}/>
                 </form>
             </main>
         </Layout>
-    )
+    );
 }
 
-export async function getServerSideProps({req}) {
+export async function getServerSideProps({params: {id}, req}) {
     const {token} = parseCookies(req);
 
-    // Fetch demands
-    const demandsRes = await fetch(`${API_URL}/api/demands?populate=einsatztyp&populate=gruppe.rollen&sort=datum:asc`, configRequest('GET', token));
-    const demands = await demandsRes.json();
-    handleErrorMessage(demandsRes, toast);
+    // Fetch activity
+    const res = await fetch(`${API_URL}/api/activities/${id}?populate=demand&populate=rollen.rolle&populate=rollen.availability&populate=orders&populate=demand.einsatztyp&populate=demand.gruppe.rollen&populate=availabilities`, configRequest('GET', token));
+    const activity = await res.json();
+    let demands = [];
+
+    if (activity.data.attributes.demand.data) {
+        demands = [activity.data.attributes.demand.data];
+    } else {
+        // Fetch demands
+        const demandsRes = await fetch(`${API_URL}/api/demands?populate=einsatztyp&populate=gruppe.rollen&sort=datum:asc`, configRequest('GET', token));
+        const list = await demandsRes.json();
+        if (!demandsRes.ok) {
+            handleErrorMessage(demandsRes, toast);
+        } else {
+            demands = list.data;
+        }
+    }
 
     // Fetch availabilities
     const availabilitiesRes = await fetch(`${API_URL}/api/availabilities?populate=rollen&populate=demand&populate=demand.gruppe&populate=benutzer`, configRequest('GET', token));
@@ -99,7 +112,11 @@ export async function getServerSideProps({req}) {
 
     return {
         props: {
-            demands: demands.data,
+            activity: {
+                id: activity.data.id,
+                ...activity.data.attributes
+            },
+            demands,
             persistedAvailabilities,
             token
         }
