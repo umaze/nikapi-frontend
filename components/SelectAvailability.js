@@ -33,7 +33,6 @@ export default function SelectAvailability({role, register, errors}) {
         <>
             <SelectWrapper
                 label={role.name}
-                required
                 id={`activity.select${role.selectableId}`}
                 options={rolleOptions(availabilitiesByRoles[role.name])}
                 disabled={!availabilitiesByRoles[role.name] || !availabilitiesByRoles[role.name].length}

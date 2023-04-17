@@ -20,7 +20,17 @@ import Link from "next/link";
 import {useDispatch} from "react-redux";
 import {useEffect, useState} from "react";
 
-export default function ActivityForm({activity, demands, persistedAvailabilities, token, register, errors, reset, isValid, setValue}) {
+export default function ActivityForm({
+                                         activity,
+                                         demands,
+                                         persistedAvailabilities,
+                                         token,
+                                         register,
+                                         errors,
+                                         reset,
+                                         isValid,
+                                         setValue
+                                     }) {
     const [step, setStep] = useState(0);
     const [selectedDatum, setSelectedDatum] = useState('');
     const [selectedEinsatztyp, setSelectedEinsatztyp] = useState('');
@@ -49,7 +59,9 @@ export default function ActivityForm({activity, demands, persistedAvailabilities
 
     const handleChange = async event => {
         reset({
-            selectDemand: event.target.value
+            activity: {
+                selectDemand: event.target.value
+            }
         });
         const selectedDemand = demands.find(demand => +demand.id === +event.target.value);
         await initialize(selectedDemand);
