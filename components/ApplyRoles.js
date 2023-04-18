@@ -3,9 +3,10 @@ import {useSelector} from "react-redux";
 import {FaPlus} from 'react-icons/fa';
 import {getSelectables, selectCurrentDemand, selectMatchingAvailabilities} from "@/store/activitySlice";
 import SelectAvailability from "@/components/SelectAvailability";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {getRoleNameOfSelectable, getUnselectedRoles} from "@/helpers/index";
 import styles from "@/styles/ApplyRoles.module.scss";
+import _ from "lodash";
 
 export default function ApplyRoles({currentStep, stepsSize, register, errors}) {
     const activityDemand = useSelector(selectCurrentDemand);
@@ -32,10 +33,13 @@ export default function ApplyRoles({currentStep, stepsSize, register, errors}) {
     };
 
     const mappedRollen = [...applySelectables(difference), ...mapSelectables(selectablesStore)];
-    const [selectables, setSelectables] = useState([...mappedRollen]);
+    const sortedRollen = _.orderBy(mappedRollen, ['selectableId'], ['asc']);
+    const [selectables, setSelectables] = useState([...sortedRollen]);
 
     const handleAddSelectable = (item, i) => {
-        setSelectables([...selectables, applySelectable(item, i)]);
+        const rollen = [...selectables, applySelectable(item, i)];
+        const sorted = _.orderBy(rollen, ['selectableId'], ['asc']);
+        setSelectables(sorted);
     };
 
     const displayButton = (roleName) => {
