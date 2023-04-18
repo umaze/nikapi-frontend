@@ -3,6 +3,9 @@
 .sidebar {
   display: flex;
   flex-direction: column;
+  position: fixed;
+  top: $header-height;
+  height: 100%;
   width: 5.5rem;
   padding: 1rem 1.6rem 1rem 1rem;
   background-color: $color-brown-light-2;
