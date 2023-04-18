@@ -160,7 +160,9 @@ export default function ActivityForm({
             currentStep={step + 1}
             stepsSize={fieldGroups.length}
             register={register}
-            errors={errors}/>
+            errors={errors}
+            setValue={setValue}
+            orders={activity?.orders.data} />
     );
 
     const ConfirmationFields = () => (

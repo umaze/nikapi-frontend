@@ -141,6 +141,7 @@ export function parseFormDataToValidProperties(data) {
 export function applyPropertiesToActivityObject(parsed, rollen) {
     const applied = {};
     applied.rollen = [];
+    applied.orders = [];
     Object.entries(parsed).forEach(([k, v]) => {
         const [key, value] = Object.entries(v)[0];
         if (rollen.some(r => r.name.toLowerCase() === key)) {
@@ -157,7 +158,11 @@ export function applyPropertiesToActivityObject(parsed, rollen) {
                     });
             }
         } else {
-            applied[key] = key === 'demand' ? +value : value;
+            if (key === 'orders') {
+                applied.orders = value.data.map(o => o.id);
+            } else {
+                applied[key] = key === 'demand' ? +value : value;
+            }
         }
     });
     return applied;

@@ -11,6 +11,10 @@
   border-radius: 0.5rem;
   background-color: $color-brown-light-3;
   box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .info {

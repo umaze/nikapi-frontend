@@ -1,28 +1,34 @@
 import Step from "@/components/Step";
 import {useSelector} from "react-redux";
 import {selectCurrentDemand, selectMatchingOrders} from "@/store/activitySlice";
-import {FaTrashAlt} from 'react-icons/fa';
 import {useState} from "react";
 import {useDrop} from "react-dnd";
 import DragFile from "@/components/DragFile";
 import styles from "@/styles/ApplyOrders.module.scss";
 import OrderItem from "@/components/OrderItem";
 
-export default function ApplyOrders({currentStep, stepsSize, register, errors}) {
+export default function ApplyOrders({orders, currentStep, stepsSize, register, errors, setValue}) {
     const activityDemand = useSelector(selectCurrentDemand);
     const activitySelectableOrders = useSelector(selectMatchingOrders);
+    const filteredOrders = activitySelectableOrders.filter(s => !orders.some(o => o.id === s.id));
     const einsatztyp = activityDemand.attributes.einsatztyp.typ;
 
     const auftragRequired = Array.of('Abend', 'Schulbesuch').some(t => t === einsatztyp);
 
-    const [basket, setBasket] = useState([]);
-    const [filteredData, setFilteredData] = useState([...activitySelectableOrders]);
+    const [basket, setBasket] = useState([...orders]);
+    const [filteredData, setFilteredData] = useState([...filteredOrders]);
     const [{isOver}, dropRef] = useDrop({
         accept: "language",
         drop: (item) => {
             const {order} = item;
             setFilteredData([...filteredData.filter(x => x.id !== order.id)]);
-            setBasket((basket) => !basket.some(x => x.id === order.id) ? [...basket, order] : basket)
+            setBasket((basket) => {
+                const value = !basket.some(x => x.id === order.id) ? [...basket, order] : basket;
+                setValue('activity.orders.data', value.map(o => {
+                    return {id: o.id}
+                }));
+                return value;
+            });
         },
         collect: (monitor) => ({
             isOver: monitor.isOver(),
@@ -32,7 +38,13 @@ export default function ApplyOrders({currentStep, stepsSize, register, errors}) 
     const handleDeleteItem = (item, e) => {
         e.preventDefault();
         setFilteredData([...filteredData, item]);
-        setBasket((basket) => [...basket.filter(x => x.id !== item.id)])
+        setBasket((basket) => {
+            const value = [...basket.filter(x => x.id !== item.id)];
+            setValue('activity.orders.data', value.map(o => {
+                return {id: o.id}
+            }));
+            return value;
+        })
     }
 
     return (

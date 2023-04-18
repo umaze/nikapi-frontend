@@ -30,7 +30,7 @@ export default function AddActivityPage({token, demands, persistedAvailabilities
 
     const onSubmit = async data => {
         // Form validity
-        const parsed = parseFormDataToValidProperties(data);
+        const parsed = parseFormDataToValidProperties(data.activity);
         const applied = applyPropertiesToActivityObject(parsed, rollen);
 
         const res = await fetch(`${API_URL}/api/activities`,
