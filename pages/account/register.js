@@ -1,84 +1,92 @@
-import { FaUser } from 'react-icons/fa';
-import { ToastContainer, toast } from 'react-toastify';
+import {FaUser} from 'react-icons/fa';
+import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useState, useEffect, useContext } from 'react';
+import {useContext, useEffect} from 'react';
 import Link from 'next/link';
 import Layout from '@/components/Layout';
 import AuthContext from '@/context/AuthContext';
 import styles from '@/styles/AuthForm.module.scss';
+import InputWrapper from "@/components/InputWrapper";
+import {useForm} from "react-hook-form";
 
 export default function RegisterPage() {
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [passwordConfirm, setPasswordConfirm] = useState('');
+    const { register: registerContext, error: errorContext } = useContext(AuthContext);
 
-    const { register, error } = useContext(AuthContext);
+    const {
+        register,
+        handleSubmit,
+        formState: {errors, isValid}
+    } = useForm({mode: 'all'});
 
     useEffect(() => {
         const show = async () => {
-            error && toast.error(error);
+            errorContext && toast.error(`${errorContext}`, {
+                position: toast.POSITION.TOP_CENTER,
+                className: 'toast-error'
+            });
         };
         show();
-    }, [error]);
+    }, [errorContext]);
 
-    const handleSubmit = e => {
-        e.preventDefault();
-
-        if (password !== passwordConfirm) {
-            toast.error('Passwords do not match!');
+    const onSubmit = async data => {
+        if (data.password !== data.passwordConfirm) {
+            toast.error('Passwörter stimmen nicht überein!', {
+                position: toast.POSITION.TOP_CENTER,
+                className: 'toast-error'
+            });
             return;
         }
-
-        register({ username, email, password });
+        registerContext({ ...data });
     };
 
     return (
-        <Layout title="User Registration">
+        <Layout title="Benutzer Registrierung">
             <div className={styles.auth}>
-                <h1>
-                    <FaUser /> Register
+                <h1 className="heading-secondary">
+                    <FaUser />Registrieren
                 </h1>
-                <ToastContainer />
-                <form onSubmit={handleSubmit}>
-                    <div>
-                        <label htmlFor="email">Username</label>
-                        <input
-                            type="text"
-                            id="username"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)} />
-                    </div>
-                    <div>
-                        <label htmlFor="email">Email Address</label>
-                        <input
-                            type="email"
-                            id="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)} />
-                    </div>
-                    <div>
-                        <label htmlFor="password">Password</label>
-                        <input
-                            type="password"
-                            id="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)} />
-                    </div>
-                    <div>
-                        <label htmlFor="passwordConfirm">Password Confirm</label>
-                        <input
-                            type="password"
-                            id="passwordConfirm"
-                            value={passwordConfirm}
-                            onChange={(e) => setPasswordConfirm(e.target.value)} />
-                    </div>
+                <form className="form" onSubmit={handleSubmit(onSubmit)}>
+                    <div className={styles.authForm}>
 
-                    <input type="submit" value="Register" className="btn" />
+                        <InputWrapper
+                            label="E-Mail-Adresse"
+                            id="email"
+                            type="email"
+                            required
+                            placeholder="E-Mail-Adresse"
+                            register={register}
+                            errors={errors} />
+                        <InputWrapper
+                            label="Benutzername"
+                            id="username"
+                            type="text"
+                            required
+                            placeholder="Vorname Name"
+                            register={register}
+                            errors={errors} />
+                        <InputWrapper
+                            label="Passwort"
+                            id="password"
+                            type="password"
+                            required
+                            placeholder="Passwort"
+                            register={register}
+                            errors={errors} />
+                        <InputWrapper
+                            label="Passwort wiederholen"
+                            id="passwordConfirm"
+                            type="password"
+                            required
+                            placeholder="Passwort"
+                            register={register}
+                            errors={errors} />
+
+                        <button className={`btn ${styles.btn}`} type="submit" disabled={!isValid}>Registrieren</button>
+                    </div>
                 </form>
 
-                <p>
-                    Already have an account? <Link href='/account/login'>Login</Link>
+                <p className={styles.hint}>
+                    Bereits einen Account? <Link href='/account/login'>Anmelden</Link>
                 </p>
             </div>
         </Layout>
