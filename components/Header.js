@@ -1,13 +1,13 @@
-import {FaSignInAlt, FaSignOutAlt} from 'react-icons/fa';
 import {useContext, useEffect} from 'react';
 import Link from 'next/link';
 import AuthContext from '@/context/AuthContext';
-import styles from '@/styles/Header.module.scss';
 import {useRouter} from "next/router";
 import {useDispatch, useSelector} from "react-redux";
 import {selectActivatedNavMenu, setActivatedNavMenu} from "@/store/applicationSlice";
-import {MAIN_MENU} from "@/config/index";
-import {checkRouteMeinBereich, checkRoutePlanung} from "@/helpers/index";
+import {MAIN_MENU, MAIN_MENU_HILFE} from "@/config/index";
+import {checkRouteHilfe, checkRouteMeinBereich, checkRoutePlanung} from "@/helpers/index";
+import {IconLogin, IconLogout} from "@tabler/icons-react";
+import styles from '@/styles/Header.module.scss';
 
 export default function Header() {
     const { user, logout } = useContext(AuthContext);
@@ -57,15 +57,23 @@ export default function Header() {
                                 Planung
                             </Link>
                         </li>
+                        <li className={`${checkRouteHilfe(currentRoute) ? styles.active : styles.nonActive}`}>
+                            <Link
+                                href={MAIN_MENU_HILFE.href}
+                                className={styles.help}
+                                onClick={() => handleSelectMenu(MAIN_MENU_HILFE.id)}>
+                                {MAIN_MENU_HILFE.icon}
+                            </Link>
+                        </li>
                         <li>
                             <Link href="#" onClick={() => logout()} className="btn btn-cta btn-icon">
-                                <FaSignOutAlt />  Logout
+                                <IconLogout />  Logout
                             </Link>
                         </li>
                     </> : <>
                         <li>
                             <Link className="btn btn-cta btn-icon" href='/account/login'>
-                                <FaSignInAlt /> Login
+                                <IconLogin /> Login
                             </Link>
                         </li>
                     </>}

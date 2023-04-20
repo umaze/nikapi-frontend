@@ -1,12 +1,11 @@
-import {FaUser} from 'react-icons/fa';
 import {toast} from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import {useContext, useEffect} from 'react';
 import Link from 'next/link';
 import Layout from '@/components/Layout';
 import AuthContext from '@/context/AuthContext';
 import InputWrapper from "@/components/InputWrapper";
 import {useForm} from "react-hook-form";
+import {IconUserCheck} from "@tabler/icons-react";
 import styles from '@/styles/AuthForm.module.scss';
 
 export default function LoginPage() {
@@ -36,7 +35,7 @@ export default function LoginPage() {
         <Layout title="Benutzer Login">
             <div className={styles.auth}>
                 <h1 className="heading-secondary">
-                    <FaUser />Anmelden
+                    <IconUserCheck />Anmelden
                 </h1>
                 <form className="form" onSubmit={handleSubmit(onSubmit)}>
                     <div className={styles.authForm}>

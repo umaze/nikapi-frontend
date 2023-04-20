@@ -208,6 +208,10 @@ export function checkRouteMeinBereich(currentRoute) {
     return checkActivatedRoute(currentRoute, ['/me', '/me/manage']);
 }
 
+export function checkRouteHilfe(currentRoute) {
+    return checkActivatedRoute(currentRoute, ['/account/help']);
+}
+
 export function checkRoutePlanung(currentRoute) {
     return checkActivatedRoute(currentRoute,
         [
