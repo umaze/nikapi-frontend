@@ -1,0 +1,53 @@
+@import "./abstracts/variables";
+
+.sectionDashboard {
+  padding: 9.6rem 0;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: $color-brown-light-3;
+  box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.075);
+  border-radius: 11px;
+  border: 1px solid $color-brown-light;
+  justify-self: center;
+  overflow: hidden;
+  transition: all .3s;
+  width: 28rem;
+
+  a {
+    height: 100%;
+  }
+
+  &:hover {
+    box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+  }
+
+  &Content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    padding: 3.2rem 2.4rem;
+
+    svg {
+      height: 3.6rem;
+      width: 3.6rem;
+      margin-bottom: 1.8rem;
+    }
+  }
+
+  &Title {
+    font-size: 2.4rem;
+    color: $color-red;
+    font-weight: 500;
+    margin: auto 0;
+    text-align: center;
+
+    span {
+      font-weight: 700;
+    }
+  }
+}

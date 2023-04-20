@@ -2,8 +2,8 @@ import Link from 'next/link';
 import {useContext} from "react";
 import AuthContext from "@/context/AuthContext";
 import {IconSleigh} from '@tabler/icons-react';
-import styles from '@/styles/Footer.module.scss';
 import ScrollLink from "@/components/ScrollLink";
+import styles from '@/styles/Footer.module.scss';
 
 export default function Footer() {
     const {user, logout} = useContext(AuthContext);

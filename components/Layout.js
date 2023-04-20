@@ -14,7 +14,7 @@ export default function Layout({title, keywords, description, children}) {
     const router = useRouter();
 
     return (
-        <div>
+        <>
             <Head>
                 <title>{title}</title>
                 <meta name="description" content={description}/>
@@ -37,7 +37,7 @@ export default function Layout({title, keywords, description, children}) {
             }
 
             <Footer/>
-        </div>
+        </>
     )
 }
 
