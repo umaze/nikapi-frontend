@@ -4,18 +4,18 @@ import {selectCurrentDemand, selectMatchingOrders} from "@/store/activitySlice";
 import {useState} from "react";
 import {useDrop} from "react-dnd";
 import DragFile from "@/components/DragFile";
-import styles from "@/styles/ApplyOrders.module.scss";
 import OrderItem from "@/components/OrderItem";
+import styles from "@/styles/ApplyOrders.module.scss";
 
-export default function ApplyOrders({orders, currentStep, stepsSize, register, errors, setValue}) {
+export default function ApplyOrders({orders, currentStep, stepsSize, setValue, readOnly}) {
     const activityDemand = useSelector(selectCurrentDemand);
     const activitySelectableOrders = useSelector(selectMatchingOrders);
-    const filteredOrders = activitySelectableOrders.filter(s => !orders.some(o => o.id === s.id));
+    const filteredOrders = activitySelectableOrders.filter(s => !orders?.some(o => o.id === s.id));
     const einsatztyp = activityDemand.attributes.einsatztyp.typ;
 
     const auftragRequired = Array.of('Abend', 'Schulbesuch').some(t => t === einsatztyp);
 
-    const [basket, setBasket] = useState([...orders]);
+    const [basket, setBasket] = useState(orders ? [...orders] : []);
     const [filteredData, setFilteredData] = useState([...filteredOrders]);
     const [{isOver}, dropRef] = useDrop({
         accept: "language",

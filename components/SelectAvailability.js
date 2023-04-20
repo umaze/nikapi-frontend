@@ -2,7 +2,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {addSelectable, selectCurrentDemand, selectMatchingAvailabilities, setRole} from "@/store/activitySlice";
 import SelectWrapper from "@/components/SelectWrapper";
 
-export default function SelectAvailability({role, register, errors}) {
+export default function SelectAvailability({role, register, errors, readOnly}) {
     const dispatch = useDispatch();
     const activityDemand = useSelector(selectCurrentDemand);
     const rollen = activityDemand.attributes?.gruppe.data.attributes.rollen;
@@ -35,7 +35,7 @@ export default function SelectAvailability({role, register, errors}) {
                 label={role.name}
                 id={`activity.select${role.selectableId}`}
                 options={rolleOptions(availabilitiesByRoles[role.name])}
-                disabled={!availabilitiesByRoles[role.name] || !availabilitiesByRoles[role.name].length}
+                disabled={readOnly || !availabilitiesByRoles[role.name] || !availabilitiesByRoles[role.name].length}
                 register={register}
                 handleChange={(e) => handleChange(role.selectableId, e)}
                 errors={errors}/>

@@ -7,7 +7,7 @@ import InputWrapper from "@/components/InputWrapper";
 import {getOptions} from "@/helpers/index";
 import styles from "@/styles/Confirmation.module.scss";
 
-export default function Confirmation({currentStep, stepsSize, register, errors}) {
+export default function Confirmation({currentStep, stepsSize, register, errors, readOnly}) {
     const activityDemand = useSelector(selectCurrentDemand);
 
     return (
@@ -25,6 +25,7 @@ export default function Confirmation({currentStep, stepsSize, register, errors})
                     required
                     placeholder="Kennzeichnung des Einsatzes"
                     register={register}
+                    disabled={readOnly}
                     errors={errors} />
                 <InputWrapper
                     label="Bemerkungen"
@@ -32,6 +33,7 @@ export default function Confirmation({currentStep, stepsSize, register, errors})
                     type="text"
                     placeholder="Spezielles zu beachten, Besonderheiten, ..."
                     register={register}
+                    disabled={readOnly}
                     errors={errors} />
                 <SelectWrapper
                     label="Status"
@@ -39,6 +41,7 @@ export default function Confirmation({currentStep, stepsSize, register, errors})
                     id="activity.selectStatus"
                     options={getOptions(STATUS_ACTIVITY)}
                     register={register}
+                    disabled={readOnly}
                     errors={errors}/>
             </div>
         </Step>

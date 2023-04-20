@@ -1,9 +1,12 @@
 import styles from "@/styles/ActivityItem.module.scss";
 import Link from "next/link";
-import {formatTime} from "@/helpers/index";
+import {formatTime, isEinsatzplaner} from "@/helpers/index";
 import {IconEdit} from "@tabler/icons-react";
+import {useContext} from "react";
+import AuthContext from "@/context/AuthContext";
 
 export default function ActivityItemOverall({activity}) {
+    const {user} = useContext(AuthContext);
     const attributes = activity.attributes;
     const roles = attributes.rollen.map(r => `${r.rolle?.name} [${r.availability.data.attributes.benutzer.data.attributes.username}]`);
 
@@ -39,11 +42,11 @@ export default function ActivityItemOverall({activity}) {
                 </div>
             </div>
 
-            <div className={styles.link}>
+            {isEinsatzplaner(user) && <div className={styles.link}>
                 <Link href={`/activities/edit/${activity.id}`} className="btn btn-secondary btn-secondary--small btn-icon">
                     <IconEdit />
                 </Link>
-            </div>
+            </div>}
         </div>
     );
 }

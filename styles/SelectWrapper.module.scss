@@ -18,10 +18,15 @@
   position: relative;
   top: 50%;
   border-radius: 5px;
+  border: 1px solid $color-brown-light;
   box-shadow: 0 0 1em rgba(white,0.2), inset 0 0 1px rgba(white,0.8);
   /* Styling the select background */
   background-color: $color-white-background;
   overflow: hidden;
+
+  &:has(select:disabled) {
+    background-color: transparent;
+  }
 
   select
   {
@@ -34,12 +39,20 @@
     border-radius: 0;
     background-color: transparent !important;
     /* Styling the select text color */
-    color: $color-brown-dark;
+    color: $color-black;
 
-    /* removes the fucking native down arrow */
+    /* removes the native down arrow */
     -webkit-appearance: none;
     -moz-appearance: none;
     text-indent: 0.01px;
+
+    &:disabled {
+      color: $color-brown;
+
+      &:hover {
+        cursor: initial;
+      }
+    }
 
     &::-ms-expand
     {

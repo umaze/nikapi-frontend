@@ -8,7 +8,7 @@ import {getRoleNameOfSelectable, getUnselectedRoles} from "@/helpers/index";
 import styles from "@/styles/ApplyRoles.module.scss";
 import _ from "lodash";
 
-export default function ApplyRoles({currentStep, stepsSize, register, errors}) {
+export default function ApplyRoles({currentStep, stepsSize, register, errors, readOnly}) {
     const activityDemand = useSelector(selectCurrentDemand);
     const rollen = activityDemand.attributes?.gruppe.data.attributes.rollen;
     const availabilitiesByRoles = useSelector(selectMatchingAvailabilities(activityDemand.id, rollen));
@@ -60,9 +60,9 @@ export default function ApplyRoles({currentStep, stepsSize, register, errors}) {
                     </div>
 
                     {selectables.map((r, i) => (
-                        <SelectAvailability key={i} role={r} register={register} errors={errors}/>
+                        <SelectAvailability key={i} role={r} register={register} errors={errors} readOnly={readOnly}/>
                     ))}
-                    {rollen.map((r, i) => (
+                    {!readOnly && rollen.map((r, i) => (
                         displayButton(r.name) &&
                         <button key={i} className="btn btn-icon" onClick={() => handleAddSelectable(r, i+1)}>
                             <FaPlus/>{r.name} hinzufügen</button>

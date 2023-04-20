@@ -29,7 +29,8 @@ export default function ActivityForm({
                                          errors,
                                          reset,
                                          isValid,
-                                         setValue
+                                         setValue,
+                                         readOnly
                                      }) {
     const [step, setStep] = useState(0);
     const [selectedDatum, setSelectedDatum] = useState('');
@@ -138,7 +139,7 @@ export default function ActivityForm({
             <SelectWrapper
                 label="Veranstaltung"
                 required
-                disabled={!!activity && !!activity.demand.data}
+                disabled={readOnly || (!!activity && !!activity.demand.data)}
                 id="activity.selectDemand"
                 options={demandOptions(demands)}
                 register={register}
@@ -152,17 +153,17 @@ export default function ActivityForm({
             currentStep={step + 1}
             stepsSize={fieldGroups.length}
             register={register}
-            errors={errors}/>
+            errors={errors}
+            readOnly={readOnly}/>
     );
 
     const ApplyOrdersFields = () => (
         <ApplyOrders
             currentStep={step + 1}
             stepsSize={fieldGroups.length}
-            register={register}
-            errors={errors}
             setValue={setValue}
-            orders={activity?.orders.data} />
+            orders={activity?.orders.data}
+            readOnly={readOnly} />
     );
 
     const ConfirmationFields = () => (
@@ -170,7 +171,8 @@ export default function ActivityForm({
             currentStep={step + 1}
             stepsSize={fieldGroups.length}
             register={register}
-            errors={errors}/>
+            errors={errors}
+            readOnly={readOnly}/>
     )
 
     /** Navigation between steps */
@@ -180,7 +182,7 @@ export default function ActivityForm({
                 step === fieldGroups.length - 1 &&
                 <button type="submit" disabled={!isValid}
                         className="btn btn-icon">
-                    <FaSave/>Speichern
+                    {readOnly ? 'OK' : <FaSave/>}{!readOnly ? 'Speichern' : ''}
                 </button>
             }
             {

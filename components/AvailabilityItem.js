@@ -22,9 +22,7 @@ export default function AvailabilityItem({availability}) {
             </div>
 
             <div className={styles.link}>
-                <Link href={`/availabilities/${availability.slug}`} legacyBehavior>
-                    <a className="btn-secondary">Details</a>
-                </Link>
+                <button className="btn btn-secondary">Details</button>
             </div>
         </div>
     )
