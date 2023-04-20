@@ -1,9 +1,13 @@
 @import "./abstracts/variables";
 
 .help {
+  .topic {
+    margin-top: 4.8rem;
+  }
+
   .accordion {
     width: 70rem;
-    margin: 10rem auto;
+    margin: 0 auto;
 
     display: flex;
     flex-direction: column;
