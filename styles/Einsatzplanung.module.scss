@@ -1,37 +1,20 @@
 @import "./abstracts/variables";
+@import "./abstracts/mixins";
 
 .sectionEinsatzplanung {
-  padding: 9.6rem 0;
+  @include section-padding;
 }
 
 .einsatzplanung {
-  display: flex;
-  flex-direction: column;
-  background-color: $color-brown-light-3;
-  box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.075);
-  border-radius: 11px;
-  border: 1px solid $color-brown-light;
+  @include tile;
   max-width: 38rem;
-  justify-self: center;
-  overflow: hidden;
-  transition: all .3s;
-
-  &:hover {
-    box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.15);
-  }
 
   &Content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100%;
-    padding: 3.2rem 2.4rem;
+    @include tile-content;
   }
 
   &Title {
-    font-size: 2.4rem;
-    color: $color-red;
-    font-weight: 500;
+    @include tile-title;
     align-self: center;
     margin-bottom: 2.4rem;
   }
