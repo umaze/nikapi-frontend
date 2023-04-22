@@ -94,21 +94,20 @@ export const configRequest = (method, token, body = null, contentType = null) =>
     };
 };
 
-export function handleErrorMessage(res, toast) {
+export function handleErrorMessage(res, toast, customId = null) {
     if (!toast) return;
 
     if (!res.ok) {
+        const config = {
+            position: toast.POSITION.TOP_CENTER,
+            className: 'toast-error',
+            toastId: customId
+        };
         if (res.status === 403 || res.status === 401) {
-            toast.error('Nicht authorisiert', {
-                position: toast.POSITION.TOP_CENTER,
-                className: 'toast-error'
-            });
+            toast.error('Nicht authorisiert', config);
             return;
         }
-        toast.error('Ein Fehler ist aufgetreten', {
-            position: toast.POSITION.TOP_CENTER,
-            className: 'toast-error'
-        });
+        toast.error('Ein Fehler ist aufgetreten', config);
     }
 }
 

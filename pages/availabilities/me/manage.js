@@ -7,17 +7,16 @@ import {
     configRequest
 } from '@/helpers/index';
 import DemandGroupItem from "@/components/DemandGroupItem";
-import {toast, ToastContainer} from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import {toast} from 'react-toastify';
 import {useRouter} from 'next/router';
 import {useState, useRef, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {selectAvailabilities, updateAvailability} from '@/store/availabilitySlice';
+import {initAvailability, selectAvailabilities, updateAvailability} from '@/store/availabilitySlice';
 import Link from 'next/link';
 import Layout from '@/components/Layout';
 import {API_URL} from '@/config/index';
+import {IconArrowLeft} from "@tabler/icons-react";
 import styles from '@/styles/FormAvailability.module.scss';
-import {FaArrowLeft} from "react-icons/fa";
 
 export default function ManageAvailabilityPage({token, demandGroups, persistedSelection}) {
     const [availabilities, setAvailabilities] = useState([]);
@@ -43,6 +42,7 @@ export default function ManageAvailabilityPage({token, demandGroups, persistedSe
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        let countFaults = 0;
 
         // demands with selected roles
         const groupedSelection = groupSelectedRolesByDemandId(availabilities);
@@ -71,36 +71,43 @@ export default function ManageAvailabilityPage({token, demandGroups, persistedSe
         //         demandId: item.demandId
         //     };
         // }))}`);
+        //
 
-        inserts.forEach(item => {
-            const data = initAvailabilityData('Neue Verfügbarkeit', item);
-            fetch(`${API_URL}/api/availabilities`, configRequest('POST', token, JSON.stringify(data)))
-                .then(res => handleErrorMessage(res, toast));
-        });
-        updates.forEach(item => {
+        await Promise.all(inserts.map(async item => {
+            const data = initAvailabilityData('Verfügbarkeit hinzugefügt', item);
+            const res = await fetch(`${API_URL}/api/availabilities`, configRequest('POST', token, JSON.stringify(data)));
+            !res.ok && countFaults++;
+            handleErrorMessage(res, toast, 'custom-id-inserts');
+        }));
+        await Promise.all(updates.map(async item => {
             const data = initAvailabilityData('Verfügbarkeit bearbeitet', item);
-            fetch(`${API_URL}/api/availabilities/${item.id}`, configRequest('PUT', token, JSON.stringify(data)))
-                .then(res => handleErrorMessage(res, toast));
-        });
-        deletions.forEach(item => {
-            fetch(`${API_URL}/api/availabilities/${item.id}`, configRequest('DELETE', token))
-                .then(res => handleErrorMessage(res, toast));
-        });
+            const res = await fetch(`${API_URL}/api/availabilities/${item.id}`, configRequest('PUT', token, JSON.stringify(data)));
+            !res.ok && countFaults++;
+            handleErrorMessage(res, toast, 'custom-id-updates');
+        }));
+        await Promise.all(deletions.map(async item => {
+            const res = await fetch(`${API_URL}/api/availabilities/${item.id}`, configRequest('DELETE', token));
+            !res.ok && countFaults++;
+            handleErrorMessage(res, toast, 'custom-id-deletions');
+        }));
 
-        // else {
-        //     const availability = await res.json();
-        //     router.push(`/availabilities/${availability.data.attributes.slug}`);
-        // }
+        if (countFaults > 0) {
+            toast.warning('Änderungen nicht vollständig gespeichert', {
+                position: toast.POSITION.TOP_CENTER,
+                className: 'toast-warning'
+            });
+        } else {
+            toast.success('Verfügbarkeiten erfolgreich geändert', {
+                position: toast.POSITION.TOP_CENTER,
+                className: 'toast-success'
+            });
+        }
+
+        await router.replace(router.asPath);
     };
 
-    useEffect(() => {
-        setAvailabilities([
-                ...selected
-            ]
-        );
-    }, [selected]);
-
-    useEffect(() => {
+    const initFormData = () => {
+        dispatch(initAvailability());
         persistedSelection.forEach(item => item.rollen.forEach(rolle => {
             dispatch(
                 updateAvailability({
@@ -112,13 +119,23 @@ export default function ManageAvailabilityPage({token, demandGroups, persistedSe
                 })
             );
         }));
-    }, []);
+    };
+
+    useEffect(() => {
+        setAvailabilities([
+                ...selected
+            ]
+        );
+    }, [selected]);
+
+    useEffect(() => {
+        initFormData();
+    }, [persistedSelection]);
 
     return (
         <Layout title="Verfügbarkeiten verwalten">
-            <Link className="link--back" href="/availabilities/me"><FaArrowLeft/>Zur&uuml;ck zu Meine Verf&uuml;gbarkeiten</Link>
+            <Link className="link--back" href="/availabilities/me"><IconArrowLeft/>Zur&uuml;ck zu Meine Verf&uuml;gbarkeiten</Link>
             <h1 className="heading-primary">Verf&uuml;gbarkeiten verwalten</h1>
-            <ToastContainer/>
 
             <form
                 onSubmit={handleSubmit}
@@ -133,7 +150,7 @@ export default function ManageAvailabilityPage({token, demandGroups, persistedSe
                     ))}
                 </ul>
 
-                <input type="submit" value="Änderung speichern" className="btn"/>
+                <button type="submit" className="btn">&Auml;nderung speichern</button>
             </form>
         </Layout>
     )

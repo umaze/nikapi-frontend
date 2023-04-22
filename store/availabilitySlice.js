@@ -20,6 +20,9 @@ export const availabilitySlice = createSlice({
             } else {
                 state.selected = [...state.selected.filter(item => !containsRole(item, action.payload))]
             }
+        },
+        initAvailability: (state) => {
+            state.selected = [];
         }
     },
     // Special reducer for hydrating the state. Special case for next-redux-wrapper
@@ -40,6 +43,6 @@ const selectAvailabilitiesAndSortedByGroup = (state) => {
     return _.orderBy(source, ['groupId'], ['asc']);
 };
 
-export const { updateAvailability } = availabilitySlice.actions;
+export const { updateAvailability, initAvailability } = availabilitySlice.actions;
 export const selectAvailabilities = (state) => { return selectAvailabilitiesAndSortedByGroup(state) };
 export default availabilitySlice.reducer;

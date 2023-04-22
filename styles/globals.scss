@@ -114,7 +114,9 @@ h1 {
 }
 
 .toast-error,
-.toast-success {
+.toast-success,
+.toast-warning {
+  color: $color-black !important;
   font-size: 2rem;
   padding: 3rem 2rem;
 }
@@ -125,6 +127,10 @@ h1 {
 
 .toast-error {
   background: $color-red-light-2 !important;
+}
+
+.toast-warning {
+  background: $color-yellow-light !important;
 }
 
 .Toastify__toast-container {
