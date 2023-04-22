@@ -1,16 +1,15 @@
 @import "./abstracts/variables";
+@import "./abstracts/mixins";
 
 .sidebar {
+  order: 1;
   display: flex;
   flex-direction: column;
-  position: fixed;
-  top: $header-height;
-  height: 100%;
   width: 5.5rem;
   padding: 1rem 1.6rem 1rem 1rem;
   background-color: $color-brown-light-2;
-  transition: width 0.3s cubic-bezier(0.2, 0, 0, 1) 0s;
   overflow-x: hidden;
+  @include transition-sidebar-with;
 
   button {
     width: 2.6rem;
@@ -30,6 +29,14 @@
       width: 100%;
       height: 100%;
     }
+  }
+
+  &Inner {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    /* parent width (5.5rem) - padding-left/-right (1rem/1.6rem) = 2.9rem */
+    width: 2.9rem;
   }
 }
 

@@ -28,25 +28,27 @@ export default function Sidebar() {
     return (
         <>
             {user && selectedNavMenu && SUB_MENU[selectedNavMenu]?.length > 0 &&
-                <div className={`${styles.sidebar} ${expanded ? 'expanded' : ''}`}>
-                    <button
-                        onClick={handleToggleCollapse}
-                        className={!expanded ? styles.centered : ''}>
-                        {expanded ? <IconChevronsLeft/> : <IconChevronsRight/>}
-                    </button>
-                    <ul className={styles.subNavList}>
-                        {SUB_MENU[selectedNavMenu]?.map((item, i) => (
-                            (item.restricted && isEinsatzplaner(user) || !item.restricted) &&
-                            <li key={i}>
-                                <Link
-                                    className={`${styles.subNavLink} ${checkActivatedRoute(currentRoute, routes(item)) ? styles.active : styles.nonActive}`}
-                                    href={item.href}>
-                                    <div className={styles.linkIcon}>{item.icon}</div>
-                                    {expanded && <div className={styles.linkIcon}>{item.label}</div>}
-                                </Link>
-                            </li>
-                        ))}
-                    </ul>
+                <div className={`${styles.sidebar} sidebar ${expanded ? 'expanded' : ''}`}>
+                    <div className={`${styles.sidebarInner} ${expanded ? 'expanded-inner' : ''}`}>
+                        <button
+                            onClick={handleToggleCollapse}
+                            className={!expanded ? styles.centered : ''}>
+                            {expanded ? <IconChevronsLeft/> : <IconChevronsRight/>}
+                        </button>
+                        <ul className={styles.subNavList}>
+                            {SUB_MENU[selectedNavMenu]?.map((item, i) => (
+                                (item.restricted && isEinsatzplaner(user) || !item.restricted) &&
+                                <li key={i}>
+                                    <Link
+                                        className={`${styles.subNavLink} ${checkActivatedRoute(currentRoute, routes(item)) ? styles.active : styles.nonActive}`}
+                                        href={item.href}>
+                                        <div className={styles.linkIcon}>{item.icon}</div>
+                                        {expanded && <div className={styles.linkIcon}>{item.label}</div>}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
                 </div>
             }
         </>

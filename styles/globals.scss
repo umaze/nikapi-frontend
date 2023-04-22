@@ -1,4 +1,5 @@
 @import "./base/base";
+@import "./abstracts/mixins";
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 a {
@@ -104,8 +105,21 @@ h1 {
   }
 }
 
-.expanded {
-  width: 20rem !important;
+div {
+  @include transition-sidebar-with;
+
+  .expanded {
+    width: 20rem !important;
+  }
+  .expanded-inner {
+    /* parent width (20rem) - padding-left/-right (1rem/1.6rem) = 17.4rem */
+    width: 17.4rem !important;
+  }
+}
+
+/* Only align main left when sidebar is given else center main content */
+div.sidebar + div.main-content-flex-1 {
+  flex: 1;
 }
 
 .info-no-data {

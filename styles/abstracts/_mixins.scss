@@ -30,6 +30,10 @@
   border-bottom: 3px solid list.nth($list, 2);
 }
 
+@mixin transition-sidebar-with {
+  transition: width 0.3s cubic-bezier(0.2, 0, 0, 1) 0s;
+}
+
 @mixin card-overview {
   display: flex;
   justify-content:space-between;

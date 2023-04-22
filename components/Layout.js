@@ -30,7 +30,7 @@ export default function Layout({title, keywords, description, children}) {
                 </> :
                 <div className={styles.container}>
                     <Sidebar/>
-                    <div className={styles.mainContent}>
+                    <div className={`${styles.mainContent} main-content-flex-1`}>
                         {children}
                     </div>
                 </div>
