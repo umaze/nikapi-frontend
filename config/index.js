@@ -55,4 +55,4 @@ export const SUB_MENU = {
     ]
 };
 
-export const FILTER_TYPE = ['demand', 'availability'];
+export const FILTER_TYPE = ['demand', 'availability', 'order'];

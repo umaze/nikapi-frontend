@@ -4,7 +4,7 @@ import InputWrapper from "@/components/InputWrapper";
 import styles from "@/styles/Filter.module.scss";
 import {FILTER_TYPE} from "@/config/index";
 
-export default function Filter({type, demandGroups, listEinsatztyp, listRolle, doFilter}) {
+export default function Filter({type, demandGroups, listEinsatztyp, listRolle, listStatus, doFilter}) {
     const {
         register,
         handleSubmit,
@@ -28,7 +28,10 @@ export default function Filter({type, demandGroups, listEinsatztyp, listRolle, d
                 datum: "",
                 selectRolle: "",
                 selectEinsatztyp: "",
-                benutzer: ""
+                selectStatus: "",
+                benutzer: "",
+                adresse: "",
+                bezeichnung: ""
             }
         });
         doFilter({});
@@ -55,12 +58,13 @@ export default function Filter({type, demandGroups, listEinsatztyp, listRolle, d
     return (
         <div>
             <form className={`form ${styles.filter}`} onSubmit={handleSubmit(onSubmit)}>
-                {type === FILTER_TYPE[0] && <SelectWrapper
-                    label="Gruppe"
-                    id="filter.selectDemandGroup"
-                    options={demandGroupOptions(demandGroups)}
-                    register={register}
-                    errors={errors}/>}
+                {type === FILTER_TYPE[0] &&
+                    <SelectWrapper
+                        label="Gruppe"
+                        id="filter.selectDemandGroup"
+                        options={demandGroupOptions(demandGroups)}
+                        register={register}
+                        errors={errors}/>}
                 <InputWrapper
                     label="Datum"
                     id="filter.datum"
@@ -68,25 +72,51 @@ export default function Filter({type, demandGroups, listEinsatztyp, listRolle, d
                     placeholder=""
                     register={register}
                     errors={errors}/>
-                {type === FILTER_TYPE[1] && <InputWrapper
-                    label="Name Mitglied"
-                    id="filter.benutzer"
-                    type="text"
-                    placeholder=""
-                    register={register}
-                    errors={errors}/>}
+                {type === FILTER_TYPE[1] &&
+                    <InputWrapper
+                        label="Name Mitglied"
+                        id="filter.benutzer"
+                        type="text"
+                        placeholder=""
+                        register={register}
+                        errors={errors}/>}
+                {type === FILTER_TYPE[2] &&
+                    <>
+                        <InputWrapper
+                            label="Bezeichnung"
+                            id="filter.bezeichnung"
+                            type="text"
+                            placeholder="z.B. Familienname"
+                            register={register}
+                            errors={errors}/>
+                        <InputWrapper
+                            label="Adresse"
+                            id="filter.adresse"
+                            type="text"
+                            placeholder="Strasse, Nr., PLZ oder Ort"
+                            register={register}
+                            errors={errors}/>
+                    </>}
                 <SelectWrapper
                     label="Einsatztyp"
                     id="filter.selectEinsatztyp"
                     options={stringOptions(listEinsatztyp)}
                     register={register}
                     errors={errors}/>
-                <SelectWrapper
-                    label="Rolle"
-                    id="filter.selectRolle"
-                    options={stringOptions(listRolle)}
-                    register={register}
-                    errors={errors}/>
+                {type !== FILTER_TYPE[2] &&
+                    <SelectWrapper
+                        label="Rolle"
+                        id="filter.selectRolle"
+                        options={stringOptions(listRolle)}
+                        register={register}
+                        errors={errors}/>}
+                {type === FILTER_TYPE[2] &&
+                    <SelectWrapper
+                        label="Status"
+                        id="filter.selectStatus"
+                        options={stringOptions(listStatus)}
+                        register={register}
+                        errors={errors}/>}
                 <div className={styles.btnGroup}>
                     <button type="submit" disabled={!isValid}
                             className={`btn ${styles.btn}`}>
