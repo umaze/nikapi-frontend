@@ -36,3 +36,11 @@
     font-weight: 700;
   }
 }
+
+.list {
+  list-style: none;
+
+  li:first-of-type {
+    margin-top: 3rem;
+  }
+}

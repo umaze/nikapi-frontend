@@ -16,9 +16,32 @@
   @include border-left-status-color("erledigt");
 }
 
-.rollen {
+.listings {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  > div:last-of-type {
+    padding-left: 1rem;
+  }
+}
+
+.additionals {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+
+  > div:last-of-type {
+    padding-left: 1rem;
+  }
+}
+
+.rollen,
+.bestellungen {
   ul {
     list-style: none;
+
+    li {
+      margin-top: 0 !important;
+    }
   }
 }
 

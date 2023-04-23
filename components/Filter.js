@@ -31,7 +31,8 @@ export default function Filter({type, demandGroups, listEinsatztyp, listRolle, l
                 selectStatus: "",
                 benutzer: "",
                 adresse: "",
-                bezeichnung: ""
+                bezeichnung: "",
+                bestellung: ""
             }
         });
         doFilter({});
@@ -85,6 +86,23 @@ export default function Filter({type, demandGroups, listEinsatztyp, listRolle, l
                         <InputWrapper
                             label="Bezeichnung"
                             id="filter.bezeichnung"
+                            type="text"
+                            placeholder="z.B. Familienname"
+                            register={register}
+                            errors={errors}/>
+                        <InputWrapper
+                            label="Adresse"
+                            id="filter.adresse"
+                            type="text"
+                            placeholder="Strasse, Nr., PLZ oder Ort"
+                            register={register}
+                            errors={errors}/>
+                    </>}
+                {type === FILTER_TYPE[3] &&
+                    <>
+                        <InputWrapper
+                            label="Bestellung"
+                            id="filter.bestellung"
                             type="text"
                             placeholder="z.B. Familienname"
                             register={register}
