@@ -105,7 +105,7 @@ h1 {
   }
 }
 
-div {
+div:has(.sidebar) {
   @include transition-sidebar-with;
 
   .expanded {
