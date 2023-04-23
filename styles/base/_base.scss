@@ -142,6 +142,11 @@ html {
   letter-spacing: 0.75px;
 }
 
+*:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba($color-brown, 0.5) !important;
+}
+
 /* Helper class */
 .margin-right-sm {
   margin-right: 1.6rem !important;
