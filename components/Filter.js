@@ -2,8 +2,9 @@ import {useForm} from "react-hook-form";
 import SelectWrapper from "@/components/SelectWrapper";
 import InputWrapper from "@/components/InputWrapper";
 import styles from "@/styles/Filter.module.scss";
+import {FILTER_TYPE} from "@/config/index";
 
-export default function Filter({demandGroups, listEinsatztyp, doFilter}) {
+export default function Filter({type, demandGroups, listEinsatztyp, listRolle, doFilter}) {
     const {
         register,
         handleSubmit,
@@ -26,7 +27,8 @@ export default function Filter({demandGroups, listEinsatztyp, doFilter}) {
                 selectDemandGroup: "",
                 datum: "",
                 selectRolle: "",
-                selectEinsatztyp: ""
+                selectEinsatztyp: "",
+                benutzer: ""
             }
         });
         doFilter({});
@@ -34,14 +36,14 @@ export default function Filter({demandGroups, listEinsatztyp, doFilter}) {
 
     const demandGroupOptions = options => (
         <>
-            <option value="">Keine Gruppe</option>
+            <option value=""></option>
             {options && options.map((option, i) => (
                 <option key={i} value={option.id}>{option.attributes.name}</option>
             ))}
         </>
     );
 
-    const stringOptions = (options, emptyLabel = 'leer') => (
+    const stringOptions = (options, emptyLabel = '') => (
         <>
             <option value="">{emptyLabel}</option>
             {options && options.map((option, i) => (
@@ -50,19 +52,15 @@ export default function Filter({demandGroups, listEinsatztyp, doFilter}) {
         </>
     );
 
-    const rollen = demandGroups?.length > 0 ?
-        [...new Set(demandGroups.flatMap(group => group.attributes.rollen?.map(rolle => rolle.name)))] :
-        [];
-
     return (
         <div>
             <form className={`form ${styles.filter}`} onSubmit={handleSubmit(onSubmit)}>
-                <SelectWrapper
+                {type === FILTER_TYPE[0] && <SelectWrapper
                     label="Gruppe"
                     id="filter.selectDemandGroup"
                     options={demandGroupOptions(demandGroups)}
                     register={register}
-                    errors={errors}/>
+                    errors={errors}/>}
                 <InputWrapper
                     label="Datum"
                     id="filter.datum"
@@ -70,16 +68,23 @@ export default function Filter({demandGroups, listEinsatztyp, doFilter}) {
                     placeholder=""
                     register={register}
                     errors={errors}/>
+                {type === FILTER_TYPE[1] && <InputWrapper
+                    label="Name Mitglied"
+                    id="filter.benutzer"
+                    type="text"
+                    placeholder=""
+                    register={register}
+                    errors={errors}/>}
                 <SelectWrapper
                     label="Einsatztyp"
                     id="filter.selectEinsatztyp"
-                    options={stringOptions(listEinsatztyp, 'Kein Einsatztyp')}
+                    options={stringOptions(listEinsatztyp)}
                     register={register}
                     errors={errors}/>
                 <SelectWrapper
                     label="Rolle"
                     id="filter.selectRolle"
-                    options={stringOptions(rollen, 'Keine Rolle')}
+                    options={stringOptions(listRolle)}
                     register={register}
                     errors={errors}/>
                 <div className={styles.btnGroup}>

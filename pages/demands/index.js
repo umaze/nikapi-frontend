@@ -2,7 +2,7 @@ import Layout from "@/components/Layout";
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {configRequest, handleErrorMessage, isEinsatzplaner, parseCookies} from '@/helpers/index';
-import {API_URL} from "@/config/index";
+import {API_URL, FILTER_TYPE} from "@/config/index";
 import DemandItem from "@/components/DemandItem";
 import Link from "next/link";
 import {useContext, useState} from "react";
@@ -21,10 +21,12 @@ export default function DemandsPage({ demands, demandGroups, token }) {
     const [selectedDemand, setSelectedDemand] = useState({});
     const router = useRouter();
 
-
-
     const listEinsatztyp = demands?.length > 0 ?
         [...new Set(demands.flatMap(demand => demand.attributes.einsatztyp?.typ))] :
+        [];
+
+    const listRolle = demandGroups?.length > 0 ?
+        [...new Set(demandGroups.flatMap(group => group.attributes.rollen?.map(rolle => rolle.name)))] :
         [];
 
     const handleFilter = data => {
@@ -62,8 +64,10 @@ export default function DemandsPage({ demands, demandGroups, token }) {
             {isEinsatzplaner(user) && <Link className="btn" href={`/demands/add`}>Veranstaltung hinzuf&uuml;gen</Link>}
 
             <Filter
+                type={FILTER_TYPE[0]}
                 demandGroups={demandGroups}
                 listEinsatztyp={listEinsatztyp}
+                listRolle={listRolle}
                 doFilter={(data) => handleFilter(data)}/>
 
             {filteredDemands?.length === 0 && <p className="info-no-data">Es sind keine Veranstaltungen vorhanden.</p>}

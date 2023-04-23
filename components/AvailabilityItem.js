@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import {formatTime} from '@/helpers/index';
 import styles from '@/styles/AvailabilityItem.module.scss';
 

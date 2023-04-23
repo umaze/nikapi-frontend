@@ -54,3 +54,5 @@ export const SUB_MENU = {
         }
     ]
 };
+
+export const FILTER_TYPE = ['demand', 'availability'];
