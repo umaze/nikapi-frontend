@@ -102,7 +102,7 @@ export default function ActivityForm({
 
     const fetchMatchingOrders = async demand => {
         // Fetch relevant orders (matching einsatztyp and datum)
-        const ordersRes = await fetch(`${API_URL}/api/orders?populate=einsatztyp&filters[einsatztyp][typ][$eq]=${demand.attributes.einsatztyp.typ}&filters[datum][$eq]=${demand.attributes.datum}`, configRequest('GET', token));
+        const ordersRes = await fetch(`${API_URL}/api/orders?populate=einsatztyp&populate=activity&filters[einsatztyp][typ][$eq]=${demand.attributes.einsatztyp.typ}&filters[datum][$eq]=${demand.attributes.datum}`, configRequest('GET', token));
         const matchingOrders = await ordersRes.json();
         handleErrorMessage(ordersRes, toast);
         return matchingOrders.data;

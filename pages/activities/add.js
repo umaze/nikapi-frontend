@@ -24,6 +24,7 @@ export default function AddActivityPage({token, demands, persistedAvailabilities
     const {
         register,
         handleSubmit,
+        setValue,
         reset,
         formState: {errors, isValid}
     } = useForm({mode: 'all'});
@@ -65,6 +66,7 @@ export default function AddActivityPage({token, demands, persistedAvailabilities
                         errors={errors}
                         reset={reset}
                         isValid={isValid}
+                        setValue={setValue}
                         demands={demands}
                         persistedAvailabilities={persistedAvailabilities}
                         token={token} />

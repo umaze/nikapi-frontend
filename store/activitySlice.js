@@ -78,6 +78,10 @@ export const selectMatchingAvailabilities = (demandId, rollen) => state => {
     }
     return matches;
 }
+
+export const selectMatchingNotConnectedOrders = state => {
+    return state.activity.orders?.filter(order => !order.attributes.activity?.data);
+}
 export const {
     setDemand,
     setMatchingOrders,

@@ -1,6 +1,6 @@
 import Step from "@/components/Step";
 import {useSelector} from "react-redux";
-import {selectCurrentDemand, selectMatchingOrders} from "@/store/activitySlice";
+import {selectCurrentDemand, selectMatchingNotConnectedOrders} from "@/store/activitySlice";
 import {useState} from "react";
 import {useDrop} from "react-dnd";
 import DragFile from "@/components/DragFile";
@@ -9,7 +9,7 @@ import styles from "@/styles/ApplyOrders.module.scss";
 
 export default function ApplyOrders({orders, currentStep, stepsSize, setValue, readOnly}) {
     const activityDemand = useSelector(selectCurrentDemand);
-    const activitySelectableOrders = useSelector(selectMatchingOrders);
+    const activitySelectableOrders = useSelector(selectMatchingNotConnectedOrders);
     const filteredOrders = activitySelectableOrders.filter(s => !orders?.some(o => o.id === s.id));
     const einsatztyp = activityDemand.attributes.einsatztyp.typ;
 
