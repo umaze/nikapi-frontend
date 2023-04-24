@@ -28,9 +28,46 @@
 .additionals {
   display: grid;
   grid-template-columns: 1fr 2fr;
+  padding-top: 0.5rem;
 
   > div:last-of-type {
     padding-left: 1rem;
+  }
+}
+
+.chevron {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 1.8rem;
+  height: 1rem;
+
+  span:hover {
+    cursor: pointer;
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+.rollen {
+  ul {
+    margin-left: 1rem;
+
+    &:has(.bullet) {
+      margin-left: 3rem;
+    }
+  }
+}
+
+.bestellungen {
+  ul {
+    margin-left: 0.6rem;
+
+    &:has(.bullet) {
+      margin-left: 2.6rem;
+    }
   }
 }
 
@@ -38,6 +75,10 @@
 .bestellungen {
   ul {
     list-style: none;
+
+    &:has(.bullet) {
+      list-style: initial;
+    }
 
     li {
       margin-top: 0 !important;

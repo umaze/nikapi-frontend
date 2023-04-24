@@ -1,15 +1,16 @@
-import styles from "@/styles/ActivityItem.module.scss";
 import Link from "next/link";
 import {formatTime, isEinsatzplaner} from "@/helpers/index";
-import {IconEdit} from "@tabler/icons-react";
-import {useContext} from "react";
+import {IconEdit, IconChevronUp, IconChevronDown} from "@tabler/icons-react";
+import {useContext, useState} from "react";
 import AuthContext from "@/context/AuthContext";
+import styles from "@/styles/ActivityItem.module.scss";
 
 export default function ActivityItemOverall({activity}) {
     const {user} = useContext(AuthContext);
     const attributes = activity.attributes;
     const roles = attributes.rollen.map(r => `${r.rolle?.name} [${r.availability.data.attributes.benutzer.data.attributes.username}]`);
     const orders = attributes.orders.data.map(o => `${o.attributes.bezeichnung} [${o.attributes.adresse}]`);
+    const [expanded, setExpanded] = useState(false);
 
     const summaryRoles = roles => {
         if (roles?.length === 1) {
@@ -30,6 +31,8 @@ export default function ActivityItemOverall({activity}) {
             return 'Keine Bestellung zugewiesen'
         }
     };
+
+    const toggle = () => setExpanded(!expanded);
 
     return (
         <div className={`${styles.activity} ${styles[attributes.status]}`}>
@@ -54,14 +57,14 @@ export default function ActivityItemOverall({activity}) {
                         <div className={styles.bestellungen}>{summaryOrders(orders)}</div>
                     </div>
                 </div>
-                <div className={styles.additionals}>
+                <div className={`${styles.additionals} ${expanded ? '' : styles.hidden}`}>
                     <div></div>
                     <div className={styles.listings}>
                         <div className={styles.rollen}>
                             <ul>
                                 {roles && roles.length > 0 ?
                                     roles.map((role, i) => (
-                                        <li key={i}>
+                                        <li key={i} className={styles.bullet}>
                                             {role}
                                         </li>
                                     )) :
@@ -73,7 +76,7 @@ export default function ActivityItemOverall({activity}) {
                             <ul>
                                 {orders && orders.length > 0 ?
                                     orders.map((order, i) => (
-                                        <li key={i}>
+                                        <li key={i} className={styles.bullet}>
                                             {order}
                                         </li>
                                     )) :
@@ -82,6 +85,9 @@ export default function ActivityItemOverall({activity}) {
                             </ul>
                         </div>
                     </div>
+                </div>
+                <div className={styles.chevron}>
+                    <span onClick={toggle}>{expanded ? <IconChevronUp /> : <IconChevronDown />}</span>
                 </div>
             </div>
 
