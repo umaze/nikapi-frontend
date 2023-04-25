@@ -2,7 +2,7 @@ import { useDrag } from "react-dnd";
 import OrderItem from "@/components/OrderItem";
 import { FaFolderOpen } from 'react-icons/fa';
 
-export const DragCard = ({ order }) => {
+export default function DragCard({ order }) {
     const [{ isDragging }, dragRef] = useDrag({
         type: "language",
         item: { order },
@@ -19,4 +19,4 @@ export const DragCard = ({ order }) => {
             </div>
         </div>
     );
-};
+}

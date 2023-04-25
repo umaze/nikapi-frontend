@@ -1,4 +1,4 @@
-import {DragCard} from "../pages/DragCard";
+import DragCard from "./DragCard";
 import styles from "@/styles/DragFile.module.scss";
 
 export default function DragFile({orders}) {
