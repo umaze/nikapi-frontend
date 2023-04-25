@@ -1,7 +1,8 @@
 import Link from "next/link";
 import {useRouter} from "next/router";
 import {useForm} from "react-hook-form";
-import {FaArrowLeft, FaSave} from "react-icons/fa";
+import {FaSave} from "react-icons/fa";
+import {IconArrowLeft} from "@tabler/icons-react";
 import {toast} from "react-toastify";
 import {API_URL} from "@/config/index";
 import Layout from "@/components/Layout";
@@ -50,7 +51,7 @@ export default function AddDemandPage({demandGroups, token}) {
 
     return (
         <Layout title="Veranstaltung hinzufügen">
-            <Link className="link--back" href="/demands"><FaArrowLeft/> Zur&uuml;ck zu Veranstaltungen</Link>
+            <Link className="link--back" href="/demands"><IconArrowLeft/> Zur&uuml;ck zu Veranstaltungen</Link>
             <main>
                 <form className="form" onSubmit={handleSubmit(onSubmit)}>
                     <h2 className="heading-secondary">Veranstaltung hinzuf&uuml;gen</h2>

@@ -1,24 +1,25 @@
 import {
     addSelectable,
-    initSelectables,
+    initSelectables, initSteps, selectCurrentDemand,
     setAvailabilities,
     setDemand,
     setMatchingOrders,
-    setRole
+    setRole, updateSteps
 } from "@/store/activitySlice";
+import Link from "next/link";
+import {useDispatch, useSelector} from "react-redux";
+import {useEffect, useState} from "react";
 import {API_URL} from "@/config/index";
 import {configRequest, formatTime, handleErrorMessage} from "@/helpers/index";
 import {toast} from "react-toastify";
 import Step from "@/components/Step";
-import styles from "@/styles/Activities.module.scss";
 import SelectWrapper from "@/components/SelectWrapper";
 import ApplyRoles from "@/components/ApplyRoles";
 import ApplyOrders from "@/components/ApplyOrders";
 import Confirmation from "@/components/Confirmation";
-import {FaArrowLeft, FaArrowRight, FaSave} from "react-icons/fa";
-import Link from "next/link";
-import {useDispatch} from "react-redux";
-import {useEffect, useState} from "react";
+import {FaSave} from "react-icons/fa";
+import {IconArrowLeft, IconArrowRight} from "@tabler/icons-react";
+import styles from "@/styles/Activities.module.scss";
 
 export default function ActivityForm({
                                          activity,
@@ -35,10 +36,24 @@ export default function ActivityForm({
     const [step, setStep] = useState(0);
     const [selectedDatum, setSelectedDatum] = useState('');
     const [selectedEinsatztyp, setSelectedEinsatztyp] = useState('');
+    const activityDemand = useSelector(selectCurrentDemand);
 
     const dispatch = useDispatch();
 
     useEffect(() => {
+        let stepsChecked = {};
+        stepsChecked['4'] = isValid
+        dispatch(updateSteps(stepsChecked));
+    }, [isValid]);
+
+    useEffect(() => {
+        let stepsChecked = {};
+        stepsChecked['1'] = !!activityDemand?.id
+        dispatch(updateSteps(stepsChecked));
+    }, [activityDemand]);
+
+    useEffect(() => {
+        dispatch(initSteps);
         if (activity) {
             const demand = activity.demand.data;
             if (demand) {
@@ -163,7 +178,7 @@ export default function ActivityForm({
             stepsSize={fieldGroups.length}
             setValue={setValue}
             orders={activity?.orders.data}
-            readOnly={readOnly} />
+            readOnly={readOnly}/>
     );
 
     const ConfirmationFields = () => (
@@ -189,14 +204,14 @@ export default function ActivityForm({
                 step < fieldGroups.length - 1 &&
                 <button type="button" onClick={() => setStep(step + 1)} disabled={!isValid}
                         className="btn-secondary btn-icon btn-icon--right">
-                    Weiter<FaArrowRight/>
+                    Weiter<IconArrowRight/>
                 </button>
             }
             {
                 step > 0 &&
                 <button type="button" onClick={() => setStep(step - 1)}
                         className="btn-secondary btn-icon">
-                    <FaArrowLeft/>Zur&uuml;ck
+                    <IconArrowLeft/>Zur&uuml;ck
                 </button>
             }
             {

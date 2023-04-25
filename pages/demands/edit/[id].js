@@ -7,7 +7,8 @@ import {
 } from "@/helpers/index";
 import {API_URL} from "@/config/index";
 import Link from "next/link";
-import {FaArrowLeft, FaSave} from "react-icons/fa";
+import {FaSave} from "react-icons/fa";
+import {IconArrowLeft} from "@tabler/icons-react";
 import {useForm} from "react-hook-form";
 import Layout from "@/components/Layout";
 import {toast} from "react-toastify";
@@ -48,7 +49,7 @@ export default function EditDemandPage({demand, demandGroups, token}) {
 
     return (
         <Layout title="Veranstaltung ändern">
-            <Link className="link--back" href="/demands"><FaArrowLeft/> Zur&uuml;ck zu Veranstaltungen</Link>
+            <Link className="link--back" href="/demands"><IconArrowLeft/> Zur&uuml;ck zu Veranstaltungen</Link>
                 <form className="form" onSubmit={handleSubmit(onSubmit)}>
                     <h2 className="heading-secondary">Veranstaltung &auml;ndern</h2>
 

@@ -1,12 +1,18 @@
 import Step from "@/components/Step";
-import {useSelector} from "react-redux";
-import {FaPlus} from 'react-icons/fa';
-import {getSelectables, selectCurrentDemand, selectMatchingAvailabilities} from "@/store/activitySlice";
+import {useDispatch, useSelector} from "react-redux";
+import {IconPlus} from "@tabler/icons-react";
+import {
+    getRoles,
+    getSelectables,
+    selectCurrentDemand,
+    selectMatchingAvailabilities,
+    updateSteps
+} from "@/store/activitySlice";
 import SelectAvailability from "@/components/SelectAvailability";
 import {useEffect, useState} from "react";
 import {getRoleNameOfSelectable, getUnselectedRoles} from "@/helpers/index";
-import styles from "@/styles/ApplyRoles.module.scss";
 import _ from "lodash";
+import styles from "@/styles/ApplyRoles.module.scss";
 
 export default function ApplyRoles({currentStep, stepsSize, register, errors, readOnly}) {
     const activityDemand = useSelector(selectCurrentDemand);
@@ -14,6 +20,9 @@ export default function ApplyRoles({currentStep, stepsSize, register, errors, re
     const availabilitiesByRoles = useSelector(selectMatchingAvailabilities(activityDemand.id, rollen));
     const selectablesStore = useSelector(getSelectables);
     const difference = getUnselectedRoles(rollen, selectablesStore);
+    const storedRoles = useSelector(getRoles);
+
+    const dispatch = useDispatch();
 
     const applySelectables = rollen => rollen?.map((rolle, i) => applySelectable(rolle, i));
     const mapSelectables = items => items?.map(item => mapSelectable(item));
@@ -48,6 +57,13 @@ export default function ApplyRoles({currentStep, stepsSize, register, errors, re
         return activityDemand.attributes.einsatztyp?.typ.startsWith('Lokal') && countSelectsForRoleName < countAvailabilities;
     };
 
+    useEffect(() => {
+        let stepsChecked = {};
+        const count = Object.entries(storedRoles)?.filter(([_, v]) => +v > 0).length;
+        stepsChecked['2'] = count >= rollen?.length;
+        dispatch(updateSteps(stepsChecked));
+    }, [storedRoles]);
+
     return (
         <Step title="Rollen" info="Mitglieder zuweisen" current={currentStep} size={stepsSize}>
             {activityDemand.attributes &&
@@ -64,8 +80,8 @@ export default function ApplyRoles({currentStep, stepsSize, register, errors, re
                     ))}
                     {!readOnly && rollen.map((r, i) => (
                         displayButton(r.name) &&
-                        <button key={i} className="btn btn-icon" onClick={() => handleAddSelectable(r, i+1)}>
-                            <FaPlus/>{r.name} hinzufügen</button>
+                        <button key={i} className="btn btn-icon" onClick={() => handleAddSelectable(r, i + 1)}>
+                            <IconPlus/>{r.name} hinzufügen</button>
                     ))}
                 </>
             }

@@ -1,7 +1,8 @@
 import Link from "next/link";
 import {useRouter} from "next/router";
 import {useForm} from "react-hook-form";
-import {FaArrowLeft, FaSave} from "react-icons/fa";
+import {FaSave} from "react-icons/fa";
+import {IconArrowLeft} from "@tabler/icons-react";
 import {toast} from "react-toastify";
 import {API_URL} from "@/config/index";
 import Layout from "@/components/Layout";
@@ -49,7 +50,7 @@ export default function AddOrderPage({token}) {
 
     return (
         <Layout title="Bestellung hinzufügen">
-            <Link className="link--back" href="/orders"><FaArrowLeft/> Zur&uuml;ck zu Bestellungen</Link>
+            <Link className="link--back" href="/orders"><IconArrowLeft/> Zur&uuml;ck zu Bestellungen</Link>
             <main>
                 <form className="form" onSubmit={handleSubmit(onSubmit)}>
                     <h2 className="heading-secondary">Bestellung hinzuf&uuml;gen</h2>

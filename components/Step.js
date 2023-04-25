@@ -1,13 +1,17 @@
-import {IconQuestionMark} from '@tabler/icons-react';
+import {IconQuestionMark, IconCheck} from '@tabler/icons-react';
 import styles from "@/styles/Step.module.scss";
+import {useSelector} from "react-redux";
+import {getSteps} from "@/store/activitySlice";
 
 export default function Step({ title, info, current, size, children }) {
+    const steps = useSelector(getSteps);
+
     return (
         <section className={styles.inputGroup}>
             <div className={styles.stepHeading}>
                 <div className={styles.stepCombo}>
                     <div className={styles.stepCircle}>
-                        <div className={styles.stepNumber}><IconQuestionMark/></div>
+                        <div className={styles.stepNumber}>{steps[(current)] ? <IconCheck/> : <IconQuestionMark/>}</div>
                     </div>
                     <div className={styles.stepDescription}>
                         <div className={styles.stepDescriptionTitle}>{title}</div>

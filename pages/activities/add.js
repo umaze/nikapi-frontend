@@ -3,7 +3,7 @@ import {toast} from "react-toastify";
 import Layout from "@/components/Layout";
 import {useRouter} from "next/router";
 import {useSelector} from "react-redux";
-import {FaArrowLeft} from "react-icons/fa";
+import {IconArrowLeft} from "@tabler/icons-react";
 import Link from "next/link";
 import {
     applyPropertiesToActivityObject,
@@ -56,7 +56,7 @@ export default function AddActivityPage({token, demands, persistedAvailabilities
 
     return (
         <Layout title="Einsatz hinzufügen">
-            <Link className="link--back" href="/activities"><FaArrowLeft/> Zur&uuml;ck zu Eins&auml;tze</Link>
+            <Link className="link--back" href="/activities"><IconArrowLeft/> Zur&uuml;ck zu Eins&auml;tze</Link>
             <main>
                 <form className="form" onSubmit={handleSubmit(onSubmit)}>
                     <h2 className="heading-secondary">Einsatz hinzuf&uuml;gen</h2>

@@ -1,19 +1,15 @@
 import {
-    applyPropertiesToActivityObject,
     configRequest,
     handleErrorMessage,
     parseCookies,
-    parseFormDataToValidProperties
 } from "@/helpers/index";
 import {API_URL} from "@/config/index";
 import Link from "next/link";
-import {FaArrowLeft} from "react-icons/fa";
+import {IconArrowLeft} from "@tabler/icons-react";
 import {useForm} from "react-hook-form";
 import Layout from "@/components/Layout";
 import {toast} from "react-toastify";
 import ActivityForm from "@/components/ActitvityForm";
-import {useSelector} from "react-redux";
-import {selectCurrentDemand} from "@/store/activitySlice";
 import {useRouter} from "next/router";
 
 export default function ActivityPage({activity, demands, persistedAvailabilities, token}) {
@@ -33,7 +29,7 @@ export default function ActivityPage({activity, demands, persistedAvailabilities
 
     return (
         <Layout title="Einsatz hinzufügen">
-            <Link className="link--back" href="/activities"><FaArrowLeft/> Zur&uuml;ck zu Eins&auml;tze</Link>
+            <Link className="link--back" href="/activities"><IconArrowLeft/> Zur&uuml;ck zu Eins&auml;tze</Link>
             <main>
                 <form className="form" onSubmit={handleSubmit(onSubmit)}>
                     <h2 className="heading-secondary">Einsatz Details</h2>

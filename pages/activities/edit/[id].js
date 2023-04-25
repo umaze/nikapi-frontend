@@ -7,7 +7,7 @@ import {
 } from "@/helpers/index";
 import {API_URL} from "@/config/index";
 import Link from "next/link";
-import {FaArrowLeft} from "react-icons/fa";
+import {IconArrowLeft} from "@tabler/icons-react";
 import {useForm} from "react-hook-form";
 import Layout from "@/components/Layout";
 import {toast} from "react-toastify";
@@ -53,7 +53,7 @@ export default function EditActivityPage({activity, demands, persistedAvailabili
 
     return (
         <Layout title="Einsatz hinzufügen">
-            <Link className="link--back" href="/activities"><FaArrowLeft/> Zur&uuml;ck zu Eins&auml;tze</Link>
+            <Link className="link--back" href="/activities"><IconArrowLeft/> Zur&uuml;ck zu Eins&auml;tze</Link>
             <main>
                 <form className="form" onSubmit={handleSubmit(onSubmit)}>
                     <h2 className="heading-secondary">Einsatz bearbeiten</h2>

@@ -1,7 +1,7 @@
 import Step from "@/components/Step";
-import {useSelector} from "react-redux";
-import {selectCurrentDemand, selectMatchingNotConnectedOrders} from "@/store/activitySlice";
-import {useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {selectCurrentDemand, selectMatchingNotConnectedOrders, updateSteps} from "@/store/activitySlice";
+import {useEffect, useState} from "react";
 import {useDrop} from "react-dnd";
 import DragFile from "@/components/DragFile";
 import OrderItem from "@/components/OrderItem";
@@ -35,6 +35,8 @@ export default function ApplyOrders({orders, currentStep, stepsSize, setValue, r
         }),
     });
 
+    const dispatch = useDispatch();
+
     const handleDeleteItem = (item, e) => {
         e.preventDefault();
         setFilteredData([...filteredData, item]);
@@ -45,7 +47,13 @@ export default function ApplyOrders({orders, currentStep, stepsSize, setValue, r
             }));
             return value;
         })
-    }
+    };
+
+    useEffect(() => {
+        let stepsChecked = {};
+        stepsChecked['3'] = auftragRequired && basket.length > 0 || !auftragRequired;
+        dispatch(updateSteps(stepsChecked));
+    }, [basket]);
 
     return (
         <Step title="Bestellungen" info="Zuweisen mit Drag&Drop" current={currentStep} size={stepsSize}>
