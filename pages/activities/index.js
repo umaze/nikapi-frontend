@@ -59,7 +59,7 @@ export default function ActivitiesPage({activities}) {
 
     return (
         <Layout title="Einsätze">
-            <h1 className="heading-primary">Eins&auml;tze</h1>
+            <h1 className="heading-primary">Alle Eins&auml;tze</h1>
             {isEinsatzplaner(user) && <Link className="btn" href={`/activities/add`}>Einsatz hinzuf&uuml;gen</Link>}
 
             <Filter

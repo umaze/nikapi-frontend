@@ -20,9 +20,9 @@ export default function AvailabilityItem({availability}) {
                 </div>
             </div>
 
-            <div className={styles.link}>
-                <button className="btn btn-secondary">Details</button>
-            </div>
+            {/*<div className={styles.link}>*/}
+            {/*    <button className="btn btn-secondary">Details</button>*/}
+            {/*</div>*/}
         </div>
     )
 }
