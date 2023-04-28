@@ -144,4 +144,27 @@
   .sidebar {
     display: none !important;
   }
+
+  .grid {
+    display: grid;
+    gap: 9.6rem;
+
+    &--3-cols {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+/**********************************/
+/* BELOW 1200px (Tablets landscape) */
+/**********************************/
+@include respond(land-tab) {
+  .grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    &--3-cols {
+    }
+  }
 }
