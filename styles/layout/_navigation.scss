@@ -26,6 +26,8 @@ header {
 
   &.nav-open {
     height: 100%;
+    width: 60vw;
+    right: 0;
   }
 
   nav {
@@ -136,6 +138,10 @@ header {
       background-color: #006ba4;
     }
   }
+
+  &--expandable {
+    display: none;
+  }
 }
 
 .help {
@@ -147,6 +153,10 @@ header {
     &:hover {
       stroke: $color-red-light;
     }
+  }
+
+  span {
+    display: none;
   }
 }
 

@@ -1,4 +1,4 @@
-import {useContext, useEffect} from 'react';
+import {useContext, useEffect, useState} from 'react';
 import Link from 'next/link';
 import AuthContext from '@/context/AuthContext';
 import {useRouter} from "next/router";
@@ -6,11 +6,13 @@ import {useDispatch, useSelector} from "react-redux";
 import {selectActivatedNavMenu, setActivatedNavMenu} from "@/store/applicationSlice";
 import {MAIN_MENU, MAIN_MENU_HILFE} from "@/config/index";
 import {checkRouteHilfe, checkRouteMeinBereich, checkRoutePlanung, isEinsatzplaner} from "@/helpers/index";
-import {IconLogin, IconLogout, IconMenu2, IconSleigh, IconX} from "@tabler/icons-react";
+import {IconChevronDown, IconChevronUp, IconLogin, IconLogout, IconMenu2, IconSleigh, IconX} from "@tabler/icons-react";
 import SubNavList from "@/components/SubNavList";
+import _ from "lodash";
 
 export default function Header() {
     const {user, logout} = useContext(AuthContext);
+    const [listExpanded, setListExpanded] = useState({});
     const dispatch = useDispatch();
     const selectedNavMenu = useSelector(selectActivatedNavMenu);
     const router = useRouter();
@@ -24,6 +26,17 @@ export default function Header() {
             removeNavOpen(event.target);
         }
     }
+
+    const handleClick = (menuId, e) => {
+        e.preventDefault();
+        const item = {...listExpanded};
+        item[menuId] = !item[menuId];
+        setListExpanded(item);
+    };
+
+    const isCollapsable = (menuId) => {
+        return !!listExpanded[menuId];
+    };
 
     const containsNavOpen = target => {
         return target && target.closest('.header')?.classList.contains('nav-open');
@@ -49,10 +62,13 @@ export default function Header() {
 
     return (
         <header>
+            <div className="overlay"></div>
             <div className="header">
                 <div className="logo">
                     <Link href='/' legacyBehavior>
-                        <a><IconSleigh/><div className="logo-text">Samichlaus</div></a>
+                        <a><IconSleigh/>
+                            <div className="logo-text">Samichlaus</div>
+                        </a>
                     </Link>
                 </div>
 
@@ -60,37 +76,51 @@ export default function Header() {
                     <ul className="main-nav-list">
                         {user ? <>
                             <li className={checkRouteMeinBereich(currentRoute) ? 'active' : 'non-active'}>
+                                <div className="main-nav-link--expandable"
+                                     onClick={(e) => handleClick(MAIN_MENU[0].id, e)}>
+                                    {isCollapsable(MAIN_MENU[0].id) ? <IconChevronUp/> : <IconChevronDown/>}
+                                    Mein Bereich
+                                </div>
                                 <Link
                                     href='/availabilities/me'
                                     className="main-nav-link"
                                     onClick={(e) => handleSelectMenu(MAIN_MENU[0].id, e)}>
                                     Mein Bereich
                                 </Link>
-                                <SubNavList
-                                    selectedMainNav={MAIN_MENU[0].id}
-                                    isAdmin={isEinsatzplaner(user)}
-                                    expanded={true}
-                                    isMobile={true}/>
+                                {isCollapsable(MAIN_MENU[0].id) &&
+                                    <SubNavList
+                                        selectedMainNav={MAIN_MENU[0].id}
+                                        isAdmin={isEinsatzplaner(user)}
+                                        expanded={true}
+                                        isMobile={true}/>
+                                }
                             </li>
                             <li className={checkRoutePlanung(currentRoute) ? 'active' : 'non-active'}>
+                                <div className="main-nav-link--expandable"
+                                     onClick={(e) => handleClick(MAIN_MENU[1].id, e)}>
+                                    {isCollapsable(MAIN_MENU[1].id) ? <IconChevronUp/> : <IconChevronDown/>}
+                                    Planung
+                                </div>
                                 <Link
                                     href='/activities'
                                     className="main-nav-link"
                                     onClick={(e) => handleSelectMenu(MAIN_MENU[1].id, e)}>
                                     Planung
                                 </Link>
-                                <SubNavList
-                                    selectedMainNav={MAIN_MENU[1].id}
-                                    isAdmin={isEinsatzplaner(user)}
-                                    expanded={true}
-                                    isMobile={true}/>
+                                {isCollapsable(MAIN_MENU[1].id) &&
+                                    <SubNavList
+                                        selectedMainNav={MAIN_MENU[1].id}
+                                        isAdmin={isEinsatzplaner(user)}
+                                        expanded={true}
+                                        isMobile={true}/>
+                                }
                             </li>
                             <li className={checkRouteHilfe(currentRoute) ? 'active' : 'non-active'}>
                                 <Link
                                     href={MAIN_MENU_HILFE.href}
                                     className="help"
                                     onClick={(e) => handleSelectMenu(MAIN_MENU_HILFE.id, e)}>
-                                    {MAIN_MENU_HILFE.icon}
+                                    {MAIN_MENU_HILFE.icon}<span>Q&A</span>
                                 </Link>
                             </li>
                             <li>

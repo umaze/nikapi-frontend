@@ -4,10 +4,35 @@
    Instead, 1rem = 1em = 16px */
 
 /**********************************/
+/* BELOW 1200px (Tablets landscape) */
+/**********************************/
+@include respond(land-tab) {
+  .grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    &--3-cols {
+    }
+  }
+}
+
+/**********************************/
 /* BELOW 944px (Tablets) */
 /**********************************/
 @include respond(tab) {
   /* MOBILE NAVIGATION */
+  .overlay {
+    &:has(+ .header.nav-open) {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(2px);
+      z-index: 100;
+    }
+  }
+
   .header {
     .logo {
       margin: 2rem 0;
@@ -16,17 +41,63 @@
 
     &.nav-open {
       .main-nav-list {
+        align-self: start;
+        margin-top: 10rem;
+        row-gap: 1rem;
+
+        li {
+          display: flex;
+          align-items: flex-start;
+          padding-left: 0;
+        }
+
         > .active {
           border: none;
         }
 
         li:not(:last-of-type) {
-            &:hover:has(.main-nav-link) {
-              background-color: transparent;
+          &:hover:has(.main-nav-link) {
+            background-color: transparent;
+          }
+        }
+
+        .main-nav-link {
+          display: none;
+
+          &--expandable {
+            display: inline-block;
+            color: $color-black;
+            font-weight: 500;
+            font-size: 3rem;
+            margin-bottom: 1.2rem;
+
+            svg {
+              margin-right: 1.8rem;
+            }
+
+            &:hover {
+              cursor: pointer;
             }
           }
-        .main-nav-link {
+        }
+
+        .help {
+          display: flex;
+          align-items: center;
           margin-bottom: 1.2rem;
+
+          svg {
+            height: 3.2rem;
+            width: 3.2rem;
+          }
+
+          span {
+            display: inline-block;
+            color: $color-black;
+            font-weight: 500;
+            font-size: 3rem;
+            padding-left: 1rem;
+          }
         }
       }
 
@@ -41,18 +112,27 @@
       }
 
       .sub-nav-list {
+        display: flex;
+        align-items: flex-start;
+        padding-left: 4rem;
+
+        li {
+          padding-left: 0;
+        }
+
         &--visible {
           display: flex;
-          align-items: center;
 
           .active {
-            margin: 0;
-            padding-right: 1.2rem;
+            border-left: 5px solid $color-red;
+            border-right: none;
+            margin: 0 0 0 -1.6rem;
+            padding-left: 1.2rem;
           }
         }
 
         .sub-nav-link {
-          &:hover {
+          &:not(.active) &:hover {
             margin-left: 0;
             padding-left: 0;
           }
@@ -109,6 +189,7 @@
   .main-nav-list {
     flex-direction: column;
     gap: 3.2rem;
+    align-items: flex-start;
 
     .main-nav-link,
     .btn {
@@ -151,20 +232,6 @@
 
     &--3-cols {
       grid-template-columns: 1fr;
-    }
-  }
-}
-
-/**********************************/
-/* BELOW 1200px (Tablets landscape) */
-/**********************************/
-@include respond(land-tab) {
-  .grid {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-
-    &--3-cols {
     }
   }
 }
