@@ -31,11 +31,15 @@ export default function Header() {
         }
     }
 
-    const handleClick = (menuId, e) => {
-        e.preventDefault();
+    const updateListExpanded = menuId => {
         const item = {...listExpanded};
         item[menuId] = !item[menuId];
         setListExpanded(item);
+    };
+
+    const handleClick = (menuId, e) => {
+        e.preventDefault();
+        updateListExpanded(menuId);
     };
 
     const isCollapsable = (menuId) => {
@@ -87,12 +91,19 @@ export default function Header() {
     ];
 
     useEffect(() => {
-        if (!selectedNavMenu) {
-            if (checkRouteMeinBereich(currentRoute)) {
+        if (checkRouteMeinBereich(currentRoute)) {
+            updateListExpanded(MAIN_MENU[0].id);
+            if (!selectedNavMenu) {
                 dispatch(setActivatedNavMenu(MAIN_MENU[0].id));
-            } else if (checkRouteEinsaetze(currentRoute)) {
+            }
+        } else if (checkRouteEinsaetze(currentRoute)) {
+            updateListExpanded(MAIN_MENU[1].id);
+            if (!selectedNavMenu) {
                 dispatch(setActivatedNavMenu(MAIN_MENU[1].id));
-            } else if (checkRouteAdmin(currentRoute)) {
+            }
+        } else if (checkRouteAdmin(currentRoute)) {
+            updateListExpanded(MAIN_MENU[2].id);
+            if (!selectedNavMenu) {
                 dispatch(setActivatedNavMenu(MAIN_MENU[2].id));
             }
         }
