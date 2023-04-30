@@ -14,6 +14,10 @@ export default function SubNavList({selectedMainNav, isAdmin, expanded = false, 
         return [item.href]
     };
 
+    const getLabel = label => {
+        return `${selectedMainNav.startsWith('mein') ? 'Meine ' : ''}${label}`;
+    }
+
     return (
         <ul className={`sub-nav-list ${isMobile ? 'sub-nav-list--visible' : ''}`}>
             {SUB_MENU[selectedMainNav]?.map((item, i) => (
@@ -23,7 +27,7 @@ export default function SubNavList({selectedMainNav, isAdmin, expanded = false, 
                         className={`sub-nav-link ${checkActivatedRoute(currentRoute, routes(item)) ? 'active' : 'non-active'}`}
                         href={item.href}>
                         <div className="link-icon">{item.icon}</div>
-                        {expanded && <div className="link-icon">{item.label}</div>}
+                        {expanded && <div className="link-icon">{getLabel(item.label)}</div>}
                     </Link>
                 </li>
             ))}

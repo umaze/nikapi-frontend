@@ -211,19 +211,25 @@ export function checkRouteHilfe(currentRoute) {
     return checkActivatedRoute(currentRoute, ['/account/help']);
 }
 
-export function checkRoutePlanung(currentRoute) {
+export function checkRouteEinsaetze(currentRoute) {
     return checkActivatedRoute(currentRoute,
         [
             '/activities',
+            '/activities/add',
+            '/activities/edit/'
+        ]);
+}
+
+export function checkRouteAdmin(currentRoute) {
+    return checkActivatedRoute(currentRoute,
+        [
             '/availabilities',
             '/demands',
             '/orders',
-            '/activities/add',
             '/orders/add',
             '/demands/add',
             '/demands/edit/',
-            '/orders/edit/',
-            '/activities/edit/'
+            '/orders/edit/'
         ]);
 }
 
