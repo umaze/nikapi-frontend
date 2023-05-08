@@ -6,7 +6,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {selectActivatedNavMenu, setActivatedNavMenu} from "@/store/applicationSlice";
 import {MAIN_MENU, MAIN_MENU_HILFE} from "@/config/index";
 import {
-    checkRouteAdmin, checkRouteEinsaetze,
+    checkRouteAdmin,
+    checkRouteEinsaetze,
     checkRouteHilfe,
     checkRouteMeinBereich,
     isEinsatzplaner
@@ -58,9 +59,17 @@ export default function Header() {
         event.currentTarget.closest('.header')?.classList.toggle(classname);
     };
 
+    /***
+     * Show MainNav items (admin-item only when user is einsatzplaner).
+     * @param i
+     * @param item
+     * @param obj
+     * @returns {*|boolean|JSX.Element}
+     */
     const menuItem = (i, item, obj) => {
         const {fn: fnCheckActivation, link} = obj;
         return (
+            (((item.id === MAIN_MENU[2].id && isEinsatzplaner(user)) || item.id !== MAIN_MENU[2].id) &&
             <li key={i} className={fnCheckActivation(currentRoute) ? 'active' : 'non-active'}>
                 <div className="main-nav-link--expandable"
                      onClick={(e) => handleClick(item.id, e)}>
@@ -80,7 +89,7 @@ export default function Header() {
                         expanded={true}
                         isMobile={true}/>
                 }
-            </li>
+            </li>)
         );
     };
 

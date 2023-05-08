@@ -28,7 +28,17 @@ export default function HomePage() {
                                 </Link>
                             </div>
                         ))}
-                        {SUB_MENU.planung && SUB_MENU.planung.map((item, i) => (
+                        {SUB_MENU.einsaetze && SUB_MENU.einsaetze.map((item, i) => (
+                            <div key={i} className={styles.card}>
+                                <Link href={item.href}>
+                                    <div className={styles.cardContent}>
+                                        {item.icon}
+                                        <div className={styles.cardTitle}>{`${item.label}`}</div>
+                                    </div>
+                                </Link>
+                            </div>
+                        ))}
+                        {SUB_MENU.admin && SUB_MENU.admin.map((item, i) => (
                             (item.restricted && isEinsatzplaner(user) || !item.restricted) &&
                             <div key={i} className={styles.card}>
                                 <Link href={item.href}>
