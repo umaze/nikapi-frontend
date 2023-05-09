@@ -1,4 +1,5 @@
 @import "./abstracts/variables";
+@import "./abstracts/mixins";
 
 /**********************************/
 /* FOOTER */
@@ -11,12 +12,17 @@
   border-top: 1px solid $color-brown;
   background-color: $color-brown-light;
   height: 100%;
+
+  nav {
+    flex-direction: column;
+  }
 }
 
 .logoCol {
   display: flex;
   flex-direction: column;
   row-gap: 2.2rem;
+  max-width: 30rem;
 
   .footerNav {
     flex-direction: row;
@@ -83,4 +89,22 @@
 .footerLink:active {
   font-weight: 600;
   color: $color-brown-dark;
+}
+
+/**********************************/
+/* BELOW 704px (Smaller Tablets) */
+/**********************************/
+@include respond(smaller-tab) {
+  // FOOTER
+  .footer {
+    padding: 3.2rem 0;
+  }
+
+  .copyright {
+    margin: 0;
+  }
+
+  .footerHeading {
+    margin-bottom: 1.2rem;
+  }
 }

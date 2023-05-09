@@ -44,6 +44,7 @@
         align-self: start;
         margin-top: 10rem;
         row-gap: 1rem;
+        min-width: 27rem;
 
         li {
           display: flex;
@@ -68,7 +69,7 @@
             display: inline-block;
             color: $color-black;
             font-weight: 500;
-            font-size: 3rem;
+            font-size: 2.6rem;
             margin-bottom: 1.2rem;
 
             svg {
@@ -95,7 +96,7 @@
             display: inline-block;
             color: $color-black;
             font-weight: 500;
-            font-size: 3rem;
+            font-size: 2.6rem;
             padding-left: 1rem;
           }
         }
@@ -195,7 +196,7 @@
     .btn {
       &:link,
       &:visited {
-        font-size: 3rem;
+        font-size: 2.6rem;
       }
     }
 
@@ -232,6 +233,66 @@
 
     &--3-cols {
       grid-template-columns: 1fr;
+    }
+  }
+
+  // FOOTER
+  footer {
+    .grid {
+      &--3-cols {
+        grid-template-columns: 1fr 1fr;
+      }
+
+
+      > div {
+        justify-self: center;
+        max-width: 30rem;
+      }
+
+      > nav {
+        display: none;
+      }
+    }
+  }
+}
+
+/**********************************/
+/* BELOW 704px (Smaller Tablets) */
+/**********************************/
+@include respond(smaller-tab) {
+  // NAVIGATION
+  .header {
+    &.nav-open {
+      width: 80vw;
+    }
+  }
+
+  // FOOTER
+  footer {
+    .container {
+      gap: 3.8rem;
+
+      &.grid {
+        &--3-cols {
+          grid-template-columns: 1fr;
+        }
+
+        > div {
+          justify-self: center;
+          min-width: 30rem;
+        }
+      }
+    }
+  }
+}
+
+/**********************************/
+/* BELOW 544px (Phone) */
+/**********************************/
+@include respond(phone) {
+  .header {
+    &.nav-open {
+      width: 90vw;
     }
   }
 }
