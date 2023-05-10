@@ -296,3 +296,16 @@
     }
   }
 }
+
+/**********************************/
+/* BELOW 400px (Phone Mini) */
+/**********************************/
+@include respond(phone-mini) {
+  .header {
+    .logo {
+      svg {
+        display: none;
+      }
+    }
+  }
+}

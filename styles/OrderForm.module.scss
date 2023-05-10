@@ -1,6 +1,8 @@
 @import "./abstracts/mixins";
 
 .order {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   column-gap: 4.8rem;
   row-gap: 3.6rem;
   padding: 0;
@@ -8,7 +10,6 @@
 
   div {
     position: relative;
-    min-width: 35rem;
     height: fit-content;
 
     &.gridSpan2 {
@@ -34,5 +35,43 @@
   input[type='number'] + span,
   input[type='date'] + span {
     right: 3.8rem;
+  }
+}
+
+/**********************************/
+/* BELOW 944px (Tablets) */
+/**********************************/
+@include respond(tab) {
+  .order {
+    grid-template-columns: 1fr 1fr;
+
+    div {
+      &.gridSpan2 {
+        grid-column: initial;
+      }
+
+      &.gridSpan3 {
+        grid-column: initial;
+      }
+    }
+  }
+}
+
+/**********************************/
+/* BELOW 544px (Phone) */
+/**********************************/
+@include respond(phone) {
+  .order {
+    grid-template-columns: 1fr;
+
+    div {
+      &.gridSpan2 {
+        grid-column: initial;
+      }
+
+      &.gridSpan3 {
+        grid-column: initial;
+      }
+    }
   }
 }
