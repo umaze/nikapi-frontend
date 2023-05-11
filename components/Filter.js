@@ -2,9 +2,8 @@ import {useForm} from "react-hook-form";
 import SelectWrapper from "@/components/SelectWrapper";
 import InputWrapper from "@/components/InputWrapper";
 import {FILTER_TYPE} from "@/config/index";
-import {IconFilter, IconFilterOff} from "@tabler/icons-react";
+import {IconFilterOff} from "@tabler/icons-react";
 import styles from "@/styles/Filter.module.scss";
-import {useState} from "react";
 
 export default function Filter({type, demandGroups, listEinsatztyp, listRolle, listStatus, doFilter, isExpanded, doCollapse}) {
     const {
