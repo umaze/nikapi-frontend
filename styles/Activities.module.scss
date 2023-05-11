@@ -52,8 +52,31 @@
   button {
     margin-left: 1rem;
 
+    &.btnIconFitContent {
+      display: none;
+    }
+
     &.btnIconSecondary {
       background-color: $color-brown;
+    }
+  }
+}
+
+/**********************************/
+/* BELOW 704px (Tablet small) */
+/**********************************/
+@include respond(smaller-tab) {
+  .list {
+    &Overflow {
+      min-width: 90rem;
+    }
+  }
+
+  .btnGroup {
+    button {
+      &.btnIconFitContent {
+        display: flex;
+      }
     }
   }
 }

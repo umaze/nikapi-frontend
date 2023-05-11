@@ -8,13 +8,14 @@ import {toast} from "react-toastify";
 import ActivityItemOverall from "@/components/ActivityItemOverall";
 import _ from "lodash";
 import Filter from "@/components/Filter";
+import {IconFilter, IconArrowsMinimize, IconArrowAutofitContent } from "@tabler/icons-react";
 import styles from "@/styles/Activities.module.scss";
-import {IconFilter} from "@tabler/icons-react";
 
 export default function ActivitiesPage({activities}) {
     const {user} = useContext(AuthContext);
     const [filteredActivities, setFilteredActivities] = useState(_.cloneDeep(activities));
     const [filterExpanded, setFilterExpanded] = useState(false);
+    const [hasOverflow, setHasOverflow] = useState(true);
 
     const listEinsatztyp = activities?.length > 0 ?
         [...new Set(activities.flatMap(activity => activity.attributes.demand.data.attributes.einsatztyp?.typ))] :
@@ -60,21 +61,30 @@ export default function ActivitiesPage({activities}) {
     };
 
     const handleToggle = flag => setFilterExpanded(flag);
+    const handleFitting = flag => setHasOverflow(!hasOverflow);
 
     return (
         <Layout title="Einsätze">
             <h1 className="heading-primary">Alle Eins&auml;tze</h1>
-            {isEinsatzplaner(user) &&
-                <div className={styles.btnGroup}>
+            <div className={styles.btnGroup}>
+                {isEinsatzplaner(user) &&
                     <Link className="btn" href={`/activities/add`}>Einsatz hinzuf&uuml;gen</Link>
-                    {!filterExpanded && <button type="button"
-                                                className={`btn btn-icon ${styles.btnIconSecondary}`}
-                                                onClick={() => handleToggle(true)}>
+                }
+                <button type="button"
+                        className={`btn btn-icon ${styles.btnIconSecondary} ${styles.btnIconFitContent}`}
+                        onClick={handleFitting}>
+                    {hasOverflow ? <IconArrowsMinimize/> : <IconArrowAutofitContent/>}
+                    {hasOverflow ? 'Ansicht schmal' : 'Ansicht breit'}
+                </button>
+                {!filterExpanded &&
+                    <button type="button"
+                            className={`btn btn-icon ${styles.btnIconSecondary}`}
+                            onClick={() => handleToggle(true)}>
                         <IconFilter/>
                         Filter anzeigen
-                    </button>}
-                </div>
-            }
+                    </button>
+                }
+            </div>
 
             <Filter
                 type={FILTER_TYPE[3]}
@@ -87,10 +97,10 @@ export default function ActivitiesPage({activities}) {
 
             {(!filteredActivities || filteredActivities.length === 0) &&
                 <p className="info-no-data">Es sind keine Eins&auml;tze vorhanden.</p>}
-            <ul className={styles.list}>
+            <ul className={`${styles.list} ${hasOverflow ? styles.listOverflow : ''}`}>
                 {filteredActivities?.map(activity => (
                     <li key={activity.id}>
-                        <ActivityItemOverall key={activity.id} activity={activity}/>
+                        <ActivityItemOverall key={activity.id} activity={activity} fitted={!hasOverflow}/>
                     </li>
                 ))}
             </ul>
