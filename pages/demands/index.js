@@ -13,9 +13,11 @@ import Deletion from "@/components/Deletion";
 import Filter from "@/components/Filter";
 import _ from "lodash";
 import styles from '@/styles/Demands.module.scss';
+import {IconFilter} from "@tabler/icons-react";
 
 export default function DemandsPage({ demands, demandGroups, token }) {
     const [filteredDemands, setFilteredDemands] = useState(_.cloneDeep(demands));
+    const [filterExpanded, setFilterExpanded] = useState(false);
     const {user} = useContext(AuthContext);
     const [showModal, setShowModal] = useState(false);
     const [selectedDemand, setSelectedDemand] = useState({});
@@ -58,17 +60,31 @@ export default function DemandsPage({ demands, demandGroups, token }) {
         setShowModal(false);
     };
 
+    const handleToggle = flag => setFilterExpanded(flag);
+
     return (
         <Layout>
             <h1 className="heading-primary">Veranstaltungen</h1>
-            {isEinsatzplaner(user) && <Link className="btn" href={`/demands/add`}>Veranstaltung hinzuf&uuml;gen</Link>}
+            {isEinsatzplaner(user) &&
+                <div className={styles.btnGroup}>
+                    <Link className="btn" href={`/demands/add`}>Veranstaltung hinzuf&uuml;gen</Link>
+                    {!filterExpanded && <button type="button"
+                                                className={`btn btn-icon ${styles.btnIconSecondary}`}
+                                                onClick={() => handleToggle(true)}>
+                        <IconFilter/>
+                        Filter anzeigen
+                    </button>}
+                </div>
+            }
 
             <Filter
                 type={FILTER_TYPE[0]}
                 demandGroups={demandGroups}
                 listEinsatztyp={listEinsatztyp}
                 listRolle={listRolle}
-                doFilter={(data) => handleFilter(data)}/>
+                doFilter={(data) => handleFilter(data)}
+                isExpanded={filterExpanded}
+                doCollapse={() => handleToggle(false)}/>
 
             {filteredDemands?.length === 0 && <p className="info-no-data">Es sind keine Veranstaltungen vorhanden.</p>}
             <ul className={styles.list}>

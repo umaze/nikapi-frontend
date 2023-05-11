@@ -1,10 +1,12 @@
 import {useForm} from "react-hook-form";
 import SelectWrapper from "@/components/SelectWrapper";
 import InputWrapper from "@/components/InputWrapper";
-import styles from "@/styles/Filter.module.scss";
 import {FILTER_TYPE} from "@/config/index";
+import {IconFilter, IconFilterOff} from "@tabler/icons-react";
+import styles from "@/styles/Filter.module.scss";
+import {useState} from "react";
 
-export default function Filter({type, demandGroups, listEinsatztyp, listRolle, listStatus, doFilter}) {
+export default function Filter({type, demandGroups, listEinsatztyp, listRolle, listStatus, doFilter, isExpanded, doCollapse}) {
     const {
         register,
         handleSubmit,
@@ -57,6 +59,7 @@ export default function Filter({type, demandGroups, listEinsatztyp, listRolle, l
     );
 
     return (
+        isExpanded &&
         <div>
             <form className={`form ${styles.filter}`} onSubmit={handleSubmit(onSubmit)}>
                 {type === FILTER_TYPE[0] &&
@@ -144,6 +147,12 @@ export default function Filter({type, demandGroups, listEinsatztyp, listRolle, l
                             className="btn btn-secondary"
                             onClick={onReset}>
                         Zur&uuml;cksetzen
+                    </button>
+                    <button type="button"
+                            className={`btn btn-icon ${styles.btnIconSecondary}`}
+                            onClick={doCollapse}>
+                        <IconFilterOff/>
+                        Ausblenden
                     </button>
                 </div>
             </form>

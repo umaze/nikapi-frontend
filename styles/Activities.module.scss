@@ -1,4 +1,5 @@
 @import "./abstracts/variables";
+@import "./abstracts/mixins";
 
 /** Form */
 .inputInvalid {
@@ -42,5 +43,31 @@
 
   li:first-of-type {
     margin-top: 3rem;
+  }
+}
+
+.btnGroup {
+  display: flex;
+
+  button {
+    margin-left: 1rem;
+
+    &.btnIconSecondary {
+      background-color: $color-brown;
+    }
+  }
+}
+
+/**********************************/
+/* BELOW 544px (Phone) */
+/**********************************/
+@include respond(phone) {
+  .btnGroup {
+    flex-direction: column;
+
+    button {
+      margin-top: 1rem;
+      margin-left: 0;
+    }
   }
 }

@@ -9,10 +9,12 @@ import ActivityItemOverall from "@/components/ActivityItemOverall";
 import _ from "lodash";
 import Filter from "@/components/Filter";
 import styles from "@/styles/Activities.module.scss";
+import {IconFilter} from "@tabler/icons-react";
 
 export default function ActivitiesPage({activities}) {
     const {user} = useContext(AuthContext);
     const [filteredActivities, setFilteredActivities] = useState(_.cloneDeep(activities));
+    const [filterExpanded, setFilterExpanded] = useState(false);
 
     const listEinsatztyp = activities?.length > 0 ?
         [...new Set(activities.flatMap(activity => activity.attributes.demand.data.attributes.einsatztyp?.typ))] :
@@ -57,32 +59,47 @@ export default function ActivitiesPage({activities}) {
         setFilteredActivities(filtered);
     };
 
+    const handleToggle = flag => setFilterExpanded(flag);
+
     return (
         <Layout title="Einsätze">
             <h1 className="heading-primary">Alle Eins&auml;tze</h1>
-            {isEinsatzplaner(user) && <Link className="btn" href={`/activities/add`}>Einsatz hinzuf&uuml;gen</Link>}
+            {isEinsatzplaner(user) &&
+                <div className={styles.btnGroup}>
+                    <Link className="btn" href={`/activities/add`}>Einsatz hinzuf&uuml;gen</Link>
+                    {!filterExpanded && <button type="button"
+                                                className={`btn btn-icon ${styles.btnIconSecondary}`}
+                                                onClick={() => handleToggle(true)}>
+                        <IconFilter/>
+                        Filter anzeigen
+                    </button>}
+                </div>
+            }
 
             <Filter
                 type={FILTER_TYPE[3]}
                 listEinsatztyp={listEinsatztyp}
                 listRolle={listRolle}
                 listStatus={listStatus}
-                doFilter={(data) => handleFilter(data)}/>
+                doFilter={(data) => handleFilter(data)}
+                isExpanded={filterExpanded}
+                doCollapse={() => handleToggle(false)}/>
 
-            {(!filteredActivities || filteredActivities.length === 0) && <p className="info-no-data">Es sind keine Eins&auml;tze vorhanden.</p>}
+            {(!filteredActivities || filteredActivities.length === 0) &&
+                <p className="info-no-data">Es sind keine Eins&auml;tze vorhanden.</p>}
             <ul className={styles.list}>
-            {filteredActivities?.map(activity => (
-                <li key={activity.id}>
-                    <ActivityItemOverall key={activity.id} activity={activity} />
-                </li>
-            ))}
+                {filteredActivities?.map(activity => (
+                    <li key={activity.id}>
+                        <ActivityItemOverall key={activity.id} activity={activity}/>
+                    </li>
+                ))}
             </ul>
         </Layout>
     )
 }
 
-export async function getServerSideProps({ req }) {
-    const { token } = parseCookies(req);
+export async function getServerSideProps({req}) {
+    const {token} = parseCookies(req);
     // Fetch orders
     const activitiesRes = await fetch(`${API_URL}/api/activities?populate=demand&populate=demand.einsatztyp&populate=rollen.rolle&populate=rollen.availability.benutzer&populate=orders`, configRequest('GET', token));
     const activities = await activitiesRes.json();

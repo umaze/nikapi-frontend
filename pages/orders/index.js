@@ -12,10 +12,12 @@ import {useRouter} from "next/router";
 import _ from "lodash";
 import Filter from "@/components/Filter";
 import styles from "@/styles/Demands.module.scss";
+import {IconFilter} from "@tabler/icons-react";
 
 export default function OrdersPage({orders, token}) {
     const {user} = useContext(AuthContext);
     const [filteredOrders, setFilteredOrders] = useState(_.cloneDeep(orders));
+    const [filterExpanded, setFilterExpanded] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const [selectedOrder, setSelectedOrder] = useState({});
     const router = useRouter();
@@ -60,16 +62,30 @@ export default function OrdersPage({orders, token}) {
         setFilteredOrders(filtered);
     };
 
+    const handleToggle = flag => setFilterExpanded(flag);
+
     return (
         <Layout>
             <h1 className="heading-primary">Bestellungen</h1>
-            {isEinsatzplaner(user) && <Link className="btn" href={`/orders/add`}>Bestellung hinzuf&uuml;gen</Link>}
+            {isEinsatzplaner(user) &&
+                <div className={styles.btnGroup}>
+                    <Link className="btn" href={`/orders/add`}>Bestellung hinzuf&uuml;gen</Link>
+                    {!filterExpanded && <button type="button"
+                                                className={`btn btn-icon ${styles.btnIconSecondary}`}
+                                                onClick={() => handleToggle(true)}>
+                        <IconFilter/>
+                        Filter anzeigen
+                    </button>}
+                </div>
+            }
 
             <Filter
                 type={FILTER_TYPE[2]}
                 listEinsatztyp={listEinsatztyp}
                 listStatus={listStatus}
-                doFilter={(data) => handleFilter(data)}/>
+                doFilter={(data) => handleFilter(data)}
+                isExpanded={filterExpanded}
+                doCollapse={() => handleToggle(false)}/>
 
             {filteredOrders?.length === 0 && <p className="info-no-data">Es sind keine Bestellungen vorhanden.</p>}
             <ul className={styles.list}>
