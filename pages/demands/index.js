@@ -1,7 +1,7 @@
 import Layout from "@/components/Layout";
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {configRequest, handleErrorMessage, isEinsatzplaner, parseCookies} from '@/helpers/index';
+import {configRequest, formatDate, handleErrorMessage, isEinsatzplaner, parseCookies} from '@/helpers/index';
 import {API_URL, FILTER_TYPE} from "@/config/index";
 import DemandItem from "@/components/DemandItem";
 import Link from "next/link";
@@ -105,7 +105,7 @@ export default function DemandsPage({ demands, demandGroups, token }) {
                     <p>Veranstaltung wirklich entfernen?</p>
                     <ul>
                         <li><em>{selectedDemand.attributes?.gruppe.data.attributes.name}</em></li>
-                        <li><em>{new Date(selectedDemand.attributes?.datum).toLocaleDateString('de-CH')}</em></li>
+                        <li><em>{formatDate(selectedDemand.attributes?.datum)}</em></li>
                         <li><em>{selectedDemand.attributes?.einsatztyp?.typ}</em></li>
                     </ul>
                 </Deletion>

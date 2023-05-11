@@ -1,5 +1,5 @@
 import Link from "next/link";
-import {formatTime, isEinsatzplaner} from "@/helpers/index";
+import {formatDate, formatTime, isEinsatzplaner} from "@/helpers/index";
 import {IconEdit, IconChevronUp, IconChevronDown} from "@tabler/icons-react";
 import {useContext, useState} from "react";
 import AuthContext from "@/context/AuthContext";
@@ -40,7 +40,7 @@ export default function ActivityItemOverall({activity}) {
                 <div className={styles.infoTop}>
                     <div>
                         {attributes.demand.data?.attributes.datum ?
-                            <strong>{new Date(attributes.demand.data?.attributes.datum).toLocaleDateString('de-CH')}</strong> :
+                            <strong>{formatDate(attributes.demand.data?.attributes.datum)}</strong> :
                             'keine Veranstaltung zugewiesen'
                         }&nbsp;
                         {formatTime(attributes.demand.data?.attributes.zeitVon)}

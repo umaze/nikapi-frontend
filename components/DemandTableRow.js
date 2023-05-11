@@ -1,4 +1,4 @@
-import { formatTime } from '@/helpers/index';
+import {formatDate, formatTime} from '@/helpers/index';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateAvailability, selectAvailabilities } from '@/store/availabilitySlice';
 import styles from '@/styles/DemandTableRow.module.scss';
@@ -27,7 +27,7 @@ export default function DemandTableRow({ groupId, demand, rolesVisible, rolesVis
     return (
         <>
         <tr className={styles.demandRow}>
-            <td className={styles.demandDatum}>{new Date(attributes.datum).toLocaleDateString('de-CH')}</td>
+            <td className={styles.demandDatum}>{formatDate(attributes.datum)}</td>
             <td className={styles.demandZeit}>{formatTime(attributes.zeitVon)}</td>
             <td className={styles.demandZeit}>{formatTime(attributes.zeitBis)}</td>
             <td className={styles.demandEinsatz}>{attributes.einsatztyp?.typ}</td>
@@ -44,7 +44,7 @@ export default function DemandTableRow({ groupId, demand, rolesVisible, rolesVis
             ))}
         </tr>
         <tr className={styles.demandRowSmall}>
-            <td className={styles.demandDatum}>{new Date(attributes.datum).toLocaleDateString('de-CH')}</td>
+            <td className={styles.demandDatum}>{formatDate(attributes.datum)}</td>
             <td className={styles.demandZeit}>{formatTime(attributes.zeitVon)}</td>
             <td className={styles.demandZeit}>{formatTime(attributes.zeitBis)}</td>
             <td className={styles.demandEinsatz}>{attributes.einsatztyp?.typ}</td>

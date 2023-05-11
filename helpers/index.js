@@ -23,6 +23,13 @@ export const formatTime = time => applyTimeToDate(time)?.toLocaleTimeString('de-
     minute: "2-digit"
 });
 
+export const formatDate = value => {
+    if (value) {
+        return new Date(value).toLocaleDateString('de-CH', { day: "2-digit", month: "2-digit", year: "numeric" });
+    }
+    return '';
+};
+
 export function groupSelectedRolesByDemandId(list) {
     const grouped = [];
 

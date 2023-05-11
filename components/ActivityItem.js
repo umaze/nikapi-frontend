@@ -1,8 +1,8 @@
-import styles from "@/styles/ActivityItem.module.scss";
 import Link from "next/link";
 import {useContext} from "react";
 import AuthContext from "@/context/AuthContext";
-import {formatTime} from "@/helpers/index";
+import {formatDate, formatTime} from "@/helpers/index";
+import styles from "@/styles/ActivityItem.module.scss";
 
 export default function ActivityItem({activity}) {
     const attributes = activity.attributes;
@@ -21,7 +21,7 @@ export default function ActivityItem({activity}) {
                     <div className={styles.einsatztyp}>{myRoles}</div>
                     <div>
                         {attributes.demand.data?.attributes.datum ?
-                            <strong>{new Date(attributes.demand.data?.attributes.datum).toLocaleDateString('de-CH')}</strong> :
+                            <strong>{formatDate(attributes.demand.data?.attributes.datum)}</strong> :
                             'keine Veranstaltung zugewiesen'
                         }&nbsp;
                         {formatTime(attributes.demand.data?.attributes.zeitVon)}
