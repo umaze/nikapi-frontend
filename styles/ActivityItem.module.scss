@@ -123,11 +123,51 @@
 /* BELOW 704px (Tablet small) */
 /**********************************/
 @include respond(smaller-tab) {
+  .main {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+
+    .info {
+      width: 100%;
+
+      .infoTop,
+      .details {
+        display: grid;
+
+        > div {
+          padding-left: 0;
+        }
+      }
+    }
+
+    .link {
+      padding: 1.2rem 0;
+    }
+
+    .myActivity {
+      .infoTop,
+      .details {
+        > div {
+          padding-left: 0;
+        }
+      }
+    }
+  }
+
+  .main:not(.mainFitted) {
+    flex-direction: row;
+  }
+
   .info {
-    &Top,
+    .infoTop,
     .details {
       display: grid;
       grid-template-columns: minmax(22rem, auto) 1fr;
+
+      > div {
+        padding-left: 0;
+      }
     }
   }
 
@@ -181,6 +221,10 @@
 
       .listFitted {
         display: flex;
+
+        &:not(:last-of-type) {
+          padding-bottom: 0.8rem;
+        }
       }
 
       &:has(.hidden) .listFitted {
@@ -194,6 +238,10 @@
       display: none;
     }
   }
+
+  .additionals:not(.listingsFitted) {
+    grid-template-columns: minmax(22rem, auto) 1fr;
+  }
 }
 
 /**********************************/
@@ -205,20 +253,22 @@
     align-items: flex-start;
   }
 
-  .main:has(.myActivity) {
+  .main:has(.mainFitted) {
     flex-direction: column;
     align-items: flex-start;
     width: 100%;
 
-    .myActivity {
-      .infoTop,
-      .details {
-        display: grid;
-        grid-template-columns: 1fr;
+    .info {
+      width: 100%;
+    }
 
-        > div {
-          padding-left: 0;
-        }
+    .infoTop,
+    .details {
+      display: grid;
+      grid-template-columns: 1fr;
+
+      > div {
+        padding-left: 0;
       }
     }
 
@@ -226,8 +276,8 @@
       display: flex;
       justify-content: stretch;
       width: 100%;
-      margin-top: 1rem;
       margin-left: 0;
+      padding: 1.2rem 0;
 
       a {
         width: 100%;

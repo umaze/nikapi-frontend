@@ -64,7 +64,7 @@ export default function DemandsPage({ demands, demandGroups, token }) {
 
     return (
         <Layout>
-            <h1 className="heading-primary">Veranstaltungen</h1>
+            <h1 className="heading-primary">Veranstalt&shy;ungen</h1>
             {isEinsatzplaner(user) &&
                 <div className={styles.btnGroup}>
                     <Link className="btn" href={`/demands/add`}>Veranstaltung hinzuf&uuml;gen</Link>

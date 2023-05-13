@@ -44,7 +44,7 @@ export default function AvailabilitiesPage({availabilities, page, total}) {
 
     return (
         <Layout>
-            <h1 className="heading-primary">Verf&uuml;gbarkeiten</h1>
+            <h1 className="heading-primary">Verf&uuml;gbar&shy;keiten</h1>
             <div className={styles.btnGroup}>
                 <Link className="btn" href={`/availabilities/me/manage`}>Verf&uuml;gbarkeiten verwalten</Link>
                 {!filterExpanded && <button type="button"

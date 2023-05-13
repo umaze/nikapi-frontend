@@ -60,18 +60,16 @@
       background-color: $color-brown;
     }
   }
+
+  + ul.listOverflow > li {
+    min-width: 90rem;
+  }
 }
 
 /**********************************/
 /* BELOW 704px (Tablet small) */
 /**********************************/
 @include respond(smaller-tab) {
-  .list {
-    &Overflow {
-      min-width: 90rem;
-    }
-  }
-
   .btnGroup {
     button {
       &.btnIconFitContent {
