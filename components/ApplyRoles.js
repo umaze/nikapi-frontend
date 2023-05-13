@@ -10,7 +10,7 @@ import {
 } from "@/store/activitySlice";
 import SelectAvailability from "@/components/SelectAvailability";
 import {useEffect, useState} from "react";
-import {getRoleNameOfSelectable, getUnselectedRoles} from "@/helpers/index";
+import {formatDate, getRoleNameOfSelectable, getUnselectedRoles} from "@/helpers/index";
 import _ from "lodash";
 import styles from "@/styles/ApplyRoles.module.scss";
 
@@ -69,7 +69,7 @@ export default function ApplyRoles({currentStep, stepsSize, register, errors, re
             {activityDemand.attributes &&
                 <>
                     <div className={styles.infos}>
-                        <p>Datum: <strong>{new Date(activityDemand.attributes.datum).toLocaleDateString('de-CH')}</strong>
+                        <p>Datum: <strong>{formatDate(activityDemand.attributes.datum)}</strong>
                         </p>
                         <p>Einsatztyp: <strong>{activityDemand.attributes.einsatztyp.typ}</strong></p>
                         {!rollen.length && <h3 className="heading-tertiary">Keine Rollen verhanden</h3>}

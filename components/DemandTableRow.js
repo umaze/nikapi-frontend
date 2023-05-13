@@ -1,9 +1,9 @@
-import { formatTime } from '@/helpers/index';
+import {formatDate, formatTime} from '@/helpers/index';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateAvailability, selectAvailabilities } from '@/store/availabilitySlice';
 import styles from '@/styles/DemandTableRow.module.scss';
 
-export default function DemandTableRow({ groupId, demand, rollen }) {
+export default function DemandTableRow({ groupId, demand, rolesVisible, rolesVisibleMobile, rollen }) {
     const attributes = demand.attributes;
     const dispatch = useDispatch();
     const selectedRoles = useSelector(selectAvailabilities).filter(selected => selected.groupId === groupId);
@@ -25,12 +25,13 @@ export default function DemandTableRow({ groupId, demand, rollen }) {
     };
 
     return (
+        <>
         <tr className={styles.demandRow}>
-            <td className={styles.demandDatum}>{new Date(attributes.datum).toLocaleDateString('de-CH')}</td>
+            <td className={styles.demandDatum}>{formatDate(attributes.datum)}</td>
             <td className={styles.demandZeit}>{formatTime(attributes.zeitVon)}</td>
             <td className={styles.demandZeit}>{formatTime(attributes.zeitBis)}</td>
             <td className={styles.demandEinsatz}>{attributes.einsatztyp?.typ}</td>
-            {rollen?.map(rolle => (
+            {rolesVisible && rollen?.map(rolle => (
                 <td className={styles.auswahlCell} key={rolle.id}>
                     <input
                         className={styles.auswahlBox}
@@ -42,5 +43,23 @@ export default function DemandTableRow({ groupId, demand, rollen }) {
                 </td>
             ))}
         </tr>
+        <tr className={styles.demandRowSmall}>
+            <td className={styles.demandDatum}>{formatDate(attributes.datum)}</td>
+            <td className={styles.demandZeit}>{formatTime(attributes.zeitVon)}</td>
+            <td className={styles.demandZeit}>{formatTime(attributes.zeitBis)}</td>
+            <td className={styles.demandEinsatz}>{attributes.einsatztyp?.typ}</td>
+            {rolesVisibleMobile && rollen?.map(rolle => (
+                <td className={styles.auswahlCell} key={rolle.id}>
+                    <input
+                        className={styles.auswahlBox}
+                        id={`${demand.id}-${rolle.name}`}
+                        type="checkbox"
+                        name={rolle.name}
+                        checked={isChecked(demand.id, rolle.name)}
+                        onChange={handleInputChange} />
+                </td>
+            ))}
+        </tr>
+        </>
     )
 }

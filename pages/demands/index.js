@@ -1,7 +1,7 @@
 import Layout from "@/components/Layout";
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {configRequest, handleErrorMessage, isEinsatzplaner, parseCookies} from '@/helpers/index';
+import {configRequest, formatDate, handleErrorMessage, isEinsatzplaner, parseCookies} from '@/helpers/index';
 import {API_URL, FILTER_TYPE} from "@/config/index";
 import DemandItem from "@/components/DemandItem";
 import Link from "next/link";
@@ -13,9 +13,11 @@ import Deletion from "@/components/Deletion";
 import Filter from "@/components/Filter";
 import _ from "lodash";
 import styles from '@/styles/Demands.module.scss';
+import {IconFilter} from "@tabler/icons-react";
 
 export default function DemandsPage({ demands, demandGroups, token }) {
     const [filteredDemands, setFilteredDemands] = useState(_.cloneDeep(demands));
+    const [filterExpanded, setFilterExpanded] = useState(false);
     const {user} = useContext(AuthContext);
     const [showModal, setShowModal] = useState(false);
     const [selectedDemand, setSelectedDemand] = useState({});
@@ -58,17 +60,31 @@ export default function DemandsPage({ demands, demandGroups, token }) {
         setShowModal(false);
     };
 
+    const handleToggle = flag => setFilterExpanded(flag);
+
     return (
         <Layout>
             <h1 className="heading-primary">Veranstaltungen</h1>
-            {isEinsatzplaner(user) && <Link className="btn" href={`/demands/add`}>Veranstaltung hinzuf&uuml;gen</Link>}
+            {isEinsatzplaner(user) &&
+                <div className={styles.btnGroup}>
+                    <Link className="btn" href={`/demands/add`}>Veranstaltung hinzuf&uuml;gen</Link>
+                    {!filterExpanded && <button type="button"
+                                                className={`btn btn-icon ${styles.btnIconSecondary}`}
+                                                onClick={() => handleToggle(true)}>
+                        <IconFilter/>
+                        Filter anzeigen
+                    </button>}
+                </div>
+            }
 
             <Filter
                 type={FILTER_TYPE[0]}
                 demandGroups={demandGroups}
                 listEinsatztyp={listEinsatztyp}
                 listRolle={listRolle}
-                doFilter={(data) => handleFilter(data)}/>
+                doFilter={(data) => handleFilter(data)}
+                isExpanded={filterExpanded}
+                doCollapse={() => handleToggle(false)}/>
 
             {filteredDemands?.length === 0 && <p className="info-no-data">Es sind keine Veranstaltungen vorhanden.</p>}
             <ul className={styles.list}>
@@ -89,7 +105,7 @@ export default function DemandsPage({ demands, demandGroups, token }) {
                     <p>Veranstaltung wirklich entfernen?</p>
                     <ul>
                         <li><em>{selectedDemand.attributes?.gruppe.data.attributes.name}</em></li>
-                        <li><em>{new Date(selectedDemand.attributes?.datum).toLocaleDateString('de-CH')}</em></li>
+                        <li><em>{formatDate(selectedDemand.attributes?.datum)}</em></li>
                         <li><em>{selectedDemand.attributes?.einsatztyp?.typ}</em></li>
                     </ul>
                 </Deletion>

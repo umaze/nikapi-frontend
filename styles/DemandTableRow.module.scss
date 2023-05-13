@@ -1,7 +1,12 @@
 @import "./abstracts/variables";
+@import "./abstracts/mixins";
 
 .demandRow {
   display: flex;
+
+  &Small {
+    display: none;
+  }
 }
 
 .demandDatum {
@@ -24,5 +29,18 @@
     width: 1.6rem;
     height: 1.6rem;
     cursor: pointer;
+  }
+}
+
+/**********************************/
+/* BELOW 1200px (Tablet landscape) */
+/**********************************/
+@include respond(land-tab) {
+  .demandRow {
+    display: none;
+
+    &Small {
+      display: flex;
+    }
   }
 }

@@ -25,3 +25,38 @@
     margin-bottom: 4.8rem;
   }
 }
+
+/**********************************/
+/* BELOW 1200px (Tablets landscape) */
+/**********************************/
+@include respond(land-tab) {
+  .sectionEinsatzplanung {
+    div:first-of-type {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      h2 {
+        text-align: center;
+        margin-bottom: 6.4rem;
+      }
+    }
+  }
+}
+
+/**********************************/
+/* BELOW 944px (Tablets) */
+/**********************************/
+@include respond(tab) {
+  .einsatzplanung {
+    &Content {
+      padding-top: 2.2rem;
+      padding-bottom: 2.2rem;
+    }
+
+    &Title,
+    &Description {
+      margin-bottom: 1.2rem;
+    }
+  }
+}

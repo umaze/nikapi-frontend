@@ -2,6 +2,80 @@
 @use "sass:list";
 @import "../abstracts/variables";
 
+// MEDIA QUERY MANAGER
+
+/*
+0    - 400px:    Phone mini
+400  - 544px:    Phone
+544  - 704px:    Tablet small
+704  - 944px:    Tablet
+944  - 1200px:   Tablet landscape
+1200 - 1344px:   Smaller desktop
+(1344 - 1800px)  is where our normal styles only
+1800px + :       Big desktop
+
+$breakpoint argument choices:
+- phone-mini
+- phone
+- smaller-tab
+- tab
+- land-tab
+- smaller-desktop
+- big-desktop
+
+1em = 16px
+*/
+@mixin respond($breakpoint) {
+  @if $breakpoint == phone-mini {
+    // 400px
+    @media only screen and (max-width: 25em) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == phone {
+    // 544px
+    @media only screen and (max-width: 34em) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == smaller-tab {
+    // 704px
+    @media only screen and (max-width: 44em) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == tab {
+    // 944px
+    @media only screen and (max-width: 59em) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == land-tab {
+    // 1200px
+    @media only screen and (max-width: 75em) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == smaller-desktop {
+    // 1344px
+    @media only screen and (max-width: 84em) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == big-desktop {
+    // 1800px
+    @media only screen and (min-width: 112.5em) {
+      @content;
+    }
+  }
+}
+
 @mixin form-label {
   display: block;
   font-size: 1.6rem;
@@ -55,7 +129,7 @@
   flex-direction: column;
   background-color: $color-brown-light-3;
   box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.075);
-  border-radius: 11px;
+  border-radius: 1rem;
   border: 1px solid $color-brown-light;
   justify-self: center;
   overflow: hidden;

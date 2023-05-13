@@ -8,9 +8,11 @@ import {useState} from "react";
 import _ from "lodash";
 import Filter from "@/components/Filter";
 import styles from "@/styles/Demands.module.scss";
+import {IconFilter} from "@tabler/icons-react";
 
-export default function AvailabilitiesPage({ availabilities, page, total }) {
+export default function AvailabilitiesPage({availabilities, page, total}) {
     const [filteredAvailabilities, setFilteredAvailabilities] = useState(_.cloneDeep(availabilities));
+    const [filterExpanded, setFilterExpanded] = useState(false);
 
     const listEinsatztyp = availabilities?.length > 0 ?
         [...new Set(availabilities.flatMap(availability => availability.attributes.demand.data.attributes.einsatztyp?.typ))] :
@@ -38,32 +40,45 @@ export default function AvailabilitiesPage({ availabilities, page, total }) {
         setFilteredAvailabilities(filtered);
     };
 
+    const handleToggle = flag => setFilterExpanded(flag);
+
     return (
         <Layout>
             <h1 className="heading-primary">Verf&uuml;gbarkeiten</h1>
-            <Link className="btn" href={`/availabilities/me/manage`}>Verf&uuml;gbarkeiten verwalten</Link>
+            <div className={styles.btnGroup}>
+                <Link className="btn" href={`/availabilities/me/manage`}>Verf&uuml;gbarkeiten verwalten</Link>
+                {!filterExpanded && <button type="button"
+                        className={`btn btn-icon ${styles.btnIconSecondary}`}
+                        onClick={() => handleToggle(true)}>
+                    <IconFilter/>
+                    Filter anzeigen
+                </button>}
+            </div>
 
             <Filter
                 type={FILTER_TYPE[1]}
                 listEinsatztyp={listEinsatztyp}
                 listRolle={listRolle}
-                doFilter={(data) => handleFilter(data)}/>
+                doFilter={(data) => handleFilter(data)}
+                isExpanded={filterExpanded}
+                doCollapse={() => handleToggle(false)}/>
 
-            {filteredAvailabilities.length === 0 && <p className="info-no-data">Es sind keine Verf&uuml;gbarkeiten vorhanden.</p>}
+            {filteredAvailabilities.length === 0 &&
+                <p className="info-no-data">Es sind keine Verf&uuml;gbarkeiten vorhanden.</p>}
             <ul className={styles.list}>
-            {filteredAvailabilities.map(availability => (
-                <li key={availability.id}>
-                    <AvailabilityItem key={availability.id} availability={availability.attributes} />
-                </li>
-            ))}
+                {filteredAvailabilities.map(availability => (
+                    <li key={availability.id}>
+                        <AvailabilityItem key={availability.id} availability={availability.attributes}/>
+                    </li>
+                ))}
             </ul>
 
-            <Pagination page={page} total={total} />
-        </Layout >
+            <Pagination page={page} total={total}/>
+        </Layout>
     )
 }
 
-export async function getServerSideProps({ req, query: { page = 1 } }) {
+export async function getServerSideProps({req, query: {page = 1}}) {
     const {token} = parseCookies(req);
     // Calculate start page
     const start = +page === 1 ? 0 : (+page - 1) * PER_PAGE;

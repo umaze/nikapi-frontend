@@ -1,11 +1,11 @@
 import Link from "next/link";
-import {formatTime, isEinsatzplaner} from "@/helpers/index";
+import {formatDate, formatTime, isEinsatzplaner} from "@/helpers/index";
 import {IconEdit, IconChevronUp, IconChevronDown} from "@tabler/icons-react";
 import {useContext, useState} from "react";
 import AuthContext from "@/context/AuthContext";
 import styles from "@/styles/ActivityItem.module.scss";
 
-export default function ActivityItemOverall({activity}) {
+export default function ActivityItemOverall({activity, fitted = false}) {
     const {user} = useContext(AuthContext);
     const attributes = activity.attributes;
     const roles = attributes.rollen.map(r => `${r.rolle?.name} [${r.availability.data.attributes.benutzer.data.attributes.username}]`);
@@ -32,71 +32,98 @@ export default function ActivityItemOverall({activity}) {
         }
     };
 
-    const toggle = () => setExpanded(!expanded);
+    const handleToggle = () => setExpanded(!expanded);
 
     return (
         <div className={`${styles.activity} ${styles[attributes.status]}`}>
-            <div className={styles.info}>
-                <div className={styles.infoTop}>
-                    <div>
-                        {attributes.demand.data?.attributes.datum ?
-                            <strong>{new Date(attributes.demand.data?.attributes.datum).toLocaleDateString('de-CH')}</strong> :
-                            'keine Veranstaltung zugewiesen'
-                        }&nbsp;
-                        {formatTime(attributes.demand.data?.attributes.zeitVon)}
-                        {attributes.demand.data?.attributes.zeitVon && ' - '}
-                        {formatTime(attributes.demand.data?.attributes.zeitBis)}
-                    </div>
-                    <div>{attributes.bezeichnung} | <span
-                        className={`${styles[`${attributes.status}-bottom`]}`}>{attributes.status}</span></div>
-                </div>
-                <div className={styles.details}>
-                    <div className={styles.einsatztyp}>{attributes.demand.data.attributes.einsatztyp?.typ}</div>
-                    <div className={styles.listings}>
-                        <div className={styles.rollen}>{summaryRoles(roles)}</div>
-                        <div className={styles.bestellungen}>{summaryOrders(orders)}</div>
-                    </div>
-                </div>
-                <div className={`${styles.additionals} ${expanded ? '' : styles.hidden}`}>
-                    <div></div>
-                    <div className={styles.listings}>
-                        <div className={styles.rollen}>
-                            <ul>
-                                {roles && roles.length > 0 ?
-                                    roles.map((role, i) => (
-                                        <li key={i} className={styles.bullet}>
-                                            {role}
-                                        </li>
-                                    )) :
-                                    <li key={1}>&ndash;</li>
-                                }
-                            </ul>
+            <div className={`no-padding-bottom ${styles.main} ${fitted ? styles.mainFitted : ''}`}>
+                <div className={styles.info}>
+                    <div className={styles.infoTop}>
+                        <div>
+                            {attributes.demand.data?.attributes.datum ?
+                                <strong>{formatDate(attributes.demand.data?.attributes.datum)}</strong> :
+                                'keine Veranstaltung zugewiesen'
+                            }&nbsp;
+                            {formatTime(attributes.demand.data?.attributes.zeitVon)}
+                            {attributes.demand.data?.attributes.zeitVon && ' - '}
+                            {formatTime(attributes.demand.data?.attributes.zeitBis)}
                         </div>
-                        <div className={styles.bestellungen}>
-                            <ul>
-                                {orders && orders.length > 0 ?
-                                    orders.map((order, i) => (
-                                        <li key={i} className={styles.bullet}>
-                                            {order}
-                                        </li>
-                                    )) :
-                                    <li key={1}>&ndash;</li>
-                                }
-                            </ul>
+                        <div>{attributes.bezeichnung} | <span
+                            className={`${styles[`${attributes.status}-bottom`]}`}>{attributes.status}</span></div>
+                    </div>
+                    <div className={styles.details}>
+                        <div className={styles.einsatztyp}>{attributes.demand.data.attributes.einsatztyp?.typ}</div>
+                        <div className={`${styles.listings} ${fitted ? styles.listingsFitted : ''}`}>
+                            <div className={styles.rollen}>{summaryRoles(roles)}</div>
+                            <div className={`${styles.rollen} ${styles.listFitted} ${expanded ? '' : styles.hidden}`}>
+                                <ul>
+                                    {roles && roles.length > 0 ?
+                                        roles.map((role, i) => (
+                                            <li key={i} className={styles.bullet}>
+                                                {role}
+                                            </li>
+                                        )) :
+                                        <li key={1}>&ndash;</li>
+                                    }
+                                </ul>
+                            </div>
+                            <div className={styles.bestellungen}>{summaryOrders(orders)}</div>
+                            <div className={`${styles.bestellungen} ${styles.listFitted} ${expanded ? '' : styles.hidden}`}>
+                                <ul>
+                                    {orders && orders.length > 0 ?
+                                        orders.map((order, i) => (
+                                            <li key={i} className={styles.bullet}>
+                                                {order}
+                                            </li>
+                                        )) :
+                                        <li key={1}>&ndash;</li>
+                                    }
+                                </ul>
+                            </div>
                         </div>
                     </div>
+                    <div className={`${styles.additionals} ${expanded ? '' : styles.hidden}`}>
+                        <div></div>
+                        <div className={`${styles.listings} ${fitted ? styles.listingsFitted : ''}`}>
+                            <div className={styles.rollen}>
+                                <ul>
+                                    {roles && roles.length > 0 ?
+                                        roles.map((role, i) => (
+                                            <li key={i} className={styles.bullet}>
+                                                {role}
+                                            </li>
+                                        )) :
+                                        <li key={1}>&ndash;</li>
+                                    }
+                                </ul>
+                            </div>
+                            <div className={styles.bestellungen}>
+                                <ul>
+                                    {orders && orders.length > 0 ?
+                                        orders.map((order, i) => (
+                                            <li key={i} className={styles.bullet}>
+                                                {order}
+                                            </li>
+                                        )) :
+                                        <li key={1}>&ndash;</li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div className={styles.chevron}>
-                    <span onClick={toggle}>{expanded ? <IconChevronUp /> : <IconChevronDown />}</span>
-                </div>
+
+                {isEinsatzplaner(user) && <div className={styles.link}>
+                    <Link href={`/activities/edit/${activity.id}`}
+                          className="btn btn-secondary btn-secondary--small btn-icon">
+                        <IconEdit/>
+                    </Link>
+                </div>}
             </div>
 
-            {isEinsatzplaner(user) && <div className={styles.link}>
-                <Link href={`/activities/edit/${activity.id}`}
-                      className="btn btn-secondary btn-secondary--small btn-icon">
-                    <IconEdit/>
-                </Link>
-            </div>}
+            <button className={`btn ${styles.btnIcon}`} onClick={handleToggle}>
+                {expanded ? <IconChevronUp/> : <IconChevronDown/>}
+            </button>
         </div>
     );
 }

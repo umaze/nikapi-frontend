@@ -8,26 +8,12 @@
 .einsatztyp {
     font-weight: 500;
     font-size: 2.2rem;
-    min-width: 28rem;
 }
 
 .info {
     flex: 2;
 
-    &Top {
-        display: grid;
-        grid-template-columns: 1fr 2fr;
-        align-items: baseline;
-
-        strong {
-            padding-right: 1rem;
-        }
-
-        div:last-of-type {
-            padding-left: 1rem;
-        }
-    }
-
+    &Top,
     .details {
         display: grid;
         grid-template-columns: 1fr 2fr;
@@ -37,15 +23,38 @@
             padding-left: 1rem;
         }
     }
+
+    &Top {
+        strong {
+            padding-right: 1rem;
+        }
+    }
 }
 
-@media (max-width: 600px) {
+/**********************************/
+/* BELOW 704px (Tablet small) */
+/**********************************/
+@include respond(smaller-tab) {
+    .info {
+        &Top,
+        .details {
+            display: grid;
+            grid-template-columns: minmax(22rem, auto) 1fr;
+        }
+    }
+}
+
+/**********************************/
+/* BELOW 544px (Phone) */
+/**********************************/
+@include respond(phone) {
     .availability {
         flex-direction: column;
-        text-align: center;
-    }
+        align-items: flex-start;
 
-    .info {
-        margin-bottom: 2rem;
+        .mitglied,
+        .rollen {
+            display: none;
+        }
     }
 }

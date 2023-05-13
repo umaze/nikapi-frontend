@@ -23,6 +23,13 @@ export const formatTime = time => applyTimeToDate(time)?.toLocaleTimeString('de-
     minute: "2-digit"
 });
 
+export const formatDate = value => {
+    if (value) {
+        return new Date(value).toLocaleDateString('de-CH', { day: "2-digit", month: "2-digit", year: "numeric" });
+    }
+    return '';
+};
+
 export function groupSelectedRolesByDemandId(list) {
     const grouped = [];
 
@@ -211,19 +218,25 @@ export function checkRouteHilfe(currentRoute) {
     return checkActivatedRoute(currentRoute, ['/account/help']);
 }
 
-export function checkRoutePlanung(currentRoute) {
+export function checkRouteEinsaetze(currentRoute) {
     return checkActivatedRoute(currentRoute,
         [
             '/activities',
+            '/activities/add',
+            '/activities/edit/'
+        ]);
+}
+
+export function checkRouteAdmin(currentRoute) {
+    return checkActivatedRoute(currentRoute,
+        [
             '/availabilities',
             '/demands',
             '/orders',
-            '/activities/add',
             '/orders/add',
             '/demands/add',
             '/demands/edit/',
-            '/orders/edit/',
-            '/activities/edit/'
+            '/orders/edit/'
         ]);
 }
 

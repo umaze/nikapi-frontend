@@ -1,48 +1,61 @@
 @import "./abstracts/variables";
+@import "./abstracts/mixins";
 
 .form label {
-    display: block;
-  }
-  
-  .form input {
-    width: 100%;
-    height: 4rem;
-    padding: 0.5rem;
-  }
-  
-  .form textarea {
-    width: 100%;
-    height: 15rem;
-  }
-  
-  .form {
-    input[type='submit'] {
-      display: block;
-      width: 100%;
-      margin: 2rem 0 3rem;
-    }
+  display: block;
+}
 
-    input[type='checkbox'] {
-      accent-color: $color-brown;
-    }
+.form input {
+  width: 100%;
+  height: 4rem;
+  padding: 0.5rem;
+}
+
+.form textarea {
+  width: 100%;
+  height: 15rem;
+}
+
+.form {
+  input[type='submit'] {
+    display: block;
+    width: 100%;
+    margin: 2rem 0 3rem;
   }
-  
-  .form .file {
-    border: 1px #ccc solid;
-    background-color: $color-white-background;
-    padding: 1rem;
+
+  input[type='checkbox'] {
+    accent-color: $color-brown;
   }
-  
+}
+
+.form .file {
+  border: 1px #ccc solid;
+  background-color: $color-white-background;
+  padding: 1rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  margin-bottom: 2rem;
+}
+
+/**********************************/
+/* BELOW 1200px (Tablet landscape) */
+/**********************************/
+@include respond(land-tab) {
+  .form {
+    width: fit-content;
+  }
+}
+
+/**********************************/
+/* BELOW 544px (Phone) */
+/**********************************/
+@include respond(phone) {
   .grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    margin-bottom: 2rem;
+    grid-template-columns: 1fr;
   }
-  
-  @media (max-width: 600px) {
-    .grid {
-      grid-template-columns: 1fr;
-    }
-  }
+}
   

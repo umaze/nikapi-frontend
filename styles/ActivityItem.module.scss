@@ -4,14 +4,26 @@
 
 .activity {
   @include card-overview;
+  padding: 0;
+  flex-direction: column;
+  align-items: initial;
+
+  .main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 1.2rem 1.2rem 2rem;
+  }
 }
 
 .offen {
   @include border-left-status-color("offen");
 }
+
 .bereit {
   @include border-left-status-color("bereit");
 }
+
 .erledigt {
   @include border-left-status-color("erledigt");
 }
@@ -25,6 +37,12 @@
   }
 }
 
+.list {
+  &Fitted {
+    display: none;
+  }
+}
+
 .additionals {
   display: grid;
   grid-template-columns: 1fr 2fr;
@@ -35,15 +53,26 @@
   }
 }
 
-.chevron {
+.btnIcon {
   display: flex;
-  align-items: center;
   justify-content: center;
-  padding-top: 1.8rem;
-  height: 1rem;
+  margin: 1rem auto 0;
+  padding: 0;
+  background-color: $color-brown-light-2;
+  border-top: 1px solid $color-brown-light;
+  border-radius: 0 0 0.5rem 0;
+  width: 100%;
 
-  span:hover {
-    cursor: pointer;
+  svg {
+    stroke: $color-brown;
+  }
+
+  &:hover {
+    background-color: $color-brown-light;
+
+    svg {
+      stroke: $color-white;
+    }
   }
 }
 
@@ -86,9 +115,124 @@
   }
 }
 
-@media (max-width: 600px) {
+.link {
+  margin-left: 1.4rem;
+}
+
+/**********************************/
+/* BELOW 704px (Tablet small) */
+/**********************************/
+@include respond(smaller-tab) {
+  .info {
+    &Top,
+    .details {
+      display: grid;
+      grid-template-columns: minmax(22rem, auto) 1fr;
+    }
+  }
+
+  .myActivity {
+    .infoTop,
+    .details {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+    }
+  }
+
+  .activity:has(.mainFitted) {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+
+    .mainFitted {
+      .infoTop,
+      .details {
+        display: grid;
+        grid-template-columns: 1fr;
+
+        > div {
+          padding-left: 0;
+        }
+      }
+    }
+
+    .link {
+      display: flex;
+      justify-content: stretch;
+      width: 100%;
+      margin-top: 1rem;
+      margin-left: 0;
+
+      a {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  }
+
+  .details:has(.listingsFitted) {
+    display: flex;
+    flex-direction: column;
+
+    .listingsFitted {
+      display: flex;
+      flex-direction: column;
+      margin-top: 1rem;
+
+      .listFitted {
+        display: flex;
+      }
+
+      &:has(.hidden) .listFitted {
+        display: none;
+      }
+    }
+  }
+
+  .additionals:has(.listingsFitted) {
+    .listingsFitted {
+      display: none;
+    }
+  }
+}
+
+/**********************************/
+/* BELOW 544px (Phone) */
+/**********************************/
+@include respond(phone) {
   .activity {
     flex-direction: column;
-    text-align: center;
+    align-items: flex-start;
+  }
+
+  .main:has(.myActivity) {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+
+    .myActivity {
+      .infoTop,
+      .details {
+        display: grid;
+        grid-template-columns: 1fr;
+
+        > div {
+          padding-left: 0;
+        }
+      }
+    }
+
+    .link {
+      display: flex;
+      justify-content: stretch;
+      width: 100%;
+      margin-top: 1rem;
+      margin-left: 0;
+
+      a {
+        width: 100%;
+        text-align: center;
+      }
+    }
   }
 }

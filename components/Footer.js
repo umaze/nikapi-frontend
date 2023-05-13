@@ -4,6 +4,7 @@ import AuthContext from "@/context/AuthContext";
 import {IconSleigh} from '@tabler/icons-react';
 import ScrollLink from "@/components/ScrollLink";
 import styles from '@/styles/Footer.module.scss';
+import {isEinsatzplaner} from "@/helpers/index";
 
 export default function Footer() {
     const {user, logout} = useContext(AuthContext);
@@ -43,11 +44,14 @@ export default function Footer() {
                     </div>
                 </div>
                 <nav className={styles.navCol}>
-                    <p className={styles.footerHeading}>Samichlaus Einsatzplanung</p>
+                    <p className={styles.footerHeading}>Einsatzplanung</p>
                     <ul className={styles.footerNav}>
                         {user ? <>
-                            <li><Link className={styles.footerLink} href='/availabilities'>Mein Bereich</Link></li>
-                            <li><Link className={styles.footerLink} href='/activities'>Planung</Link></li>
+                            <li><Link className={styles.footerLink} href='/availabilities/me'>Mein Bereich</Link></li>
+                            <li><Link className={styles.footerLink} href='/activities'>Eins&auml;tze</Link></li>
+                            {isEinsatzplaner(user) &&
+                                <li><Link className={styles.footerLink} href='/availabilities'>Admin</Link></li>
+                            }
                             <li><Link className={styles.footerLink} href='#' onClick={() => logout()}>Logout</Link></li>
                         </> : <>
                             <li>

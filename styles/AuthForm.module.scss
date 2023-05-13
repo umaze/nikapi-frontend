@@ -1,10 +1,11 @@
 @import "./abstracts/mixins";
 
 .auth {
-  border: 1px solid;
-  border-radius: 8px;
+  background-color: $color-brown-light-3;
+  box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.075);
+  border-radius: 1rem;
+  border: 1px solid $color-brown-light;
   padding: 3rem;
-  min-width: 50rem;
   max-width: 70rem;
 
   svg {

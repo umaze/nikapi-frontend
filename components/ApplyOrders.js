@@ -5,6 +5,7 @@ import {useEffect, useState} from "react";
 import {useDrop} from "react-dnd";
 import DragFile from "@/components/DragFile";
 import OrderItem from "@/components/OrderItem";
+import {formatDate} from "@/helpers/index";
 import styles from "@/styles/ApplyOrders.module.scss";
 
 export default function ApplyOrders({orders, currentStep, stepsSize, setValue, readOnly}) {
@@ -60,7 +61,7 @@ export default function ApplyOrders({orders, currentStep, stepsSize, setValue, r
             {activityDemand.attributes &&
                 <>
                     <div className={styles.infos}>
-                        <p>Datum: <strong>{new Date(activityDemand.attributes.datum).toLocaleDateString('de-CH')}</strong>
+                        <p>Datum: <strong>{formatDate(activityDemand.attributes.datum)}</strong>
                         </p>
                         <p>Einsatztyp: <strong>{einsatztyp}</strong></p>
                     </div>

@@ -23,13 +23,35 @@
 
 .btnGroup {
   align-self: flex-end;
+  display: flex;
 
   button {
     font: inherit;
     padding: 1rem 1.2rem;
+
+    &.btnIconSecondary {
+      background-color: $color-brown;
+      font-size: $default-font-size;
+    }
   }
 
   button:not(:last-of-type) {
     margin-right: 1rem;
+  }
+}
+
+/**********************************/
+/* BELOW 544px (Phone) */
+/**********************************/
+@include respond(phone) {
+  .filter {
+    flex-direction: column;
+  }
+
+  .btnGroup {
+    justify-content: space-between;
+    align-self: flex-start;
+    margin-top: 1.4rem;
+    width: 100%;
   }
 }

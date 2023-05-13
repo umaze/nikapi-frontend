@@ -1,0 +1,311 @@
+@import "../abstracts/mixins";
+
+/* rem and em do NOT depend on html font-size in media queries!
+   Instead, 1rem = 1em = 16px */
+
+/**********************************/
+/* BELOW 1200px (Tablets landscape) */
+/**********************************/
+@include respond(land-tab) {
+  .grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    &--3-cols {
+    }
+  }
+}
+
+/**********************************/
+/* BELOW 944px (Tablets) */
+/**********************************/
+@include respond(tab) {
+  /* MOBILE NAVIGATION */
+  .overlay {
+    &:has(+ .header.nav-open) {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(2px);
+      z-index: 100;
+    }
+  }
+
+  .header {
+    .logo {
+      margin: 2rem 0;
+      z-index: 9999;
+    }
+
+    &.nav-open {
+      .main-nav-list {
+        align-self: start;
+        margin-top: 10rem;
+        row-gap: 1rem;
+        min-width: 27rem;
+
+        li {
+          display: flex;
+          align-items: flex-start;
+          padding-left: 0;
+        }
+
+        > .active {
+          border: none;
+        }
+
+        li:not(:last-of-type) {
+          &:hover:has(.main-nav-link) {
+            background-color: transparent;
+          }
+        }
+
+        .main-nav-link {
+          display: none;
+
+          &--expandable {
+            display: inline-block;
+            color: $color-black;
+            font-weight: 500;
+            font-size: 2.6rem;
+            margin-bottom: 1.2rem;
+
+            svg {
+              margin-right: 1.8rem;
+            }
+
+            &:hover {
+              cursor: pointer;
+            }
+          }
+        }
+
+        .help {
+          display: flex;
+          align-items: center;
+          margin-bottom: 1.2rem;
+
+          svg {
+            height: 3.2rem;
+            width: 3.2rem;
+          }
+
+          span {
+            display: inline-block;
+            color: $color-black;
+            font-weight: 500;
+            font-size: 2.6rem;
+            padding-left: 1rem;
+          }
+        }
+      }
+
+      .btn-mobile-nav,
+      .logo {
+        margin-top: 1rem;
+        align-self: flex-start;
+      }
+
+      .logo-text {
+        display: none;
+      }
+
+      .sub-nav-list {
+        display: flex;
+        align-items: flex-start;
+        padding-left: 4rem;
+
+        li {
+          padding-left: 0;
+        }
+
+        &--visible {
+          display: flex;
+
+          .active {
+            border-left: 5px solid $color-red;
+            border-right: none;
+            margin: 0 0 0 -1.6rem;
+            padding-left: 1.2rem;
+          }
+        }
+
+        .sub-nav-link {
+          &:not(.active) &:hover {
+            margin-left: 0;
+            padding-left: 0;
+          }
+        }
+      }
+    }
+  }
+
+  .btn-mobile-nav {
+    display: block;
+    vertical-align: center;
+    z-index: 9999;
+  }
+
+  .main-nav {
+    background-color: rgba(255, 255, 255, 0.97);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    transform: translateX(100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.5s ease-in;
+
+    /* Hide navigation */
+    /* Hide it visually */
+    opacity: 0;
+    /* Make it unaccessible to mouse and keyboard  */
+    pointer-events: none;
+    /* Hide it from screen readers */
+    visibility: hidden;
+  }
+
+  .nav-open .main-nav {
+    opacity: 1;
+    pointer-events: auto;
+    visibility: visible;
+    transform: translateX(0);
+  }
+
+  .nav-open .icon-mobile-nav {
+    &#icon-close-outline {
+      display: block;
+    }
+
+    &#icon-menu-outline {
+      display: none;
+    }
+  }
+
+  .main-nav-list {
+    flex-direction: column;
+    gap: 3.2rem;
+    align-items: flex-start;
+
+    .main-nav-link,
+    .btn {
+      &:link,
+      &:visited {
+        font-size: 2.6rem;
+      }
+    }
+
+    .help {
+      svg {
+        height: 4.8rem;
+        width: 4.8rem;
+      }
+    }
+
+    .btn {
+      padding: 0.8rem 1.2rem;
+
+      svg {
+        height: 3.2rem;
+        width: 3.2rem;
+      }
+    }
+
+    li {
+      margin: 0 !important;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  .sidebar {
+    display: none !important;
+  }
+
+  .grid {
+    display: grid;
+    gap: 9.6rem;
+
+    &--3-cols {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  // FOOTER
+  footer {
+    .grid {
+      &--3-cols {
+        grid-template-columns: 1fr 1fr;
+      }
+
+
+      > div {
+        justify-self: center;
+        max-width: 30rem;
+      }
+
+      > nav {
+        display: none;
+      }
+    }
+  }
+}
+
+/**********************************/
+/* BELOW 704px (Smaller Tablets) */
+/**********************************/
+@include respond(smaller-tab) {
+  // NAVIGATION
+  .header {
+    &.nav-open {
+      width: 80vw;
+    }
+  }
+
+  // FOOTER
+  footer {
+    .container {
+      gap: 3.8rem;
+
+      &.grid {
+        &--3-cols {
+          grid-template-columns: 1fr;
+        }
+
+        > div {
+          justify-self: center;
+          min-width: 30rem;
+        }
+      }
+    }
+  }
+}
+
+/**********************************/
+/* BELOW 544px (Phone) */
+/**********************************/
+@include respond(phone) {
+  .header {
+    &.nav-open {
+      width: 90vw;
+    }
+  }
+}
+
+/**********************************/
+/* BELOW 400px (Phone Mini) */
+/**********************************/
+@include respond(phone-mini) {
+  .header {
+    .logo {
+      svg {
+        display: none;
+      }
+    }
+  }
+}

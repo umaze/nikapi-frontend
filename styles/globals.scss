@@ -1,5 +1,7 @@
-@import "./base/base";
 @import "./abstracts/mixins";
+@import "./base/base";
+@import "./layout/navigation";
+@import "./base/queries";
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 a {
@@ -24,6 +26,7 @@ h1 {
   cursor: pointer;
   border: 0;
   border-radius: 0.5rem;
+  text-align: center;
 
   &-cta {
     background-color: $color-red-dark-2;

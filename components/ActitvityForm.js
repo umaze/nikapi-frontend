@@ -10,7 +10,7 @@ import Link from "next/link";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 import {API_URL} from "@/config/index";
-import {configRequest, formatTime, handleErrorMessage} from "@/helpers/index";
+import {configRequest, formatDate, formatTime, handleErrorMessage} from "@/helpers/index";
 import {toast} from "react-toastify";
 import Step from "@/components/Step";
 import SelectWrapper from "@/components/SelectWrapper";
@@ -125,7 +125,7 @@ export default function ActivityForm({
 
     const getOptionLabel = demand => {
         const typ = demand.attributes.einsatztyp?.typ;
-        const datum = new Date(demand.attributes.datum).toLocaleDateString('de-CH')
+        const datum = formatDate(demand.attributes.datum);
         const zeit = `${formatTime(demand.attributes.zeitVon)} - ${formatTime(demand.attributes.zeitBis)}`;
         const gruppe = demand.attributes.gruppe.data.attributes.name;
         if (demand.attributes.zeitVon) {
@@ -147,7 +147,7 @@ export default function ActivityForm({
     const DemandFields = () => (
         <Step title="Veranstaltung" info="Eine Veranstaltung auswählen" current={step + 1} size={fieldGroups.length}>
             <div className={styles.infos}>
-                <p>Datum: <strong>{selectedDatum ? new Date(selectedDatum).toLocaleDateString('de-CH') : '-'}</strong>
+                <p>Datum: <strong>{selectedDatum ? formatDate(selectedDatum) : '-'}</strong>
                 </p>
                 <p>Einsatztyp: <strong>{selectedEinsatztyp || '-'}</strong></p>
             </div>

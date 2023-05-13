@@ -1,7 +1,7 @@
-import {formatTime} from '@/helpers/index';
-import styles from '@/styles/DemandItem.module.scss';
+import {formatDate, formatTime} from '@/helpers/index';
 import Link from "next/link";
 import {IconEdit, IconTrash} from "@tabler/icons-react";
+import styles from '@/styles/DemandItem.module.scss';
 
 export default function DemandItem({ demand, onDelete, token }) {
     const attributes = demand.attributes;
@@ -12,7 +12,7 @@ export default function DemandItem({ demand, onDelete, token }) {
             <div className={styles.info}>
                 <div className={styles.infoTop}>
                     <div>
-                        <strong>{new Date(attributes.datum).toLocaleDateString('de-CH')}</strong>&nbsp;
+                        <strong>{formatDate(attributes.datum)}</strong>&nbsp;
                         {formatTime(attributes.zeitVon)}
                         {attributes.zeitVon && ' - '}
                         {formatTime(attributes.zeitBis)}
