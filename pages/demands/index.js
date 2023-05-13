@@ -12,8 +12,8 @@ import Modal from "@/components/Modal";
 import Deletion from "@/components/Deletion";
 import Filter from "@/components/Filter";
 import _ from "lodash";
-import styles from '@/styles/Demands.module.scss';
 import {IconFilter} from "@tabler/icons-react";
+import styles from '@/styles/Demands.module.scss';
 
 export default function DemandsPage({ demands, demandGroups, token }) {
     const [filteredDemands, setFilteredDemands] = useState(_.cloneDeep(demands));
@@ -64,7 +64,7 @@ export default function DemandsPage({ demands, demandGroups, token }) {
 
     return (
         <Layout>
-            <h1 className="heading-primary">Veranstalt&shy;ungen</h1>
+            <h1 className="heading-primary">Ver&shy;anstaltungen</h1>
             {isEinsatzplaner(user) &&
                 <div className={styles.btnGroup}>
                     <Link className="btn" href={`/demands/add`}>Veranstaltung hinzuf&uuml;gen</Link>
