@@ -35,7 +35,7 @@ export const AuthProvider = ({ children }) => {
         if (res.ok) {
             setUser(data.user);
             dispatch(setActivatedNavMenu(MAIN_MENU[0].id));
-            await router.push('/availabilities/me');
+            await router.push('/');
         } else {
             setError(data.message);
             // setError('');
@@ -63,7 +63,7 @@ export const AuthProvider = ({ children }) => {
             setUser(data.user);
             await checkUserLoggedIn();
             dispatch(setActivatedNavMenu(MAIN_MENU[0].id));
-            await router.push('/activities/me');
+            await router.push('/');
         } else {
             setError(data.message);
             // setError('');

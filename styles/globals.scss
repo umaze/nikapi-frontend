@@ -29,7 +29,7 @@ h1 {
   text-align: center;
 
   &-cta {
-    background-color: $color-red-dark-2;
+    background-color: $color-red-dark;
   }
 
   &:hover {
@@ -151,9 +151,36 @@ div.sidebar + div.main-content-flex-1 {
 }
 
 .Toastify__toast-container {
-  width: 35vw !important;
+  width: 40vw !important;
 }
 
 .form {
   font-size: 1.8rem;
+}
+
+/**********************************/
+/* BELOW 944px (Tablets) */
+/**********************************/
+@include respond(tab) {
+  .Toastify__toast-container {
+    width: 60vw !important;
+  }
+}
+
+/**********************************/
+/* BELOW 704px (Smaller Tablets) */
+/**********************************/
+@include respond(smaller-tab) {
+  .Toastify__toast-container {
+    width: 75vw !important;
+  }
+}
+
+/**********************************/
+/* BELOW 544px (Phone) */
+/**********************************/
+@include respond(phone) {
+  .Toastify__toast-container {
+    width: 100vw !important;
+  }
 }

@@ -13,7 +13,7 @@ export default function HomePage() {
         <Layout>
             <main>
                 <div className="container">
-                    <h1 className="heading-primary">&Uuml;bersicht Einsatzplanung</h1>
+                    <h1 className="heading-primary">&Uuml;bersicht Einsatz&shy;planung</h1>
                 </div>
 
                 <section className={styles.sectionDashboard} id="dashboard">
