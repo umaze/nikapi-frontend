@@ -1,6 +1,8 @@
-import styles from '@/styles/Hero.module.scss';
 import Link from "next/link";
+import Image from "next/image";
+import picschmutzli from '../img/hero-schmutzli.png';
 import ScrollLink from "@/components/ScrollLink";
+import styles from '@/styles/Hero.module.scss';
 
 export default function Hero() {
     return (
@@ -18,6 +20,7 @@ export default function Hero() {
                     </ScrollLink>
                 </div>
                 <div className="hero-img-box">
+                    <Image src={picschmutzli} alt="Bild Schmutzli"/>
                 </div>
             </div>
         </section>
