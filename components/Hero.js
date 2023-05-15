@@ -13,7 +13,7 @@ export default function Hero() {
                     <p className={styles.heroDescription}>Die St.Nikolaus Gesellschaft Dietlikon &amp; Br&uuml;ttisellen plant und koordiniert die Eins&auml;tze seiner Mitglieder anhand derer Verf&uuml;gbarkeiten. Denn Eins&auml;tze wollen koordiniert und gut geplant sein.</p>
                     <p className={styles.heroDescription}>Sei Teil der Freiwilligen und unterst&uuml;tze uns!</p>
                     <Link href='/account/login' className="btn btn--full margin-right-sm">
-                        Teilnehmen
+                        Login
                     </Link>
                     <ScrollLink className="btn btn--outline" href="#einsatzplanung">
                         Mehr erfahren &darr;
