@@ -8,6 +8,7 @@
 .sectionHero {
   background-color: rgba($color-brown-dark, 0.7);
   padding: 4.8rem 0 9.6rem 0;
+  position: relative;
 }
 
 .hero {
@@ -21,8 +22,11 @@
   gap: 9.6rem;
   align-items: center;
 
-  &-img {
-    width: 100%;
+  &Img {
+    position: absolute;
+    bottom: 2rem;
+    right: 5rem;
+    scale: 1.1;
   }
 
   &Description {
@@ -40,9 +44,42 @@
 /* BELOW 944px (Tablets) */
 /**********************************/
 @include respond(tab) {
+  .sectionHero {
+    position: initial;
+    padding-bottom: 0;
+  }
+
   .hero {
     grid-template-columns: 1fr;
     height: unset;
     gap: 0;
+
+    &ImgBox {
+      display: flex;
+      justify-content: center;
+      padding-top: 4.8rem;
+    }
+
+    &Img {
+      position: initial;
+      bottom: 0;
+      scale: 1;
+    }
+  }
+}
+
+/**********************************/
+/* BELOW 544px (Phone) */
+/**********************************/
+@include respond(phone) {
+  .hero {
+    &ImgBox {
+      justify-content: flex-start;
+    }
+
+    &Img {
+      height: 100%;
+      width: 100%;
+    }
   }
 }

@@ -19,8 +19,8 @@ export default function Hero() {
                         Mehr erfahren &darr;
                     </ScrollLink>
                 </div>
-                <div className="hero-img-box">
-                    <Image src={picschmutzli} alt="Bild Schmutzli"/>
+                <div className={styles.heroImgBox}>
+                    <Image src={picschmutzli} alt="Bild Schmutzli" className={styles.heroImg}/>
                 </div>
             </div>
         </section>
