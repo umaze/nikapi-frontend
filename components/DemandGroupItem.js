@@ -6,7 +6,7 @@ import styles from '@/styles/DemandGroupItem.module.scss';
 export default function DemandGroupItem({group}) {
     const attributes = group.attributes;
     const [rolesVisible, setRolesVisible] = useState(true);
-    const [rolesVisibleMobile, setRolesVisibleMobile] = useState(false);
+    const [rolesVisibleMobile, setRolesVisibleMobile] = useState(true);
 
     const handleToggle = e => {
         e.preventDefault();

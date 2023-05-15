@@ -48,7 +48,7 @@ export default function Filter({type, demandGroups, listEinsatztyp, listRolle, l
         </>
     );
 
-    const stringOptions = (options, emptyLabel = '') => (
+    const stringOptions = (options, emptyLabel = 'Alle') => (
         <>
             <option value="">{emptyLabel}</option>
             {options && options.map((option, i) => (

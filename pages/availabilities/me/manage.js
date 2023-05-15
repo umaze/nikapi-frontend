@@ -151,6 +151,7 @@ export default function ManageAvailabilityPage({token, demandGroups, persistedSe
                 </ul>
 
                 <button type="submit" className="btn">&Auml;nderung speichern</button>
+                <Link className="link--back link--back-bottom" href="/availabilities/me"><IconArrowLeft/>Zur&uuml;ck zu Meine Verf&uuml;gbarkeiten</Link>
             </form>
         </Layout>
     )
