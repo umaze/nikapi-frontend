@@ -1,0 +1,116 @@
+{
+  "data": [
+    {
+      "section": "datenschutz",
+      "title": "Datenschutzerklärung",
+      "content": {
+        "prolog": "Der Schutz Ihrer Privatsphäre ist für uns sehr wichtig. Nachstehend informieren wir Sie ausführlich über die Verarbeitung von personenbezogenen Daten durch St.Nikolaus-Gesellschaft Dietlikon & Wangen-Brüttisellen, Postfach 301, CH-8305 Dietlikon.",
+        "chapters": [
+          {
+            "title": "1. Verarbeitung von personenbezogenen Daten",
+            "content": [
+              {
+                "subtitle": "1.1 Besuch unserer Webseite",
+                "paragraphs": [
+                  "Bei jedem Aufruf unserer Webseite speichert der Webserver automatisch ein sogenanntes Server-Logfile, das z.B. den Namen der aufgerufenen URL, die IP-Adresse des Users, Datum und Uhrzeit des Abrufs, den genutzten Browser, die übertragene Datenmenge, den http-Status-Code und den anfragenden Provider (Zugriffsdaten) enthält und den Abruf dokumentiert.",
+                  "Diese Zugriffsdaten werden ausschliesslich zum Zwecke der Sicherstellung eines störungsfreien Betriebs der Seite sowie der Verbesserung unseres Angebots ausgewertet. Dies dient der Wahrung unserer im Rahmen einer Interessensabwägung überwiegenden berechtigten Interessen an einer korrekten Darstellung unseres Angebots."
+                ]
+              },
+              {
+                "subtitle": "1.2 Hostingdienstleistungen durch Drittanbieter",
+                "paragraphs": [
+                  "Im Rahmen einer Verarbeitung in unserem Auftrag erbringen Drittanbieter für uns die Dienste zum Hosting und zur Darstellung der Webseiten. Dies dient der Wahrung unserer im Rahmen einer Interessensabwägung überwiegenden berechtigten Interessen an einer korrekten Darstellung unserer Angebote und Dienstleistungen."
+                ]
+              }
+            ]
+          },
+          {
+            "title": "2. Cookies",
+            "content": [
+              {
+                "subtitle": "2.1 Einsatz von Cookies",
+                "paragraphs": [
+                  "Um den Besuch unserer Website attraktiv zu gestalten und die Nutzung bestimmter Funktionen zu ermöglichen, um passende Produkte anzuzeigen oder zur Marktforschung verwenden wir auf verschiedenen Seiten sogenannte Cookies. Dies dient der Wahrung unserer im Rahmen einer Interessensabwägung überwiegenden berechtigten Interessen an einer optimierten Darstellung unseres Angebots. Cookies sind kleine Textdateien, die automatisch auf Ihrem Endgerät gespeichert werden. Einige der von uns verwendeten Cookies werden nach Ende der Browser-Sitzung, also nach Schliessen Ihres Browsers, wieder gelöscht (sog. Session-Cookies). Andere Cookies verbleiben auf dem Gerät des Users und ermöglichen uns, den Browser beim nächsten Besuch wiederzuerkennen (persistente Cookies). Die Dauer der Speicherung können Sie der Übersicht in den Cookie-Einstellungen Ihres Webbrowsers entnehmen. Mit der Nutzung unserer Webseite willigen Sie ein, dass Cookies von uns gesetzt werden und damit personenbezogene Nutzungsdaten erhoben, gespeichert und genutzt werden, auch über das Ende der Browser-Sitzung hinaus. Diese Einwilligung können Sie jederzeit widerrufen, indem Sie in der Browservoreinstellung die Annahme von Cookies ausschliessen und bereits gesetzte Cookies löschen. Bei der Nichtannahme von Cookies kann die Funktionalität unserer Website jedoch eingeschränkt sein. Sie können Ihren Browser auch so einstellen, dass Sie über das Setzen von Cookies informiert werden und einzeln über deren Annahme entscheiden oder die Annahme von Cookies für bestimmte Fälle oder bestimmte Websites generell ausschliessen. Jeder Browser unterscheidet sich in der Art, wie er die Cookie-Einstellungen verwaltet. Weitere Informationen zu Cookies und deren Annahme oder Ablehnung finden sich unter folgenden Links der einschlägigen Browser-Anbieter:"
+                ],
+                "links": [
+                  {
+                    "anbieter":  "Internet Explorer™",
+                    "link":  "https://support.microsoft.com/de-de/microsoft-edge/cookies-in-microsoft-edge-l%C3%B6schen-63947406-40ac-c3b8-57b9-2a946a29ae09"
+                  },
+                  {
+                    "anbieter":  "Safari™",
+                    "link":  "https://support.apple.com/de-ch/guide/safari/sfri11471/mac"
+                  },
+                  {
+                    "anbieter":  "Chrome™",
+                    "link":  "https://support.google.com/chrome/bin/answer.py?hl=de&hlrm=en&answer=95647"
+                  },
+                  {
+                    "anbieter":  "Firefox™",
+                    "link":  "https://support.mozilla.org/de/kb/cookies-erlauben-und-ablehnen"
+                  },
+                  {
+                    "anbieter":  "Opera™",
+                    "link":  "https://help.opera.com/de/latest/security-and-privacy/"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "title": "3. Hyperlinks zu anderen Websites",
+            "content": [
+              {
+                "paragraphs": [
+                  "Unsere Webseite kann Links zu anderen Websites und zu sozialen Netzwerken (z.B. Facebook, Instagram, Twitter) enthalten. Wir überwachen diese Websites nicht und sind weder für deren Inhalt noch deren Umgang mit persönlichen Daten verantwortlich. Unsere Website verwendet keine Social-Media-Plug-Ins."
+                ]
+              }
+            ]
+          },
+          {
+            "title": "4. Rechte, Auskunft und Kontakte",
+            "content": [
+              {
+                "paragraphs": [
+                  "St.Nikolaus-Gesellschaft Dietlikon & Wangen-Brüttisellen hat keinen zuständigen Datenschutzbeauftragten. Im Rahmen der Datenschutzgesetzgebung insbesondere für Auskünfte und Anliegen betreffend erfasster personenbezogener Daten sowie deren Verarbeitung, Datenberichtigungen, Widersprüche zur Datenerfassung und Datenhaltung sowie Gesuche um Datenlöschungen können Sie sich an die Datenschutz-Aufsichtsbehörde wenden.",
+                  "Die zuständige Datenschutz-Aufsichtsbehörde für die Schweiz ist der Eidg. Datenschutz- und Öffentlichkeitsbeauftragte (EDÖB): www.edoeb.admin.ch."
+                ]
+              }
+            ]
+          },
+          {
+            "title": "5. Widerspruchsrecht",
+            "content": [
+              {
+                "paragraphs": [
+                  "Sofern personenbezogene Daten mit Bezug zur Europäischen Union (EU) gemäss Art. 3 EU-Datenschutz-Grundverordnung (DSGVO) auf Grundlage von berechtigten Interessen gemäss Art. 6 Abs. 1 S. 1 lit. f DSGVO verarbeitet werden, besteht das Recht, gemäss Art. 21 DSGVO Widerspruch gegen die Verarbeitung solcher Daten einzulegen, soweit dafür Gründe vorliegen, die sich aus besonderer Situation ergeben oder sich der Widerspruch gegen Direktmarketingmassnahmen richtet. Im letzteren Fall haben Sie jederzeit die Möglichkeit, einer Verwendung Ihrer Daten zu Marketingzwecken mit Wirkung für die Zukunft zu widersprechen. Bitte beachten Sie, dass eine Bearbeitung aus systemtechnischen Gründen ein paar Tage in Anspruch nehmen kann."
+                ]
+              }
+            ]
+          },
+          {
+            "title": "6. Aufbewahrungsdauer und Löschung",
+            "content": [
+              {
+                "paragraphs": [
+                  "Wir behalten personenbezogene Daten so lange auf, wie die betroffene Person uns dafür ihre Einwilligung gibt, es für die Abwicklung der entsprechenden Rechtsbeziehung erforderlich und/oder es gesetzlich geboten ist. Danach werden die personenbezogenen Daten technisch bestmöglich und adäquat gelöscht."
+                ]
+              }
+            ]
+          },
+          {
+            "title": "7. Änderungen dieser Datenschutzerklärung",
+            "content": [
+              {
+                "paragraphs": [
+                  "Soweit gesetzlich und/oder tatsächlich notwendig, wird diese Datenschutzerklärung angepasst bzw. geändert."
+                ]
+              }
+            ]
+          }
+        ],
+        "jurisdiction": "CH-Dietlikon, 18.05.2023"
+      }
+    }
+  ]
+}
