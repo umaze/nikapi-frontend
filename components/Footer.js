@@ -20,11 +20,11 @@ export default function Footer() {
                         Dietlikon &amp; Wangen-Br&uuml;ttisellen.<br/>All rights reserved.</p>
                     <ul className={styles.footerNav}>
                         <li>
-                            <Link className={styles.footerLink} data-item-title="Impressum" href="#">Impressum</Link>
+                            <Link className={styles.footerLink} data-item-title="Impressum" href='/impressum'>Impressum</Link>
                         </li>
                         <li>
                             <Link className={styles.footerLink} data-item-title="Datenschutzbestimmungen"
-                                  href="#">Datenschutz</Link>
+                                  href='/datenschutz'>Datenschutz</Link>
                         </li>
                     </ul>
                 </div>

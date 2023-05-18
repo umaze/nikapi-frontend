@@ -1,0 +1,33 @@
+@import "./abstracts/variables";
+
+.impressum {
+  &TextBox {
+    display: flex;
+    flex-direction: column;
+    gap: 3.2rem;
+    padding: 2.4rem 3.4rem 4.8rem 0;
+    font-size: 1.8rem;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  &Info {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    width: 100%;
+    line-height: 3rem;
+
+    &Title {
+      font-weight: 500;
+      color: $color-black;
+      cursor: default;
+    }
+
+    &Address {
+      grid-column: span 2;
+    }
+  }
+}

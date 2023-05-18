@@ -195,29 +195,31 @@ export default function ActivityForm({
         <section className={styles.navigationControls}>
             {
                 step === fieldGroups.length - 1 &&
-                <button type="submit" disabled={!isValid}
-                        className="btn btn-icon">
-                    {readOnly ? 'OK' : <FaSave/>}{!readOnly ? 'Speichern' : ''}
-                </button>
+                <div className={styles.btnGroup}>
+                    <button type="button" onClick={() => setStep(step - 1)}
+                            className="btn-secondary btn-icon">
+                        <IconArrowLeft/>Zur&uuml;ck
+                    </button>
+                    <button type="submit" disabled={!isValid}
+                            className="btn btn-icon">
+                        {readOnly ? 'OK' : <FaSave/>}{!readOnly ? 'Speichern' : ''}
+                    </button>
+                </div>
             }
             {
                 step < fieldGroups.length - 1 &&
-                <button type="button" onClick={() => setStep(step + 1)} disabled={!isValid}
-                        className="btn-secondary btn-icon btn-icon--right">
-                    Weiter<IconArrowRight/>
-                </button>
+                <div className={styles.btnGroup}>
+                    <button type="button" onClick={() => setStep(step - 1)} disabled={step === 0}
+                            className="btn-secondary btn-icon">
+                        <IconArrowLeft/>Zur&uuml;ck
+                    </button>
+                    <button type="button" onClick={() => setStep(step + 1)} disabled={!isValid}
+                            className="btn-secondary btn-icon btn-icon--right">
+                        Weiter<IconArrowRight/>
+                    </button>
+                </div>
             }
-            {
-                step > 0 &&
-                <button type="button" onClick={() => setStep(step - 1)}
-                        className="btn-secondary btn-icon">
-                    <IconArrowLeft/>Zur&uuml;ck
-                </button>
-            }
-            {
-                step === 0 &&
-                <Link className="btn-secondary" href={`/activities`}>Abbrechen</Link>
-            }
+            <Link className="btn-secondary" href={`/activities`}>Abbrechen</Link>
         </section>
     )
 
