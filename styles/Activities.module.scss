@@ -6,6 +6,7 @@
   border: $color-red 1px solid !important;
 }
 .range {
+  display: grid;
   grid-column-gap: 2rem;
 
   div {
