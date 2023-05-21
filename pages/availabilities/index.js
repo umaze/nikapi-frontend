@@ -46,7 +46,6 @@ export default function AvailabilitiesPage({availabilities, page, total}) {
         <Layout>
             <h1 className="heading-primary">Verf&uuml;gbar&shy;keiten</h1>
             <div className={styles.btnGroup}>
-                <Link className="btn" href={`/availabilities/me/manage`}>Verf&uuml;gbarkeiten verwalten</Link>
                 {!filterExpanded && <button type="button"
                         className={`btn btn-icon ${styles.btnIconSecondary}`}
                         onClick={() => handleToggle(true)}>
