@@ -7,6 +7,20 @@
   &Small {
     display: none;
   }
+
+  &SmallVertically {
+    display: none;
+  }
+}
+
+/*
+ * Select all but the first .demandRowSmall child of tbody,
+ * and remove the margin-top from the previous rule.
+ */
+tbody {
+  > .demandRowSmall ~ .demandRowSmall {
+    margin-top: 2rem;
+  }
 }
 
 .demandDatum {
@@ -42,5 +56,57 @@
     &Small {
       display: flex;
     }
+  }
+}
+
+/**********************************/
+/* BELOW 704px (Tablet small) */
+/**********************************/
+@include respond(smaller-tab) {
+  .demandRow {
+    &SmallVertically {
+      display: flex;
+      align-items: center;
+
+      td:first-of-type {
+        padding-left: 2rem;
+        width: 15rem;
+        font-weight: 500;
+      }
+
+      td {
+        &.auswahlCell {
+          padding-left: 2rem;
+          min-width: fit-content;
+        }
+      }
+    }
+  }
+
+  .rolesHorizontally {
+    display: none;
+  }
+}
+
+
+/**********************************/
+/* BELOW 544px (Phone) */
+/**********************************/
+@include respond(phone) {
+  .demandRow {
+    &SmallVertically {
+      padding-top: 0.5rem;
+    }
+  }
+  .demandDatum {
+    width: $column-demand-datum-small;
+  }
+
+  .demandZeit {
+    width: $column-demand-zeit-small;
+  }
+
+  .demandEinsatz {
+    min-width: $column-demand-einsatz-small;
   }
 }

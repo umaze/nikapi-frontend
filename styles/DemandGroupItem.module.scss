@@ -42,6 +42,10 @@
     text-align: center;
     min-width: $column-demand-auswahl-rollen;
   }
+
+  .rolesHorizontally {
+    display: block;
+  }
 }
 
 /**********************************/
@@ -73,6 +77,50 @@
         border-bottom: solid 1px #ddd;
         margin-bottom: 0.8rem;
       }
+    }
+  }
+}
+
+/**********************************/
+/* BELOW 704px (Tablet small) */
+/**********************************/
+@include respond(smaller-tab) {
+  .group {
+    .demandAuswahlRollen {
+      display: none;
+    }
+
+    .containerTable {
+      .rolesHorizontally {
+        display: none !important;
+      }
+    }
+  }
+}
+
+/**********************************/
+/* BELOW 544px (Phone) */
+/**********************************/
+@include respond(phone) {
+  .group {
+    font-size: 1.4rem;
+
+    &Info {
+      h3 {
+        margin-left: 0.5rem;
+      }
+    }
+
+    .demandDatum {
+      width: $column-demand-datum-small;
+    }
+
+    .demandZeit {
+      width: $column-demand-zeit-small;
+    }
+
+    .demandEinsatz {
+      min-width: $column-demand-einsatz-small;
     }
   }
 }

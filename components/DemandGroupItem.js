@@ -58,7 +58,7 @@ export default function DemandGroupItem({group}) {
                     ))}
                     </tbody>
                 </table>
-                <button className={`btn ${styles.btnIcon}`} onClick={e => handleToggle(e)}>
+                <button className={`btn ${styles.btnIcon} ${styles.rolesHorizontally}`} onClick={e => handleToggle(e)}>
                     {rolesVisibleMobile ? <IconChevronLeft/> : <IconChevronRight/>}
                 </button>
             </div>
