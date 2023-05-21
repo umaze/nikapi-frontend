@@ -15,7 +15,7 @@ export default function ActivitiesPage({activities}) {
     const {user} = useContext(AuthContext);
     const [filteredActivities, setFilteredActivities] = useState(_.cloneDeep(activities));
     const [filterExpanded, setFilterExpanded] = useState(false);
-    const [hasOverflow, setHasOverflow] = useState(true);
+    const [hasOverflow, setHasOverflow] = useState(false);
 
     const listEinsatztyp = activities?.length > 0 ?
         [...new Set(activities.flatMap(activity => activity.attributes.demand.data.attributes.einsatztyp?.typ))] :

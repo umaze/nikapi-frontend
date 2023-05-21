@@ -23,3 +23,17 @@
     @include input-field;
   }
 }
+
+/**********************************/
+/* BELOW 704px (Tablet small) */
+/**********************************/
+@include respond(smaller-tab) {
+  .infos {
+    flex-direction: column;
+    padding-top: 1rem;
+
+    p {
+      margin: 0;
+    }
+  }
+}

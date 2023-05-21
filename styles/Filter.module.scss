@@ -55,3 +55,23 @@
     width: 100%;
   }
 }
+
+/**********************************/
+/* BELOW 400px (Phone mini) */
+/**********************************/
+@include respond(phone-mini) {
+  .filter {
+    .btnGroup {
+      flex-wrap: wrap;
+      gap: 1rem;
+
+      button {
+        margin-right: 0;
+
+        &.btn {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

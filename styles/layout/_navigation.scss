@@ -200,8 +200,10 @@ header {
 
   .active {
     border-right: 5px solid $color-red;
-    margin-right: -16px;
+    margin: 0 -16px;
     padding-right: 4px;
+    padding-left: 16px;
+    background-color: $color-brown-light-3;
 
     &:hover,
     &:active {
