@@ -44,8 +44,11 @@ $default-font-size: 1.8rem;
 
 // TABLE COLUMNS
 $column-demand-datum: 9rem;
+$column-demand-datum-small: 7rem;
 $column-demand-zeit: 6rem;
+$column-demand-zeit-small: 4rem;
 $column-demand-einsatz: 20rem;
+$column-demand-einsatz-small: min-content;
 $column-demand-auswahl-rollen: 12rem;
 
 // HEADER

@@ -1,3 +1,5 @@
+@import "./abstracts/mixins";
+
 .dragBox {
   border-radius: 0.75rem;
   border: 1px dashed black;
@@ -10,5 +12,16 @@
   &Title {
     margin: 0 4rem;
     font-weight: 700;
+  }
+}
+
+/**********************************/
+/* BELOW 704px (Tablet small) */
+/**********************************/
+@include respond(smaller-tab) {
+  .dragBox {
+    &Title {
+      margin: 0 2rem;
+    }
   }
 }

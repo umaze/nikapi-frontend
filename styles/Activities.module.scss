@@ -5,6 +5,41 @@
 .inputInvalid {
   border: $color-red 1px solid !important;
 }
+.range {
+  display: grid;
+  grid-column-gap: 2rem;
+
+  div {
+    min-width: 0;
+  }
+}
+.wrapper {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    margin-bottom: 0.8rem;
+  }
+
+  .inputField {
+    display: flex;
+    align-items: center;
+  }
+
+  input {
+    @include input-field;
+    width: 100%;
+  }
+
+  input:disabled {
+    color: $color-brown;
+    border-color: $color-brown-light;
+
+    &::placeholder {
+      color: transparent;
+    }
+  }
+}
 
 /** navigation by steps */
 .navigationControls {
@@ -70,6 +105,15 @@
 /* BELOW 704px (Tablet small) */
 /**********************************/
 @include respond(smaller-tab) {
+  .infos {
+    flex-direction: column;
+    padding-top: 1rem;
+
+    p {
+      margin: 0;
+    }
+  }
+
   .btnGroup {
     button {
       &.btnIconFitContent {

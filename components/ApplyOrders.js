@@ -66,7 +66,7 @@ export default function ApplyOrders({orders, currentStep, stepsSize, setValue, r
                         <p>Einsatztyp: <strong>{einsatztyp}</strong></p>
                     </div>
                     {!auftragRequired &&
-                        <p>Bestellungen sind für Typ '{einsatztyp}' <strong>nicht erforderlich</strong>.</p>}
+                        <p className={styles.hint}>Bestellungen sind für Typ '{einsatztyp}' <strong>nicht erforderlich</strong>.</p>}
 
                     {auftragRequired &&
                         <div className={styles.dragAndDrop}>

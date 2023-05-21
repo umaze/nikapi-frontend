@@ -23,3 +23,33 @@
     }
   }
 }
+
+.btnGroup {
+  display: flex;
+  column-gap: 1rem;
+}
+
+/**********************************/
+/* BELOW 544px (Phone) */
+/**********************************/
+@include respond(phone) {
+  .list {
+    li {
+      padding: 2rem 0.5rem
+    }
+  }
+}
+
+/**********************************/
+/* BELOW 400px (Phone mini) */
+/**********************************/
+@include respond(phone-mini) {
+  .btnGroup {
+    flex-direction: column-reverse;
+    row-gap: 1rem;
+
+    a {
+      text-align: center;
+    }
+  }
+}

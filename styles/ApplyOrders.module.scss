@@ -1,3 +1,5 @@
+@import "./abstracts/mixins";
+
 .infos {
   display: flex;
   column-gap: 2rem;
@@ -10,6 +12,12 @@
   strong {
     font-weight: 700;
   }
+}
+
+.hint {
+  border: 1px solid $color-brown-light;
+  border-radius: 0.5rem;
+  padding: 1rem;
 }
 
 .dragAndDrop {
@@ -46,6 +54,32 @@
 
     button {
       margin-left: 1rem;
+    }
+  }
+}
+
+/**********************************/
+/* BELOW 704px (Tablet small) */
+/**********************************/
+@include respond(smaller-tab) {
+  .infos {
+    flex-direction: column;
+    padding-top: 1rem;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  .dragAndDrop {
+    grid-template-columns: 1fr;
+
+    &Basket {
+      margin-top: 2rem;
+    }
+
+    &Title {
+      margin: 0 2rem;
     }
   }
 }

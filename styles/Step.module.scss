@@ -57,6 +57,10 @@
   border-bottom: 1px solid $color-brown;
   background-color: $color-brown-light-2;
 
+  .stepInfoSmall {
+    display: none;
+  }
+
   .stepCircle {
     align-self: center;
     display: flex;
@@ -102,8 +106,11 @@
 }
 
 .inputGroup select {
-  min-width: 50rem;
   @include form-field;
+  padding-right: 3.2rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   background-color: $color-white;
 
@@ -117,5 +124,53 @@
 
   &:focus-visible {
     outline: none;
+  }
+}
+
+/**********************************/
+/* BELOW 704px (Tablet small) */
+/**********************************/
+@include respond(smaller-tab) {
+  .inputGroup {
+    min-width: initial;
+  }
+}
+
+/**********************************/
+/* BELOW 544px (Phone) */
+/**********************************/
+@include respond(phone) {
+  .stepCombo {
+    align-items: center;
+
+    .stepStatus {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      row-gap: 0.5rem;
+
+      .stepInfoSmall {
+        display: block;
+      }
+
+      .stepCircle {
+        width: 4rem;
+        height: 4rem;
+      }
+    }
+  }
+
+  .stepInfo {
+    display: none;
+  }
+}
+
+/**********************************/
+/* BELOW 400px (Phone mini) */
+/**********************************/
+@include respond(phone-mini) {
+  .inputGroup {
+    padding: 1.8rem 1rem;
   }
 }

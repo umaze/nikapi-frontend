@@ -128,7 +128,8 @@
             border-left: 5px solid $color-red;
             border-right: none;
             margin: 0 0 0 -1.6rem;
-            padding-left: 1.2rem;
+            padding: 0 1.2rem;
+            background-color: $color-red-light-2;
           }
         }
 

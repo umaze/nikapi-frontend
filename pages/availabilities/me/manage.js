@@ -134,7 +134,8 @@ export default function ManageAvailabilityPage({token, demandGroups, persistedSe
 
     return (
         <Layout title="Verfügbarkeiten verwalten">
-            <Link className="link--back" href="/availabilities/me"><IconArrowLeft/>Zur&uuml;ck zu Meine Verf&uuml;gbarkeiten</Link>
+            <Link className="link--back" href="/availabilities/me"><IconArrowLeft/>Zur&uuml;ck zu Meine
+                Verf&uuml;gbarkeiten</Link>
             <h1 className="heading-primary">Verf&uuml;gbarkeiten verwalten</h1>
 
             <form
@@ -150,8 +151,10 @@ export default function ManageAvailabilityPage({token, demandGroups, persistedSe
                     ))}
                 </ul>
 
-                <button type="submit" className="btn">&Auml;nderung speichern</button>
-                <Link className="link--back link--back-bottom" href="/availabilities/me"><IconArrowLeft/>Zur&uuml;ck zu Meine Verf&uuml;gbarkeiten</Link>
+                <div className={styles.btnGroup}>
+                    <Link className="btn-secondary" href={`/availabilities/me`}>Abbrechen</Link>
+                    <button type="submit" className="btn">&Auml;nderung speichern</button>
+                </div>
             </form>
         </Layout>
     )

@@ -10,8 +10,11 @@ export default function Step({ title, info, current, size, children }) {
         <section className={styles.inputGroup}>
             <div className={styles.stepHeading}>
                 <div className={styles.stepCombo}>
-                    <div className={styles.stepCircle}>
-                        <div className={styles.stepNumber}>{steps[(current)] ? <IconCheck/> : <IconQuestionMark/>}</div>
+                    <div className={styles.stepStatus}>
+                        <div className={styles.stepInfoSmall}><strong>{current}</strong> / {size}</div>
+                        <div className={styles.stepCircle}>
+                            <div className={styles.stepNumber}>{steps[(current)] ? <IconCheck/> : <IconQuestionMark/>}</div>
+                        </div>
                     </div>
                     <div className={styles.stepDescription}>
                         <div className={styles.stepDescriptionTitle}>{title}</div>

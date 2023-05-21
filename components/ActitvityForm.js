@@ -36,6 +36,9 @@ export default function ActivityForm({
     const [step, setStep] = useState(0);
     const [selectedDatum, setSelectedDatum] = useState('');
     const [selectedEinsatztyp, setSelectedEinsatztyp] = useState('');
+    const [selectedZeitVon, setSelectedZeitVon] = useState('');
+    const [selectedZeitBis, setSelectedZeitBis] = useState('');
+    const [selectedGruppe, setSelectedGruppe] = useState('');
     const activityDemand = useSelector(selectCurrentDemand);
 
     const dispatch = useDispatch();
@@ -99,6 +102,9 @@ export default function ActivityForm({
 
     const initialize = async selectedDemand => {
         setSelectedDatum(selectedDemand.attributes.datum);
+        setSelectedZeitVon(selectedDemand.attributes.zeitVon);
+        setSelectedZeitBis(selectedDemand.attributes.zeitBis);
+        setSelectedGruppe(selectedDemand.attributes.gruppe?.data?.attributes.name);
         setSelectedEinsatztyp(selectedDemand.attributes.einsatztyp.typ);
         dispatch(
             setDemand({
@@ -127,12 +133,7 @@ export default function ActivityForm({
         const typ = demand.attributes.einsatztyp?.typ;
         const datum = formatDate(demand.attributes.datum);
         const zeit = `${formatTime(demand.attributes.zeitVon)} - ${formatTime(demand.attributes.zeitBis)}`;
-        const gruppe = demand.attributes.gruppe.data.attributes.name;
-        if (demand.attributes.zeitVon) {
-            return `${datum} | ${zeit} | ${typ} [${gruppe}]`;
-        } else {
-            return `${datum} | keine Zeit | ${typ} [${gruppe}]`;
-        }
+        return `${datum} - ${typ}${demand.attributes.zeitVon ? ` (${zeit})` : ''}`;
     };
 
     const demandOptions = options => (
@@ -147,8 +148,7 @@ export default function ActivityForm({
     const DemandFields = () => (
         <Step title="Veranstaltung" info="Eine Veranstaltung auswählen" current={step + 1} size={fieldGroups.length}>
             <div className={styles.infos}>
-                <p>Datum: <strong>{selectedDatum ? formatDate(selectedDatum) : '-'}</strong>
-                </p>
+                <p>Datum: <strong>{selectedDatum ? formatDate(selectedDatum) : '-'}</strong></p>
                 <p>Einsatztyp: <strong>{selectedEinsatztyp || '-'}</strong></p>
             </div>
             <SelectWrapper
@@ -160,6 +160,38 @@ export default function ActivityForm({
                 register={register}
                 handleChange={e => handleChange(e)}
                 errors={errors}/>
+            <div className={`grid grid--2-cols ${styles.range}`}>
+                <div className={styles.wrapper}>
+                    <label>Zeit von</label>
+                    <div className={styles.inputField}>
+                        <input
+                            id="demand.zeitVon"
+                            type="time"
+                            value={selectedZeitVon}
+                            disabled={true}/>
+                    </div>
+                </div>
+                <div className={styles.wrapper}>
+                    <label>Zeit bis</label>
+                    <div className={styles.inputField}>
+                        <input
+                            id="demand.zeitBis"
+                            type="time"
+                            value={selectedZeitBis}
+                            disabled={true}/>
+                    </div>
+                </div>
+            </div>
+            <div className={styles.wrapper}>
+                <label>Gruppe</label>
+                <div className={styles.inputField}>
+                    <input
+                        id="demandGroup"
+                        type="text"
+                        value={selectedGruppe}
+                        disabled={true}/>
+                </div>
+            </div>
         </Step>
     );
 
