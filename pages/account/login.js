@@ -52,6 +52,7 @@ export default function LoginPage() {
                             label="Passwort"
                             id="password"
                             type="password"
+                            autocomplete="off"
                             required
                             placeholder="Passwort eingeben"
                             register={register}

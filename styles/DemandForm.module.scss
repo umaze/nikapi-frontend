@@ -46,11 +46,17 @@
 @include respond(phone) {
   .demand {
     grid-template-columns: 1fr;
+    row-gap: 2rem;
+    margin-bottom: 4.8rem;
 
     div {
       &.gridSpan2 {
         grid-column: initial;
       }
+    }
+
+    + button {
+      width: 100%;
     }
   }
 }

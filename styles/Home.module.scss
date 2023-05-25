@@ -37,3 +37,12 @@
     }
   }
 }
+
+/**********************************/
+/* BELOW 704px (Tablet small) */
+/**********************************/
+@include respond(smaller-tab) {
+  .sectionDashboard {
+    padding: 4.8rem 0;
+  }
+}

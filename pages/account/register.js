@@ -75,6 +75,7 @@ export default function RegisterPage() {
                             label="Passwort wiederholen"
                             id="passwordConfirm"
                             type="password"
+                            autocomplete="off"
                             required
                             placeholder="Passwort"
                             register={register}

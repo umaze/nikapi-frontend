@@ -29,6 +29,7 @@ header {
     width: 60vw;
     right: 0;
     z-index: 990;
+    background-color: $color-white;
   }
 
   nav {
@@ -97,6 +98,7 @@ header {
 
   > .active {
     border-bottom: 5px solid $color-red;
+    background-color: $color-brown-light-2;
 
     .main-nav-link,
     .help {
