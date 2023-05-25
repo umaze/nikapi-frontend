@@ -32,6 +32,12 @@ header {
     background-color: $color-white;
   }
 
+  &:not(&.nav-open) .main-nav-list {
+    > .active {
+      background-color: $color-brown-light-2;
+    }
+  }
+
   nav {
     display: flex;
     height: 100%;
@@ -98,7 +104,6 @@ header {
 
   > .active {
     border-bottom: 5px solid $color-red;
-    background-color: $color-brown-light-2;
 
     .main-nav-link,
     .help {
