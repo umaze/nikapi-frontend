@@ -1,11 +1,13 @@
 import Layout from "@/components/Layout";
 import {IconChevronDown, IconChevronUp} from "@tabler/icons-react";
-import {useState} from "react";
+import {useContext, useState} from "react";
 import {listQuestionAndAnswer} from "@/config/help";
 import _ from "lodash";
 import styles from "@/styles/Help.module.scss";
+import AuthContext from "@/context/AuthContext";
 
 export default function HelpPage() {
+    const {user} = useContext(AuthContext);
     const [listExpanded, setListExpanded] = useState([]);
 
     const handleClick = (indTopic, indItem, e) => {
@@ -26,6 +28,9 @@ export default function HelpPage() {
         return listExpanded[indTopic]?.includes(indItem);
     };
 
+    const isPublic = topic => topic.name === 'Generell' && !user;
+    const isMember = topic => topic.name !== 'Generell' && user;
+
     return (
         <Layout title="Hilfe">
             <div className={styles.help}>
@@ -34,24 +39,25 @@ export default function HelpPage() {
                 </h1>
 
                 {listQuestionAndAnswer && listQuestionAndAnswer.map((item, i) => (
-                    <div key={i} className={styles.topic}>
+                    ((isPublic(item.topic)) || (isMember(item.topic))) && <div key={i} className={styles.topic}>
                         <h2 className="heading-secondary">{item.topic.name}</h2>
                         <div className={styles.accordion}>
-                        {item.topic.list && item.topic.list.map((item, ind) => (
-                            <div
-                                key={ind}
-                                className={`${styles.item} ${isCollapsable(i, ind) ? styles.open : ''}`}
-                                onClick={e => handleClick(i, ind, e)}>
-                                <p className={styles.number}>{item.number}</p>
-                                <p className={styles.question}>{item.question}</p>
-                                {isCollapsable(i, ind) ? <IconChevronUp/> : <IconChevronDown/>}
-                                <div className={styles.hiddenBox}>
-                                    <p>{item.answer}</p>
+                            {item.topic.list && item.topic.list.map((item, ind) => (
+                                <div
+                                    key={ind}
+                                    className={`${styles.item} ${isCollapsable(i, ind) ? styles.open : ''}`}
+                                    onClick={e => handleClick(i, ind, e)}>
+                                    <p className={styles.number}>{item.number}</p>
+                                    <p className={styles.question}>{item.question}</p>
+                                    {isCollapsable(i, ind) ? <IconChevronUp/> : <IconChevronDown/>}
+                                    <div className={styles.hiddenBox}>
+                                        <p>{item.answer}</p>
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
+                            ))}
                         </div>
                     </div>
+
                 ))}
             </div>
         </Layout>

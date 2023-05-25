@@ -1,6 +1,33 @@
 export const listQuestionAndAnswer = [
     {
         topic: {
+            name: 'Generell',
+            list: [
+                {
+                    number: '01',
+                    question: 'Wie bin ich dabei?',
+                    answer: 'Kandidaten und Kandidatinnen werden an der jährlichen Generalversammlung aufgenommen. Neue Mitglieder erhalten danach die Möglichkeit, sich in der Einsatzplanung zu registrieren und sind anschliessend zugelassen.'
+                },
+                {
+                    number: '02',
+                    question: 'Wieso sehe ich keine Einsätze, Verfügbarkeiten oder Veranstaltungen?',
+                    answer: 'Für nicht angemeldete Benutzer sind geschützte Daten nicht sichtbar.'
+                },
+                {
+                    number: '03',
+                    question: 'Sind andere Vereine beteiligt?',
+                    answer: 'Die Einsatzplanung ist aktuell ausschliesslich zu eigenen Vereinszwecken bereitgestellt und betrieben. Gerne lässt sich aber über vorhandenes Potential diskutieren.'
+                },
+                {
+                    number: '04',
+                    question: 'Gibt es eine Historisierung?',
+                    answer: 'Nein. Die Daten sind explizit für die aktuelle Samichlaus Saison gepflegt.'
+                }
+            ]
+        }
+    },
+    {
+        topic: {
             name: 'Verfügbarkeiten',
             list: [
                 {
