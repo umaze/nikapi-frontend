@@ -8,10 +8,12 @@ import Sidebar from "@/components/Sidebar";
 import {useContext} from "react";
 import AuthContext from "@/context/AuthContext";
 import styles from '@/styles/Layout.module.scss';
+import NotFoundPage from "../pages/404";
 
 export default function Layout({title, keywords, description, children}) {
     const {user} = useContext(AuthContext);
     const router = useRouter();
+    const publicRoutes = ['/account/help', '/account/login', '/account/register', '/datenschutz', '/impressum'];
 
     return (
         <>
@@ -23,11 +25,13 @@ export default function Layout({title, keywords, description, children}) {
 
             <Header/>
 
-            {(router.pathname === '/' && !user) ?
+            {(router.pathname === '/' && !user) &&
                 <>
                     <Hero/>
                     <Einsatzplanung/>
-                </> :
+                </>
+            }
+            {((user || publicRoutes.includes(router.pathname) && !user)) &&
                 <div className={styles.container}>
                     <Sidebar/>
                     <div className={`${styles.mainContent} main-content-flex-1`}>

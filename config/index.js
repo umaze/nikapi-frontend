@@ -28,7 +28,7 @@ export const SUB_MENU = {
     einsaetze: [
         {
             href: '/activities',
-            label: 'Einsätze',
+            label: 'Alle Einsätze',
             icon: <IconClipboardList/>,
             additionals: ['/add', '/edit/']
         }
@@ -36,7 +36,7 @@ export const SUB_MENU = {
     admin: [
         {
             href: '/availabilities',
-            label: 'Verfügbarkeiten',
+            label: 'Alle Verfügbarkeiten',
             icon: <IconCheckbox/>,
             restricted: true
         },

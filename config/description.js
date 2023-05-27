@@ -4,7 +4,7 @@ export const listDescriptionEinsatzplanung = [
             name: 'Veranstaltungen',
             list: [
                 {
-                    text: 'Während der Samichlaus Zeit gilt es, die grosse Nachfrage einzuteilen, um den Überblick zu behalten. Die Einsätze sind in verschiedene Veranstaltungen unterteilt, für welche jeweils ein definierter Bedarf an Rollen vorliegt.'
+                    text: 'Während der Samichlaus Saison gilt es, die grosse Nachfrage einzuteilen, um den Überblick zu behalten. Die Einsätze sind in verschiedene Veranstaltungen unterteilt. Eine Veranstaltung hat jeweils einen bestimmten Bedarf an Rollen. Diese wiederum sollen durch die verfügbaren Mitglieder besetzt werden.'
                 }
             ]
         }
@@ -14,7 +14,7 @@ export const listDescriptionEinsatzplanung = [
             name: 'Verfügbarkeiten',
             list: [
                 {
-                    text: 'Die Mitglieder geben ihre Verfügbarkeiten zu den aufgelisteten Veranstaltungen an. Die Verfügbarkeiten bilden die Basis für die eigentliche Einsatzplanung. Je nach Einsatztyp der Veranstaltung plant der Einsatzplaner oder die Einsatzplanerin die mit den Verfügbarkeiten die benötigten Rollen.'
+                    text: 'Die Mitglieder geben stellen sich für eine oder mehrere Rollen zur Verfügung. Diese Verfügbarkeiten bilden die Basis für die Einsatzplanung. Jeder Rolle einer Veranstaltung stehen dann Mitglieder zur Verfügung, die sich für diese verfügbar markiert haben.'
                 }
             ]
         }
@@ -24,7 +24,7 @@ export const listDescriptionEinsatzplanung = [
             name: 'Einsätze',
             list: [
                 {
-                    text: 'Die Mitglieder wird eine Übersicht ihrer Einsätze angezeigt. Hat der Benutzer eine Übereinstimmung seiner Verfügbarkeit mit einem Einsatz, wird dieser angezeigt.'
+                    text: 'Für jede Veranstaltung erstellt die Einsatzplanung einen Einsatz. Ist ein Mitglied einer Rolle zugewiesen, wird dem Mitglied der Einsatz in der persönlichen Übersicht angezeigt.'
                 }
             ]
         }

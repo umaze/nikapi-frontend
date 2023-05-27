@@ -29,6 +29,13 @@ header {
     width: 60vw;
     right: 0;
     z-index: 990;
+    background-color: $color-white;
+  }
+
+  &:not(&.nav-open) .main-nav-list {
+    > .active {
+      background-color: $color-brown-light-2;
+    }
   }
 
   nav {

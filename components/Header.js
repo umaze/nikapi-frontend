@@ -150,6 +150,14 @@ export default function Header() {
                                 </Link>
                             </li>
                         </> : <>
+                            <li className={checkRouteHilfe(currentRoute) ? 'active' : 'non-active'}>
+                                <Link
+                                    href={MAIN_MENU_HILFE.href}
+                                    className="help"
+                                    onClick={(e) => handleSelectMenu(MAIN_MENU_HILFE.id, e)}>
+                                    {MAIN_MENU_HILFE.icon}<span>Q&A</span>
+                                </Link>
+                            </li>
                             <li>
                                 <Link className="btn btn-cta btn-icon" href='/account/login'>
                                     <IconLogin/> Login

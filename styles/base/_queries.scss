@@ -230,7 +230,7 @@
 
   .grid {
     display: grid;
-    gap: 9.6rem;
+    gap: 4.8rem;
 
     &--3-cols {
       grid-template-columns: 1fr;
@@ -295,6 +295,10 @@
     &.nav-open {
       width: 90vw;
     }
+  }
+
+  .heading-secondary {
+    margin-bottom: 3.6rem;
   }
 }
 
