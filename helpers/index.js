@@ -87,7 +87,13 @@ export function getMatchingSelectionsWithUpdates(listCurrent, listPersisted) {
     return listCurrent
         .filter(current => listPersisted.some(
             persisted => +current.groupId === +persisted.groupId && +current.demandId === +persisted.demandId && hasUpdatedRoles(current.rollen, persisted.rollen)
-        ));
+        ))
+        .map(current => {
+            const mapped = {...current};
+            const matching = listPersisted.find(persisted => +current.groupId === +persisted.groupId && +current.demandId === +persisted.demandId);
+            mapped.id = matching ? matching.id : 0;
+            return mapped;
+        });
 }
 
 export const configRequest = (method, token, body = null, contentType = null) => {
