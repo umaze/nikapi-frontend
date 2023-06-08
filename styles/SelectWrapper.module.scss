@@ -20,7 +20,7 @@
   top: 50%;
   border-radius: 5px;
   border: 1px solid $color-brown-light;
-  box-shadow: 0 0 1em rgba(white,0.2), inset 0 0 1px rgba(white,0.8);
+  box-shadow: 0 0 1em rgba(white, 0.2), inset 0 0 1px rgba(white, 0.8);
   /* Styling the select background */
   background-color: $color-white-background;
   overflow: hidden;
@@ -29,8 +29,11 @@
     background-color: transparent;
   }
 
-  select
-  {
+  &:has(select:focus) {
+    box-shadow: 0 0 0 3px rgba($color-brown, 0.5) !important;
+  }
+
+  select {
     width: 100%;
     margin: 0;
     padding: 1.2rem 1.8rem;
@@ -55,16 +58,14 @@
       }
     }
 
-    &::-ms-expand
-    {
+    &::-ms-expand {
       display: none;
     }
 
   }
 
   &:before,
-  &:after
-  {
+  &:after {
     position: absolute;
     top: 50%;
     right: 1em;
@@ -75,8 +76,7 @@
     pointer-events: none;
   }
 
-  &:before
-  {
+  &:before {
     transform: translateY(-125%);
     /* Styling the down arrow */
     border-left: .25em solid transparent;
@@ -84,8 +84,7 @@
     border-bottom: .375em solid $color-brown-dark;
   }
 
-  &:after
-  {
+  &:after {
     /* Styling the down arrow */
     border-left: .25em solid transparent;
     border-right: .25em solid transparent;
