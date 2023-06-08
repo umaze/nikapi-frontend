@@ -66,20 +66,18 @@ export default function DemandTableRow({groupId, demand, rolesVisible, rolesVisi
                     <td>Rollen:</td>
                 </tr>}
             {rolesVisible && rollen.map(rolle => (
-                <>
-                    <tr className={styles.demandRowSmallVertically} key={rolle.id}>
-                        <td>{rolle.name}</td>
-                        <td className={styles.auswahlCell} key={rolle.id}>
-                            <input
-                                className={styles.auswahlBox}
-                                id={`${demand.id}-${rolle.name}`}
-                                type="checkbox"
-                                name={rolle.name}
-                                checked={isChecked(demand.id, rolle.name)}
-                                onChange={handleInputChange}/>
-                        </td>
-                    </tr>
-                </>
+                <tr className={styles.demandRowSmallVertically} key={rolle.id}>
+                    <td>{rolle.name}</td>
+                    <td className={styles.auswahlCell} key={rolle.id}>
+                        <input
+                            className={styles.auswahlBox}
+                            id={`${demand.id}-${rolle.name}`}
+                            type="checkbox"
+                            name={rolle.name}
+                            checked={isChecked(demand.id, rolle.name)}
+                            onChange={handleInputChange}/>
+                    </td>
+                </tr>
             ))}
         </>
     )
