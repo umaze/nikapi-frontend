@@ -32,6 +32,7 @@ export default function Filter({type, demandGroups, listEinsatztyp, listRolle, l
                 selectStatus: "",
                 benutzer: "",
                 adresse: "",
+                mitglied: "",
                 bezeichnung: "",
                 bestellung: ""
             }
@@ -102,6 +103,13 @@ export default function Filter({type, demandGroups, listEinsatztyp, listRolle, l
                     </>}
                 {type === FILTER_TYPE[3] &&
                     <>
+                        <InputWrapper
+                            label="Mitglied"
+                            id="filter.mitglied"
+                            type="text"
+                            placeholder="Name oder Vorname"
+                            register={register}
+                            errors={errors}/>
                         <InputWrapper
                             label="Bestellung"
                             id="filter.bestellung"
