@@ -22,7 +22,7 @@ export default function ActivitiesPage({activities}) {
         [];
 
     const listRolle = activities?.length > 0 ?
-        [...new Set(activities.flatMap(activity => activity.attributes.rollen?.map(rolle => rolle.name)))] :
+        [...new Set(activities.flatMap(activity => activity.attributes.rollen?.map(item => item.rolle.name)))] :
         [];
 
     const listStatus = activities?.length > 0 ?
@@ -45,7 +45,7 @@ export default function ActivitiesPage({activities}) {
                 filtered = filtered.filter(activity => activity.attributes.status === data.selectStatus);
             }
             if (data.selectRolle) {
-                filtered = filtered.filter(activity => activity.attributes.rollen?.some(rolle => rolle.name === data.selectRolle));
+                filtered = filtered.filter(activity => activity.attributes.rollen?.some(item => item.rolle.name === data.selectRolle));
             }
             if (data.selectEinsatztyp) {
                 filtered = filtered.filter(activity => activity.attributes.demand.data.attributes.einsatztyp?.typ === data.selectEinsatztyp);
@@ -55,6 +55,9 @@ export default function ActivitiesPage({activities}) {
             }
             if (data.adresse) {
                 filtered = filtered.filter(activity => activity.attributes.orders.data?.some(order => order.attributes.adresse.toLowerCase().includes(data.adresse.toLowerCase())));
+            }
+            if (data.mitglied) {
+                filtered = filtered.filter(activity => activity.attributes.rollen?.some(item => item.availability.data.attributes.benutzer.data.attributes.username.toLowerCase().includes(data.mitglied.toLowerCase())));
             }
         }
         setFilteredActivities(filtered);

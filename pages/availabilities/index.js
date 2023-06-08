@@ -1,16 +1,14 @@
 import Layout from "@/components/Layout";
 import AvailabilityItem from "@/components/AvailabilityItem";
-import {API_URL, FILTER_TYPE, PER_PAGE} from "@/config/index";
-import Pagination from '@/components/Pagination';
+import {API_URL, FILTER_TYPE} from "@/config/index";
 import {configRequest, parseCookies} from "@/helpers/index";
-import Link from "next/link";
 import {useState} from "react";
 import _ from "lodash";
 import Filter from "@/components/Filter";
-import styles from "@/styles/Demands.module.scss";
 import {IconFilter} from "@tabler/icons-react";
+import styles from "@/styles/Demands.module.scss";
 
-export default function AvailabilitiesPage({availabilities, page, total}) {
+export default function AvailabilitiesPage({availabilities}) {
     const [filteredAvailabilities, setFilteredAvailabilities] = useState(_.cloneDeep(availabilities));
     const [filterExpanded, setFilterExpanded] = useState(false);
 
@@ -47,8 +45,8 @@ export default function AvailabilitiesPage({availabilities, page, total}) {
             <h1 className="heading-primary">Verf&uuml;gbar&shy;keiten</h1>
             <div className={styles.btnGroup}>
                 {!filterExpanded && <button type="button"
-                        className={`btn btn-icon ${styles.btnIconSecondary}`}
-                        onClick={() => handleToggle(true)}>
+                                            className={`btn btn-icon ${styles.btnIconSecondary}`}
+                                            onClick={() => handleToggle(true)}>
                     <IconFilter/>
                     Filter anzeigen
                 </button>}
@@ -71,26 +69,20 @@ export default function AvailabilitiesPage({availabilities, page, total}) {
                     </li>
                 ))}
             </ul>
-
-            <Pagination page={page} total={total}/>
         </Layout>
     )
 }
 
-export async function getServerSideProps({req, query: {page = 1}}) {
+export async function getServerSideProps({req}) {
     const {token} = parseCookies(req);
-    // Calculate start page
-    const start = +page === 1 ? 0 : (+page - 1) * PER_PAGE;
 
     // Fetch availabilities
-    const availabilitiesRes = await fetch(`${API_URL}/api/availabilities?populate=rollen&populate=demand.einsatztyp&populate=benutzer&sort=bemerkung:asc&pagination[limit]=${PER_PAGE}&pagination[start]=${start}`, configRequest('GET', token));
+    const availabilitiesRes = await fetch(`${API_URL}/api/availabilities?populate=rollen&populate=demand.einsatztyp&populate=benutzer&sort=bemerkung:asc`, configRequest('GET', token));
     const availabilities = await availabilitiesRes.json();
 
     return {
         props: {
-            availabilities: availabilities.data,
-            page: +page,
-            total: availabilities.meta.pagination?.total || 0
+            availabilities: availabilities.data
         }
     };
 }

@@ -22,6 +22,16 @@ export const listQuestionAndAnswer = [
                     number: '04',
                     question: 'Gibt es eine Historisierung?',
                     answer: 'Nein. Die Daten sind explizit für die aktuelle Samichlaus Saison gepflegt.'
+                },
+                {
+                    number: '05',
+                    question: 'Wie komme ich zur Webseite des Vereins?',
+                    answer: 'Im Footer befindet sich ein Link zur aktuellen Vereins Webseite.'
+                },
+                {
+                    number: '06',
+                    question: 'Wo kann ich einen Auftrag für einen Hausbesuch erfassen?',
+                    answer: 'Haus- und Schulbesuche können in den Wochen vor der Samichlaus-Saison über die Webseite des Vereins eingegeben werden. Danach ist die Erfassung in den Monaten bis zur nächsten Saison wieder ausgeschaltet.'
                 }
             ]
         }

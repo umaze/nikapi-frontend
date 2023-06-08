@@ -136,7 +136,7 @@ export default function ManageAvailabilityPage({token, demandGroups, persistedSe
         <Layout title="Verfügbarkeiten verwalten">
             <Link className="link--back" href="/availabilities/me"><IconArrowLeft/>Zur&uuml;ck zu Meine
                 Verf&uuml;gbarkeiten</Link>
-            <h1 className="heading-primary">Verf&uuml;gbarkeiten verwalten</h1>
+            <h1 className="heading-primary">Verf&uuml;gbar&shy;keiten verwalten</h1>
 
             <form
                 onSubmit={handleSubmit}
