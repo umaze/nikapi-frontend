@@ -16,7 +16,6 @@ export default function ActivitiesPage({activities}) {
     const [filteredActivities, setFilteredActivities] = useState(_.cloneDeep(activities));
     const [filterExpanded, setFilterExpanded] = useState(false);
     const [hasOverflow, setHasOverflow] = useState(false);
-    console.log(`${JSON.stringify(activities[0].attributes.rollen[0].availability.data.attributes.benutzer.data.attributes.username)}`);
 
     const listEinsatztyp = activities?.length > 0 ?
         [...new Set(activities.flatMap(activity => activity.attributes.demand.data.attributes.einsatztyp?.typ))] :
