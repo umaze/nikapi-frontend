@@ -10,7 +10,7 @@ import styles from '@/styles/Sidebar.module.scss';
 
 export default function Sidebar() {
     const {user} = useContext(AuthContext);
-    const [expanded, setExpanded] = useState(false);
+    const [expanded, setExpanded] = useState(true);
     const selectedNavMenu = useSelector(selectActivatedNavMenu);
 
     const handleToggleCollapse = () => setExpanded(prevState => !prevState);

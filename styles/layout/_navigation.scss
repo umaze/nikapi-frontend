@@ -54,6 +54,7 @@ header {
     display: flex;
     align-items: center;
   }
+
   svg {
     height: 3.6rem;
     width: 3.6rem;
@@ -65,9 +66,83 @@ header {
   color: $color-red;
 }
 
+.userinfo,
+.username-mobile {
+  font-size: 1.8rem;
+  font-weight: 500;
+
+  &-role {
+    border: 1px solid $color-red;
+    border-radius: .5rem;
+    padding: 0.5rem 1rem;
+    margin-left: 1rem;
+    color: $color-red-dark;
+    background-color: rgba($color-red-light, 0.2);
+    width: fit-content;
+  }
+
+  &:hover {
+    cursor: default;
+  }
+}
+
+.userinfo {
+  position: absolute;
+  right: 3.2rem;
+  margin-top: 2rem;
+  border: 1px solid $color-brown;
+  border-radius: 0.8rem;
+  padding: 1.8rem 2.4rem;
+  background-color: $color-brown-light-3;
+
+  ul {
+    list-style: none;
+
+    li {
+      margin: 0 !important;
+
+      &.username {
+        padding: 0;
+        margin-bottom: 1rem !important;
+      }
+    }
+  }
+
+  .btn {
+    margin-top: 1.8rem;
+  }
+}
+
+.square {
+  position: absolute;
+  right: 6.2rem;
+  margin-top: 1rem;
+  width: 2rem;
+  height: 2rem;
+  border-top: 1px solid $color-brown;
+  border-right: 1px solid $color-brown;
+  background-color: $color-brown-light-3;
+  transform: rotate(-45deg);
+  z-index: 11;
+}
+
+.username-mobile {
+  display: none;
+}
+
 /**********************************/
 /* NAVIGATION */
 /**********************************/
+
+.header {
+  &:not(.nav-open) {
+    .main-nav-list {
+      > li:nth-last-child(2) {
+        display: none;
+      }
+    }
+  }
+}
 
 .main-nav-list {
   list-style: none;
@@ -106,7 +181,8 @@ header {
     border-bottom: 5px solid $color-red;
 
     .main-nav-link,
-    .help {
+    .help,
+    .user {
       margin-bottom: -5px;
     }
   }
@@ -152,7 +228,8 @@ header {
   }
 }
 
-.help {
+.help,
+.user {
   svg {
     height: 3.6rem;
     width: 3.6rem;
@@ -166,6 +243,10 @@ header {
   span {
     display: none;
   }
+}
+
+.user:hover {
+  cursor: pointer;
 }
 
 /* MOBILE */
@@ -221,6 +302,8 @@ header {
   .non-active {
     border: none;
     margin-right: -1.6rem;
+    margin-left: -1rem;
+    padding-left: 1rem;
   }
 }
 

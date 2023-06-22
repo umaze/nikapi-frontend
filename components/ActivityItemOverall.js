@@ -12,23 +12,11 @@ export default function ActivityItemOverall({activity, fitted = false}) {
     const orders = attributes.orders.data.map(o => `${o.attributes.bezeichnung} [${o.attributes.adresse}]`);
     const [expanded, setExpanded] = useState(false);
 
-    const summaryRoles = roles => {
-        if (roles?.length === 1) {
-            return '1 Rolle zugewiesen'
-        } else if (roles?.length > 1) {
-            return `${roles.length} Rollen zugewiesen`
+    const summaryZugewiesen = items => {
+        if (items?.length > 0) {
+            return `${items.length} zugewiesen`
         } else {
-            return 'Keine Rollen zugewiesen'
-        }
-    };
-
-    const summaryOrders = orders => {
-        if (orders?.length === 1) {
-            return '1 Bestellung zugewiesen'
-        } else if (orders?.length > 1) {
-            return `${orders.length} Bestellungen zugewiesen`
-        } else {
-            return 'Keine Bestellung zugewiesen'
+            return 'Keine zugewiesen'
         }
     };
 
@@ -54,7 +42,7 @@ export default function ActivityItemOverall({activity, fitted = false}) {
                     <div className={styles.details}>
                         <div className={styles.einsatztyp}>{attributes.demand.data.attributes.einsatztyp?.typ}</div>
                         <div className={`${styles.listings} ${fitted ? styles.listingsFitted : ''}`}>
-                            <div className={styles.rollen}>{summaryRoles(roles)}</div>
+                            <div className={styles.rollen}><span>Rollen</span>: {!expanded && summaryZugewiesen(roles)}</div>
                             <div className={`${styles.rollen} ${styles.listFitted} ${expanded ? '' : styles.hidden}`}>
                                 <ul>
                                     {roles && roles.length > 0 ?
@@ -67,7 +55,7 @@ export default function ActivityItemOverall({activity, fitted = false}) {
                                     }
                                 </ul>
                             </div>
-                            <div className={styles.bestellungen}>{summaryOrders(orders)}</div>
+                            <div className={styles.bestellungen}><span>Bestellungen</span>: {!expanded && summaryZugewiesen(orders)}</div>
                             <div className={`${styles.bestellungen} ${styles.listFitted} ${expanded ? '' : styles.hidden}`}>
                                 <ul>
                                     {orders && orders.length > 0 ?

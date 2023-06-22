@@ -12,6 +12,7 @@ export default function InputWrapper({label, type, required, disabled, id, place
                     type={type}
                     disabled={disabled}
                     placeholder={placeholder}
+                    min="0"
                 />
                 {errors[label] && <span>!</span>}
             </div>
