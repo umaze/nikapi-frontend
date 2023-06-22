@@ -12,12 +12,22 @@ import {
     checkRouteMeinBereich,
     isEinsatzplaner
 } from "@/helpers/index";
-import {IconChevronDown, IconChevronUp, IconLogin, IconLogout, IconMenu2, IconSleigh, IconX} from "@tabler/icons-react";
+import {
+    IconChevronDown,
+    IconChevronUp,
+    IconLogin,
+    IconLogout,
+    IconMenu2,
+    IconSleigh,
+    IconUserCircle,
+    IconX
+} from "@tabler/icons-react";
 import SubNavList from "@/components/SubNavList";
 
 export default function Header() {
     const {user, logout} = useContext(AuthContext);
     const [listExpanded, setListExpanded] = useState({});
+    const [userInfoVisible, setUserInfoVisible] = useState(false);
     const dispatch = useDispatch();
     const selectedNavMenu = useSelector(selectActivatedNavMenu);
     const router = useRouter();
@@ -59,6 +69,10 @@ export default function Header() {
         event.currentTarget.closest('.header')?.classList.toggle(classname);
     };
 
+    const userInfoToggle = () => {
+        setUserInfoVisible(!userInfoVisible);
+    };
+
     /***
      * Show MainNav items (admin-item only when user is einsatzplaner).
      * @param i
@@ -70,26 +84,26 @@ export default function Header() {
         const {fn: fnCheckActivation, link} = obj;
         return (
             (((item.id === MAIN_MENU[2].id && isEinsatzplaner(user)) || item.id !== MAIN_MENU[2].id) &&
-            <li key={i} className={fnCheckActivation(currentRoute) ? 'active' : 'non-active'}>
-                <div className="main-nav-link--expandable"
-                     onClick={(e) => handleClick(item.id, e)}>
-                    {isCollapsable(item.id) ? <IconChevronUp/> : <IconChevronDown/>}
-                    {item.label}
-                </div>
-                <Link
-                    href={link}
-                    className="main-nav-link"
-                    onClick={(e) => handleSelectMenu(item.id, e)}>
-                    {item.label}
-                </Link>
-                {isCollapsable(item.id) &&
-                    <SubNavList
-                        selectedMainNav={item.id}
-                        isAdmin={isEinsatzplaner(user)}
-                        expanded={true}
-                        isMobile={true}/>
-                }
-            </li>)
+                <li key={i} className={fnCheckActivation(currentRoute) ? 'active' : 'non-active'}>
+                    <div className="main-nav-link--expandable"
+                         onClick={(e) => handleClick(item.id, e)}>
+                        {isCollapsable(item.id) ? <IconChevronUp/> : <IconChevronDown/>}
+                        {item.label}
+                    </div>
+                    <Link
+                        href={link}
+                        className="main-nav-link"
+                        onClick={(e) => handleSelectMenu(item.id, e)}>
+                        {item.label}
+                    </Link>
+                    {isCollapsable(item.id) &&
+                        <SubNavList
+                            selectedMainNav={item.id}
+                            isAdmin={isEinsatzplaner(user)}
+                            expanded={true}
+                            isMobile={true}/>
+                    }
+                </li>)
         );
     };
 
@@ -130,6 +144,12 @@ export default function Header() {
                     </Link>
                 </div>
 
+                {user &&
+                    <div className="username-mobile">{user.username}
+                        <span className="username-mobile-role">{user.role ? user.role.name : 'Mitglied'}</span>
+                    </div>
+                }
+
                 <nav className="main-nav">
                     <ul className="main-nav-list">
                         {user ? <>
@@ -145,9 +165,21 @@ export default function Header() {
                                 </Link>
                             </li>
                             <li>
-                                <Link href="#" onClick={() => logout()} className="btn btn-cta btn-icon">
-                                    <IconLogout/> Logout
-                                </Link>
+                                <a className="user" onClick={userInfoToggle}>
+                                    <IconUserCircle/>
+                                </a>
+                                {userInfoVisible && <>
+                                    <div className="square"></div>
+                                    <div className="userinfo">
+                                        <ul>
+                                            <li className="username">{user.username}</li>
+                                            <li className="userinfo-role">{user.role ? user.role.name : 'Mitglied'}</li>
+                                        </ul>
+                                        <Link href="#" onClick={() => logout()} className="btn btn-cta btn-icon">
+                                            <IconLogout/> Logout
+                                        </Link>
+                                    </div>
+                                </>}
                             </li>
                         </> : <>
                             <li className={checkRouteHilfe(currentRoute) ? 'active' : 'non-active'}>
