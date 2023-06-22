@@ -31,6 +31,12 @@
     }
 }
 
+.rollen {
+    &Mobile {
+        display: none;
+    }
+}
+
 /**********************************/
 /* BELOW 704px (Tablet small) */
 /**********************************/
@@ -55,6 +61,12 @@
         .mitglied,
         .rollen {
             display: none;
+        }
+
+        .rollen {
+            &Mobile {
+                display: inline;
+            }
         }
     }
 }

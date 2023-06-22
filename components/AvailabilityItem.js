@@ -18,6 +18,9 @@ export default function AvailabilityItem({availability}) {
                     <div className={styles.einsatztyp}>{availability.demand?.data.attributes.einsatztyp.typ}</div>
                     <div className={styles.rollen}>{availability.rollen?.map(rolle => rolle.name).join(', ')}</div>
                 </div>
+                <div>
+                    <div className={styles.rollenMobile}>{availability.rollen?.map(rolle => rolle.name).join(', ')}</div>
+                </div>
             </div>
 
             {/*<div className={styles.link}>*/}
