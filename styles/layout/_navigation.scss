@@ -54,6 +54,7 @@ header {
     display: flex;
     align-items: center;
   }
+
   svg {
     height: 3.6rem;
     width: 3.6rem;
@@ -132,6 +133,16 @@ header {
 /**********************************/
 /* NAVIGATION */
 /**********************************/
+
+.header {
+  &:not(.nav-open) {
+    .main-nav-list {
+      > li:nth-last-child(2) {
+        display: none;
+      }
+    }
+  }
+}
 
 .main-nav-list {
   list-style: none;

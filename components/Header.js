@@ -165,6 +165,11 @@ export default function Header() {
                                 </Link>
                             </li>
                             <li>
+                                <Link href="#" onClick={() => logout()} className="btn btn-cta btn-icon">
+                                    <IconLogout/> Logout
+                                </Link>
+                            </li>
+                            <li>
                                 <a className="user" onClick={userInfoToggle}>
                                     <IconUserCircle/>
                                 </a>
