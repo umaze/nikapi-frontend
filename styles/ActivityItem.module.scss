@@ -80,6 +80,13 @@
   display: none;
 }
 
+.rollen,
+.bestellungen {
+  span {
+    font-weight: 500;
+  }
+}
+
 .rollen {
   ul {
     margin-left: 1rem;
