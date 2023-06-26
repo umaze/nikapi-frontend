@@ -3,7 +3,7 @@ import styles from "@/styles/InputWrapper.module.scss";
 export default function InputWrapper({label, type, required, disabled, id, placeholder, register, errors}) {
     return (
         <div className={styles.wrapper}>
-            <label>{label}</label>
+            <label htmlFor={id}>{label}</label>
             <div className={styles.inputField}>
                 <input
                     {...register(id, {required})}

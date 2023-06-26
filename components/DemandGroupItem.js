@@ -17,27 +17,27 @@ export default function DemandGroupItem({group}) {
     return (
         <div className={styles.group}>
             <div className={styles.groupInfo}>
-                <h3 className="subheading">{attributes.name}</h3>
+                <h2 className="subheading">{attributes.name}</h2>
             </div>
             <div className={styles.containerTable}>
                 <table>
                     <thead>
                     <tr className={styles.demandHeader}>
-                        <td className={styles.demandDatum}>Datum</td>
-                        <td className={styles.demandZeit}>Von</td>
-                        <td className={styles.demandZeit}>Bis</td>
-                        <td className={styles.demandEinsatz}>Einsatz</td>
+                        <th className={styles.demandDatum}>Datum</th>
+                        <th className={styles.demandZeit}>Von</th>
+                        <th className={styles.demandZeit}>Bis</th>
+                        <th className={styles.demandEinsatz}>Einsatz</th>
                         {rolesVisible && attributes.rollen.map(rolle => (
-                            <td className={styles.demandAuswahlRollen} key={rolle.id}>{rolle.name}</td>
+                            <th className={styles.demandAuswahlRollen} key={rolle.id}>{rolle.name}</th>
                         ))}
                     </tr>
                     <tr className={styles.demandHeaderSmall}>
-                        <td className={styles.demandDatum}>Datum</td>
-                        <td className={styles.demandZeit}>Von</td>
-                        <td className={styles.demandZeit}>Bis</td>
-                        <td className={styles.demandEinsatz}>Einsatz</td>
+                        <th className={styles.demandDatum}>Datum</th>
+                        <th className={styles.demandZeit}>Von</th>
+                        <th className={styles.demandZeit}>Bis</th>
+                        <th className={styles.demandEinsatz}>Einsatz</th>
                         {rolesVisibleMobile && attributes.rollen.map(rolle => (
-                            <td className={styles.demandAuswahlRollen} key={rolle.id}>{rolle.name}</td>
+                            <th className={styles.demandAuswahlRollen} key={rolle.id}>{rolle.name}</th>
                         ))}
                     </tr>
                     </thead>
@@ -58,8 +58,11 @@ export default function DemandGroupItem({group}) {
                     ))}
                     </tbody>
                 </table>
-                <button className={`btn ${styles.btnIcon} ${styles.rolesHorizontally}`} onClick={e => handleToggle(e)}>
-                    {rolesVisibleMobile ? <IconChevronLeft/> : <IconChevronRight/>}
+                <button
+                    className={`btn ${styles.btnIcon} ${styles.rolesHorizontally}`}
+                    onClick={e => handleToggle(e)}
+                    aria-label={`Felder Verfügbarkeiten ${rolesVisibleMobile ? 'zuklappen' : 'aufklappen'}`}>
+                    {rolesVisibleMobile ? <IconChevronLeft/> : <IconChevronRight/>}{`Felder Verfügbarkeiten ${rolesVisibleMobile ? 'zuklappen' : 'aufklappen'}`}
                 </button>
             </div>
 

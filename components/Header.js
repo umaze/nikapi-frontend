@@ -28,6 +28,7 @@ export default function Header() {
     const {user, logout} = useContext(AuthContext);
     const [listExpanded, setListExpanded] = useState({});
     const [userInfoVisible, setUserInfoVisible] = useState(false);
+    const [menuOpen, setMenuOpen] = useState(false);
     const dispatch = useDispatch();
     const selectedNavMenu = useSelector(selectActivatedNavMenu);
     const router = useRouter();
@@ -67,6 +68,7 @@ export default function Header() {
 
     const menuToggle = (classname, event) => {
         event.currentTarget.closest('.header')?.classList.toggle(classname);
+        setMenuOpen(!menuOpen);
     };
 
     const userInfoToggle = () => {
@@ -205,7 +207,10 @@ export default function Header() {
                     </ul>
                 </nav>
 
-                <button className="btn-mobile-nav" onClick={(e) => menuToggle('nav-open', e)}>
+                <button
+                    className="btn-mobile-nav"
+                    onClick={(e) => menuToggle('nav-open', e)}
+                    aria-label={`Hauptmenu ${menuOpen ? 'schliessen' : 'öffnen'}`}>
                     <IconMenu2 className="icon-mobile-nav" id="icon-menu-outline"/>
                     <IconX className="icon-mobile-nav" id="icon-close-outline"/>
                 </button>

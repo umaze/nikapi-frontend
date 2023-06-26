@@ -104,13 +104,13 @@ export default function ActivityItemOverall({activity, fitted = false}) {
                 {isEinsatzplaner(user) && <div className={styles.link}>
                     <Link href={`/activities/edit/${activity.id}`}
                           className="btn btn-secondary btn-secondary--small btn-icon">
-                        <IconEdit/>
+                        <IconEdit/>Einsatz {`${attributes.datum} ${attributes.zeitVon} ${attributes.einsatztyp?.typ}`} bearbeiten
                     </Link>
                 </div>}
             </div>
 
-            <button className={`btn ${styles.btnIcon}`} onClick={handleToggle}>
-                {expanded ? <IconChevronUp/> : <IconChevronDown/>}
+            <button className={`btn ${styles.btnIcon} ${styles.btnNoText}`} onClick={handleToggle}>
+                {expanded ? <IconChevronUp/> : <IconChevronDown/>}{`Rollen und Bestellungen ${expanded ? 'zuklappen' : 'aufklappen'}`}
             </button>
         </div>
     );

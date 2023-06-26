@@ -34,7 +34,7 @@ export default function Footer() {
                         <div>St.Nikolaus-Gesellschaft<br/>
                             Dietlikon &amp; Wangen-Br&uuml;ttisellen<br/>
                             Postfach 301<br/>
-                            8305 <strong>Dietlikon</strong>
+                            8305 Dietlikon
                         </div>
                         <div>
                             <Link href="https://samichlaus-dietlikon.ch" target="_blank">

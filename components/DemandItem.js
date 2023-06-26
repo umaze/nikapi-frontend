@@ -29,11 +29,11 @@ export default function DemandItem({demand, onDelete, token}) {
                 <div className={styles.link}>
                     <Link href={`/demands/edit/${demand.id}`}
                           className="btn btn-secondary btn-secondary--small btn-icon">
-                        <IconEdit/>
+                        <IconEdit/>Veranstaltung {`${attributes.datum} ${attributes.zeitVon} ${attributes.einsatztyp?.typ}`} bearbeiten
                     </Link>
                     {demand.attributes.activities.data.length === 0 &&
                         <button className="btn btn-secondary btn-secondary--small btn-icon" onClick={onDelete}>
-                            <IconTrash/>
+                            <IconTrash/>Veranstaltung {`${attributes.datum} ${attributes.zeitVon} ${attributes.einsatztyp?.typ}`} entfernen
                         </button>}
                 </div>
             </div>

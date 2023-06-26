@@ -56,7 +56,7 @@ export default function EditActivityPage({activity, demands, persistedAvailabili
             <Link className="link--back" href="/activities"><IconArrowLeft/> Zur&uuml;ck zu Eins&auml;tze</Link>
             <main>
                 <form className="form" onSubmit={handleSubmit(onSubmit)}>
-                    <h2 className="heading-secondary">Einsatz bearbeiten</h2>
+                    <h1 className="heading-secondary">Einsatz bearbeiten</h1>
 
                     <ActivityForm
                         register={register}

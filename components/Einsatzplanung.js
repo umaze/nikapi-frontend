@@ -13,7 +13,7 @@ export default function Einsatzplanung() {
                 {listDescriptionEinsatzplanung.map((item, i) => (
                     <div key={i} className={styles.einsatzplanung}>
                         <div className={styles.einsatzplanungContent}>
-                            <p className={styles.einsatzplanungTitle}>{item.topic.name}</p>
+                            <h3 className={styles.einsatzplanungTitle}>{item.topic.name}</h3>
                             {item.topic.list.map((block, ind) => (
                                 <p key={ind} className={styles.einsatzplanungDescription}>{block.text}</p>
                             ))}

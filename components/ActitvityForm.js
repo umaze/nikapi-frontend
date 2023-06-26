@@ -162,7 +162,7 @@ export default function ActivityForm({
                 errors={errors}/>
             <div className={`grid grid--2-cols ${styles.range}`}>
                 <div className={styles.wrapper}>
-                    <label>Zeit von</label>
+                    <label htmlFor="demand.zeitVon">Zeit von</label>
                     <div className={styles.inputField}>
                         <input
                             id="demand.zeitVon"
@@ -172,7 +172,7 @@ export default function ActivityForm({
                     </div>
                 </div>
                 <div className={styles.wrapper}>
-                    <label>Zeit bis</label>
+                    <label htmlFor="demand.zeitBis">Zeit bis</label>
                     <div className={styles.inputField}>
                         <input
                             id="demand.zeitBis"
@@ -183,7 +183,7 @@ export default function ActivityForm({
                 </div>
             </div>
             <div className={styles.wrapper}>
-                <label>Gruppe</label>
+                <label htmlFor="demandGroup">Gruppe</label>
                 <div className={styles.inputField}>
                     <input
                         id="demandGroup"

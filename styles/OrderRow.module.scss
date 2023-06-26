@@ -20,6 +20,10 @@
   display: flex;
   column-gap: 0.5rem;
 
+  a, button {
+    font-size: 0;
+  }
+
   a:first-of-type {
     margin-left: 1.4rem;
   }

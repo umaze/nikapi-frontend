@@ -152,7 +152,6 @@ export default function ManageAvailabilityPage({token, demandGroups, persistedSe
                 </ul>
 
                 <div className={styles.btnGroup}>
-                    <Link className="btn-secondary" href={`/availabilities/me`}>Abbrechen</Link>
                     <button type="submit" className="btn">&Auml;nderung speichern</button>
                 </div>
             </form>

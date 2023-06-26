@@ -59,6 +59,19 @@
   display: grid;
   grid-template-rows: 2fr 1fr;
   row-gap: 1.2rem;
+
+  a:link, a:visited {
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: $color-black;
+    transition: all 0.3s;
+  }
+
+  a:hover,
+  a:active {
+    font-weight: 600;
+    color: $color-brown-dark;
+  }
 }
 
 .footerHeading {

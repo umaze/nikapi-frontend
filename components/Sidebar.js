@@ -22,7 +22,8 @@ export default function Sidebar() {
                     <div className={`${styles.sidebarInner} ${expanded ? 'expanded-inner' : ''}`}>
                         <button
                             onClick={handleToggleCollapse}
-                            className={!expanded ? styles.centered : ''}>
+                            className={!expanded ? styles.centered : ''}
+                            aria-label={`Seitenmenu ${expanded ? 'zuklappen' : 'aufklappen'}`}>
                             {expanded ? <IconChevronsLeft/> : <IconChevronsRight/>}
                         </button>
                         <SubNavList

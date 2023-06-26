@@ -59,7 +59,7 @@ export default function AddActivityPage({token, demands, persistedAvailabilities
             <Link className="link--back" href="/activities"><IconArrowLeft/> Zur&uuml;ck zu Eins&auml;tze</Link>
             <main>
                 <form className="form" onSubmit={handleSubmit(onSubmit)}>
-                    <h2 className="heading-secondary">Einsatz hinzuf&uuml;gen</h2>
+                    <h1 className="heading-secondary">Einsatz hinzuf&uuml;gen</h1>
 
                     <ActivityForm
                         register={register}

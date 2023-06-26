@@ -136,8 +136,8 @@ header {
 
 .header {
   &:not(.nav-open) {
-    .main-nav-list {
-      > li:nth-last-child(2) {
+    .main-nav-list:has(a.user) {
+      li:not(.username):nth-last-child(2) {
         display: none;
       }
     }

@@ -3,7 +3,7 @@ import styles from "@/styles/SelectWrapper.module.scss";
 export default function SelectWrapper({label, required, disabled, id, options, register, handleChange, errors}) {
     return (
         <div className={styles.wrapper}>
-            <label>{label}</label>
+            <label htmlFor={id}>{label}</label>
             <div className={styles.customSelect}>
                 <select
                     {...register(id, {required})}

@@ -36,6 +36,7 @@ export default function DemandTableRow({groupId, demand, rolesVisible, rolesVisi
                         <input
                             className={styles.auswahlBox}
                             id={`${demand.id}-${rolle.name}`}
+                            aria-label={`${attributes.datum} ${attributes.zeitVon} ${attributes.einsatztyp?.name} ${rolle.name}`}
                             type="checkbox"
                             name={rolle.name}
                             checked={isChecked(demand.id, rolle.name)}
@@ -53,6 +54,7 @@ export default function DemandTableRow({groupId, demand, rolesVisible, rolesVisi
                         <input
                             className={styles.auswahlBox}
                             id={`${demand.id}-${rolle.name}`}
+                            aria-label={`${attributes.datum} ${attributes.zeitVon} ${attributes.einsatztyp?.name} ${rolle.name}`}
                             type="checkbox"
                             name={rolle.name}
                             checked={isChecked(demand.id, rolle.name)}
@@ -72,6 +74,7 @@ export default function DemandTableRow({groupId, demand, rolesVisible, rolesVisi
                         <input
                             className={styles.auswahlBox}
                             id={`${demand.id}-${rolle.name}`}
+                            aria-label={`${attributes.datum} ${attributes.zeitVon} ${attributes.einsatztyp?.name} ${rolle.name}`}
                             type="checkbox"
                             name={rolle.name}
                             checked={isChecked(demand.id, rolle.name)}

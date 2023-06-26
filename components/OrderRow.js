@@ -28,11 +28,11 @@ export default function OrderRow({order, onDelete}) {
 
                 <div className={styles.link}>
                     <Link href={`/orders/edit/${order.id}`} className="btn btn-secondary btn-secondary--small btn-icon">
-                        <IconEdit/>
+                        <IconEdit/>Bestellung {`${attributes.datum} ${attributes.einsatztyp?.typ} ${attributes.bezeichnung}`} bearbeiten
                     </Link>
                     {!order.activity?.data &&
                         <button className="btn btn-secondary btn-secondary--small btn-icon" onClick={onDelete}>
-                            <IconTrash/>
+                            <IconTrash/>Bestellung {`${attributes.datum} ${attributes.einsatztyp?.typ} ${attributes.bezeichnung}`} entfernen
                         </button>}
                 </div>
             </div>

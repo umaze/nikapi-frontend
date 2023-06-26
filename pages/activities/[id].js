@@ -32,7 +32,7 @@ export default function ActivityPage({activity, demands, persistedAvailabilities
             <Link className="link--back" href="/activities"><IconArrowLeft/> Zur&uuml;ck zu Eins&auml;tze</Link>
             <main>
                 <form className="form" onSubmit={handleSubmit(onSubmit)}>
-                    <h2 className="heading-secondary">Einsatz Details</h2>
+                    <h1 className="heading-secondary">Einsatz Details</h1>
 
                     <ActivityForm
                         register={register}
