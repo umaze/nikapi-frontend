@@ -1,10 +1,10 @@
-import styles from '@/styles/Skiplinks.module.scss';
 import {useContext} from "react";
+import Link from "next/link";
 import AuthContext from "@/context/AuthContext";
 import {isEinsatzplaner} from "@/helpers/index";
-import Link from "next/link";
 import {SUB_MENU} from "@/config/index";
 import ScrollLink from "@/components/ScrollLink";
+import styles from '@/styles/SkipLinks.module.scss';
 
 export default function SkipLinks() {
     const {user} = useContext(AuthContext);
