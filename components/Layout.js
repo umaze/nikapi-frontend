@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import {useRouter} from 'next/router';
+import SkipLinks from "@/components/Skiplinks";
 import Header from './Header';
 import Hero from './Hero';
 import Footer from './Footer';
@@ -8,7 +9,6 @@ import Sidebar from "@/components/Sidebar";
 import {useContext} from "react";
 import AuthContext from "@/context/AuthContext";
 import styles from '@/styles/Layout.module.scss';
-import NotFoundPage from "../pages/404";
 
 export default function Layout({title, keywords, description, children}) {
     const {user} = useContext(AuthContext);
@@ -23,6 +23,7 @@ export default function Layout({title, keywords, description, children}) {
                 <meta name="keywords" content={keywords}/>
             </Head>
 
+            <SkipLinks/>
             <Header/>
 
             {(router.pathname === '/' && !user) &&

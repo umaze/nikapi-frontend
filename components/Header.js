@@ -71,7 +71,8 @@ export default function Header() {
         setMenuOpen(!menuOpen);
     };
 
-    const userInfoToggle = () => {
+    const userInfoToggle = e => {
+        e.preventDefault();
         setUserInfoVisible(!userInfoVisible);
     };
 
@@ -172,9 +173,9 @@ export default function Header() {
                                 </Link>
                             </li>
                             <li>
-                                <a className="user" onClick={userInfoToggle}>
+                                <Link href="#" className="user" onClick={e => userInfoToggle(e)}>
                                     <IconUserCircle/>
-                                </a>
+                                </Link>
                                 {userInfoVisible && <>
                                     <div className="square"></div>
                                     <div className="userinfo">

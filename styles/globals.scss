@@ -17,6 +17,11 @@ h1 {
   margin-bottom: 3rem;
 }
 
+#kopf {
+  position: relative;
+  z-index: 1000;
+}
+
 .btn {
   display: inline-block;
   background: $color-red-light;

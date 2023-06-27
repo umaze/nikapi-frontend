@@ -245,8 +245,13 @@ header {
   }
 }
 
-.user:hover {
-  cursor: pointer;
+.user {
+  display: inline-block;
+  height: 100%;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 /* MOBILE */
