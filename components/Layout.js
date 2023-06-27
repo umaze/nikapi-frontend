@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import {useRouter} from 'next/router';
-import SkipLinks from "@/components/Skiplinks";
+import SkipLinks from "@/components/SkipLinks";
 import Header from './Header';
 import Hero from './Hero';
 import Footer from './Footer';
