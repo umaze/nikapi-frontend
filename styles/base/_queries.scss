@@ -333,9 +333,11 @@
 /**********************************/
 @include respond(phone-mini) {
   .header {
-    .logo {
-      svg {
-        display: none;
+    &:not(.nav-open) {
+      .logo {
+        svg {
+          display: none;
+        }
       }
     }
   }
