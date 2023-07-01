@@ -317,6 +317,15 @@
   .heading-secondary {
     margin-bottom: 3.6rem;
   }
+
+  .banner {
+    flex-direction: column;
+    padding: 1rem 2rem 2rem 2rem;
+
+    &__text {
+      margin-bottom: 2rem;
+    }
+  }
 }
 
 /**********************************/

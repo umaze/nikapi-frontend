@@ -9,6 +9,7 @@ import Sidebar from "@/components/Sidebar";
 import {useContext} from "react";
 import AuthContext from "@/context/AuthContext";
 import styles from '@/styles/Layout.module.scss';
+import Banner from "@/components/Banner";
 
 export default function Layout({title, keywords, description, children}) {
     const {user} = useContext(AuthContext);
@@ -42,6 +43,7 @@ export default function Layout({title, keywords, description, children}) {
             }
 
             <Footer/>
+            <Banner/>
         </>
     )
 }
