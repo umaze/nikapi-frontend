@@ -6,11 +6,12 @@
 
 .wrapper {
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   height: 100%;
 
   label {
     margin-bottom: 0.8rem;
+    font-weight: 500;
   }
 }
 
@@ -19,7 +20,7 @@
   position: relative;
   top: 50%;
   border-radius: 5px;
-  border: 1px solid $color-brown-light;
+  border: 1px solid $color-black;
   box-shadow: 0 0 1em rgba(white, 0.2), inset 0 0 1px rgba(white, 0.8);
   /* Styling the select background */
   background-color: $color-white-background;
@@ -27,10 +28,24 @@
 
   &:has(select:disabled) {
     background-color: transparent;
+    border: none;
+
+    &:before,
+    &:after {
+      display: none;
+    }
+
+    select {
+      padding-left: 0.5rem;
+    }
   }
 
   &:has(select:focus) {
     box-shadow: 0 0 0 3px rgba($color-brown, 0.5) !important;
+  }
+
+  &:has(select[required]) + label:after {
+    content: ' *';
   }
 
   select {
@@ -51,11 +66,16 @@
     text-indent: 0.01px;
 
     &:disabled {
-      color: $color-brown;
+      color: $color-black;
+      border: none;
 
       &:hover {
         cursor: initial;
       }
+    }
+
+    &::placeholder {
+      color: $color-brown;
     }
 
     &::-ms-expand {

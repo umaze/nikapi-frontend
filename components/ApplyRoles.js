@@ -69,9 +69,9 @@ export default function ApplyRoles({currentStep, stepsSize, register, errors, re
             {activityDemand.attributes &&
                 <>
                     <div className={styles.infos}>
-                        <p>Datum: <strong>{formatDate(activityDemand.attributes.datum)}</strong>
+                        <p><strong>Datum:</strong> {formatDate(activityDemand.attributes.datum)}
                         </p>
-                        <p>Einsatztyp: <strong>{activityDemand.attributes.einsatztyp.typ}</strong></p>
+                        <p><strong>Einsatztyp:</strong> {activityDemand.attributes.einsatztyp.typ}</p>
                         {!rollen.length && <h3 className="heading-tertiary">Keine Rollen verhanden</h3>}
                     </div>
 

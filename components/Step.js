@@ -24,6 +24,7 @@ export default function Step({ title, info, current, size, children }) {
                 <div className={styles.stepInfo}>Schritt <strong>{current}</strong> / {size}</div>
             </div>
             {children}
+            <div className={styles.stepHint}>* Pflichtfeld (Eingabe zwingend)</div>
         </section>
     )
 }

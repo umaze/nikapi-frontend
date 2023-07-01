@@ -38,6 +38,10 @@
   }
 }
 
+.mandatoryHint {
+  @include mandatory-hint;
+}
+
 /**********************************/
 /* BELOW 944px (Tablets) */
 /**********************************/

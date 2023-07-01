@@ -9,7 +9,7 @@
 @include respond(land-tab) {
   .grid {
     display: flex;
-    justify-content: center;
+    //justify-content: center;
     flex-wrap: wrap;
 
     &--3-cols {
