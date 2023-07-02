@@ -81,6 +81,7 @@ export default function DemandForm({register, errors, demand, demandGroups, setV
                         register={register}
                         errors={errors}/>
                 </div>
+                <div className={styles.mandatoryHint}>* Pflichtfeld (Eingabe zwingend)</div>
             </div>
         </>
     );

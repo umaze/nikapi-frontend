@@ -30,7 +30,7 @@ export default function OrderForm({register, errors, order, setValue}) {
                     id="order.bezeichnung"
                     type="text"
                     required
-                    placeholder="Kennzeichnung des Einsatzes"
+                    placeholder="Eindeutige Angabe"
                     register={register}
                     errors={errors} />
                 <div className={styles.gridSpan2}>
@@ -98,6 +98,7 @@ export default function OrderForm({register, errors, order, setValue}) {
                         register={register}
                         errors={errors} />
                 </div>
+                <div className={styles.mandatoryHint}>* Pflichtfeld (Eingabe zwingend)</div>
             </div>
         </>
     );

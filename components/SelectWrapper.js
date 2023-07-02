@@ -1,9 +1,9 @@
 import styles from "@/styles/SelectWrapper.module.scss";
 
 export default function SelectWrapper({label, required, disabled, id, options, register, handleChange, errors}) {
+    const isDisabled = disabled || !options || (Array.isArray(options) && !options.length);
     return (
         <div className={styles.wrapper}>
-            <label htmlFor={id}>{label}</label>
             <div className={styles.customSelect}>
                 <select
                     {...register(id, {required})}
@@ -11,11 +11,13 @@ export default function SelectWrapper({label, required, disabled, id, options, r
                     id={id}
                     autoComplete="off"
                     onChange={handleChange}
-                    disabled={disabled || !options || (Array.isArray(options) && !options.length)}>
+                    required={required && !isDisabled}
+                    disabled={isDisabled}>
                     {options}
                 </select>
                 {errors[label] && <span>mandatory</span>}
             </div>
+            <label htmlFor={id}>{label}</label>
         </div>
     )
 }

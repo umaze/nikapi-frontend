@@ -61,9 +61,9 @@ export default function ApplyOrders({orders, currentStep, stepsSize, setValue, r
             {activityDemand.attributes &&
                 <>
                     <div className={styles.infos}>
-                        <p>Datum: <strong>{formatDate(activityDemand.attributes.datum)}</strong>
+                        <p><strong>Datum:</strong> {formatDate(activityDemand.attributes.datum)}
                         </p>
-                        <p>Einsatztyp: <strong>{einsatztyp}</strong></p>
+                        <p><strong>Einsatztyp:</strong> {einsatztyp}</p>
                     </div>
                     {!auftragRequired &&
                         <p className={styles.hint}>Bestellungen sind für Typ '{einsatztyp}' <strong>nicht erforderlich</strong>.</p>}

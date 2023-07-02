@@ -11,19 +11,19 @@ export default function Confirmation({currentStep, stepsSize, register, errors, 
     const activityDemand = useSelector(selectCurrentDemand);
 
     return (
-        <Step title="Bestätigung" info="Abschliessende Angaben" current={currentStep} size={stepsSize}>
+        <Step title="Bestätigung" info="Abschliessende Angaben" current={currentStep} size={stepsSize} showHint={true}>
             <div className={styles.confirmation}>
                 <div className={styles.infos}>
-                    <p>Datum: <strong>{formatDate(activityDemand.attributes.datum)}</strong>
+                    <p><strong>Datum:</strong> {formatDate(activityDemand.attributes.datum)}
                     </p>
-                    <p>Einsatztyp: <strong>{activityDemand.attributes.einsatztyp.typ}</strong></p>
+                    <p><strong>Einsatztyp:</strong> {activityDemand.attributes.einsatztyp.typ}</p>
                 </div>
                 <InputWrapper
                     label="Bezeichnung"
                     id="activity.bezeichnung"
                     type="text"
                     required
-                    placeholder="Kennzeichnung des Einsatzes"
+                    placeholder="Eindeutige Beschreibung des Einsatzes"
                     register={register}
                     disabled={readOnly}
                     errors={errors} />

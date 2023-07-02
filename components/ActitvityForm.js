@@ -145,16 +145,18 @@ export default function ActivityForm({
         </>
     );
 
+    const isSelectDisabled = readOnly || (!!activity && !!activity.demand.data);
+
     const DemandFields = () => (
-        <Step title="Veranstaltung" info="Eine Veranstaltung auswählen" current={step + 1} size={fieldGroups.length}>
+        <Step title="Veranstaltung" info="Eine Veranstaltung auswählen" current={step + 1} size={fieldGroups.length} showHint={!isSelectDisabled}>
             <div className={styles.infos}>
-                <p>Datum: <strong>{selectedDatum ? formatDate(selectedDatum) : '-'}</strong></p>
-                <p>Einsatztyp: <strong>{selectedEinsatztyp || '-'}</strong></p>
+                <p><strong>Datum</strong>: {selectedDatum ? formatDate(selectedDatum) : '-'}</p>
+                <p><strong>Einsatztyp:</strong> {selectedEinsatztyp || '-'}</p>
             </div>
             <SelectWrapper
                 label="Veranstaltung"
                 required
-                disabled={readOnly || (!!activity && !!activity.demand.data)}
+                disabled={isSelectDisabled}
                 id="activity.selectDemand"
                 options={demandOptions(demands)}
                 register={register}

@@ -19,20 +19,26 @@
 
 .wrapper {
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
 
   label {
     margin-bottom: 0.8rem;
+    font-weight: 500;
   }
 
   .inputField {
     display: flex;
     align-items: center;
+
+    &:has(input[required]) + label:after {
+      content: ' *';
+    }
   }
 
   input:disabled {
     color: $color-brown;
-    border-color: $color-brown-light;
+    border: none;
+    padding-left: 0.5rem;
 
     &::placeholder {
       color: transparent;

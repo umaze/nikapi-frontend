@@ -9,7 +9,7 @@
 @include respond(land-tab) {
   .grid {
     display: flex;
-    justify-content: center;
+    //justify-content: center;
     flex-wrap: wrap;
 
     &--3-cols {
@@ -317,6 +317,15 @@
   .heading-secondary {
     margin-bottom: 3.6rem;
   }
+
+  .banner {
+    flex-direction: column;
+    padding: 1rem 2rem 2rem 2rem;
+
+    &__text {
+      margin-bottom: 2rem;
+    }
+  }
 }
 
 /**********************************/
@@ -324,9 +333,11 @@
 /**********************************/
 @include respond(phone-mini) {
   .header {
-    .logo {
-      svg {
-        display: none;
+    &:not(.nav-open) {
+      .logo {
+        svg {
+          display: none;
+        }
       }
     }
   }

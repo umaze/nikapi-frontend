@@ -1,5 +1,6 @@
 @import "./abstracts/mixins";
 @import "./base/base";
+@import "./components/banner";
 @import "./layout/navigation";
 @import "./base/queries";
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
@@ -54,6 +55,11 @@ h1 {
       /*Add border inside*/
       box-shadow: inset 0 0 0 3px $color-white;
     }
+  }
+
+  &--banner {
+    align-self: center;
+    line-height: inherit;
   }
 }
 
@@ -167,6 +173,10 @@ div.sidebar + div.main-content-flex-1 {
 
 .form {
   font-size: 1.8rem;
+}
+
+.hidden {
+  display: none;
 }
 
 /**********************************/
