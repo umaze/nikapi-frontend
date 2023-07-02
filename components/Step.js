@@ -3,7 +3,7 @@ import styles from "@/styles/Step.module.scss";
 import {useSelector} from "react-redux";
 import {getSteps} from "@/store/activitySlice";
 
-export default function Step({ title, info, current, size, children }) {
+export default function Step({ title, info, current, size, children, showHint = false }) {
     const steps = useSelector(getSteps);
 
     return (
@@ -24,7 +24,7 @@ export default function Step({ title, info, current, size, children }) {
                 <div className={styles.stepInfo}>Schritt <strong>{current}</strong> / {size}</div>
             </div>
             {children}
-            <div className={styles.stepHint}>* Pflichtfeld (Eingabe zwingend)</div>
+            {showHint && <div className={styles.stepHint}>* Pflichtfeld (Eingabe zwingend)</div>}
         </section>
     )
 }

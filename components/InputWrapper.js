@@ -11,7 +11,7 @@ export default function InputWrapper({label, type, required, disabled, id, place
                     type={type}
                     disabled={disabled}
                     placeholder={placeholder}
-                    required={required}
+                    required={required && !disabled}
                     min="0"
                 />
                 {errors[label] && <span>!</span>}

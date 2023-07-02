@@ -11,7 +11,7 @@ export default function Confirmation({currentStep, stepsSize, register, errors, 
     const activityDemand = useSelector(selectCurrentDemand);
 
     return (
-        <Step title="Bestätigung" info="Abschliessende Angaben" current={currentStep} size={stepsSize}>
+        <Step title="Bestätigung" info="Abschliessende Angaben" current={currentStep} size={stepsSize} showHint={true}>
             <div className={styles.confirmation}>
                 <div className={styles.infos}>
                     <p><strong>Datum:</strong> {formatDate(activityDemand.attributes.datum)}
