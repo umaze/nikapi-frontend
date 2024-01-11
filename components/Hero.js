@@ -9,7 +9,7 @@ export default function Hero() {
         <section className={styles.sectionHero}>
             <div className={styles.hero}>
                 <div className="hero-text-box">
-                    <h1 className="heading-primary">Einsatz&shy;planung Samichlaus</h1>
+                    <h1 className="heading-primary">Einsatz&shy;planung Samichlaus FFHS</h1>
                     <p className={styles.heroDescription}>Die St.Nikolaus-Gesellschaft Dietlikon &amp; Wangen-Br&uuml;ttisellen plant und koordiniert die Eins&auml;tze seiner Mitglieder anhand derer Verf&uuml;gbarkeiten. Denn Eins&auml;tze wollen koordiniert und gut geplant sein.</p>
                     <p className={styles.heroDescription}>Unterst&uuml;tze den Schmutzli und melde dich an!</p>
                     <Link href='/account/login' className="btn margin-right-sm">
